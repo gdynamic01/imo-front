@@ -1,0 +1,1 @@
+export const TYPES_DEMANDES = ['Locations', 'Ventes immobilières'];

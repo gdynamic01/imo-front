@@ -1,0 +1,48 @@
+.depot-offre {
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.brand-logo:hover {
+  color: white !important;
+  text-decoration: none !important;
+}
+.brand-logo {
+  margin-left: 2rem;
+}
+.menu-header {
+  .depot-offre {
+    border: 1px solid;
+    border-width: 4px ;
+    margin-right: 88px;
+  };
+  .depot-offre:hover {
+    background-color: rgba(0,0,0,0.1);
+  };
+  a:hover, .depot-offre:hover {
+    color: white !important;
+    text-decoration: none !important;
+  }
+}
+#mobile-header {
+  .depot-offre {
+    border: 1px solid red;
+    border-width: 4px ;
+    margin-left: 9px;
+    font-weight: 500;
+  };
+  .depot-offre:hover {
+    background-color: rgba(0,0,0,0.05);
+  };
+  a:hover, .depot-offre:hover {
+    text-decoration: none !important;
+  }
+  .li_depot-offre {
+    margin-top: 13px;
+  }
+
+}
+.libelle-header-bottom {
+  border-bottom: 1px solid white;
+  border-bottom-width: 9px;
+}

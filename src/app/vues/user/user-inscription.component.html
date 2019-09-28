@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row bloc-inscription">
+    <form class="col s12 m12 l12 xl12 form-inscription" novalidate="novalidate">
+      <div class="row user-info">
+        <div class="col s12 m12 l12 xl12 type-user">
+          <span class="libelle-text">Qui êtes-vous </span><span class="red-text">*</span>
+          <label>
+            <input name="type_user" type="radio" (click)="openform('professionnel')" data-error=".errorTxt1"
+              aria-required="true" class="error" aria-describedby="type_user-error" aria-invalid="true" /><span>Professionnel</span>
+          </label>
+          <label>
+            <input name="type_user" type="radio" (click)="openform('particulier')" class="error" /><span>Particulier</span>
+          </label>
+          <div class="input-field errorTxt1 bloc-error">
+            <div id="type_user-error" class="error"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row user-info"> 
+        <div class="input-field col s12 m5 l5 xl5 info-commune_text">
+          <!-- <span class="libelle-text">Nom </span><span class="red-text">*</span> -->
+          <input type="text" name="nom" placeholder="Nom *" class="nom" [(ngModel)]="infoUser.nom" data-error=".errorTxt5"
+            aria-required="true" class="error" aria-describedby="nom-error" aria-invalid="true">
+          <div class="input-field errorTxt2 bloc-error">
+            <div id="nom-error" class="error"></div>
+          </div>
+        </div>
+        <div class="input-field col s12 m5 l5 xl5 info-commune_text">
+          <!-- <span class="libelle-text">Prénom </span><span class="red-text">*</span> -->
+          <input type="text" name="prenom" placeholder="Prénom *" [(ngModel)]="infoUser.prenom" class="prenom" data-error=".errorTxt6"
+            aria-required="true" class="error" aria-describedby="prenom-error" aria-invalid="true">
+          <div class="input-field errorTxt6 bloc-error">
+            <div id="prenom-error" class="error"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row user-info"> 
+        <div class="input-field col s12 m12 l12 xl12 info-commune_text">
+          <!-- <span class="libelle-text">Adresse email </span><span class="red-text">*</span> -->
+          <input type="email" name="email" placeholder="Email *" class="email" [(ngModel)]="user.email" data-error=".errorTxt2"
+            aria-required="true" class="error" aria-describedby="email-error" aria-invalid="true">
+          <div class="input-field errorTxt2 bloc-error">
+            <div id="email-error" class="error"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row user-info"> 
+        <div class="input-field col s12 m12 l12 xl12 info-commune_text">
+          <!-- <span class="libelle-text">Mot de passe </span><span class="red-text">*</span> -->
+          <input type="password" name="password" placeholder="Mot de passe *" [(ngModel)]="user.password" class="passwords" data-error=".errorTxt3"
+            aria-required="true" class="error" aria-describedby="password-error" aria-invalid="true">
+          <div class="input-field errorTxt3 bloc-error">
+            <div id="password-error" class="error"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row user-info" *ngIf="isBlocProfessionnel">
+        <!-- info Entreprise -->
+        <div class="input-field col s12 m12 l12 xl12 info-professionnel">
+          <!-- <span class="libelle-text">Mot de passe </span><span class="red-text">*</span> -->
+          <input type="text" name="siret" placeholder="Numero siret *" [(ngModel)]= "professionnel.siret" class="siret" data-error=".errorTxt4"
+            aria-required="true" class="error" aria-describedby="siret-error" aria-invalid="true">
+          <div class="input-field errorTxt4 bloc-error">
+            <div id="siret-error" class="error"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row user-info">
+        <div class="col s12 m12 l12 xl12">
+          <button mz-button class="btn green waves-effect waves-light" (click)="valider()"><i class="mdi-action-perm-identity"></i> Valider</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

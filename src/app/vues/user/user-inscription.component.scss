@@ -1,0 +1,26 @@
+.form-inscription {
+  .type-user {
+    label {
+      margin-left: 2rem;
+    }
+  };
+  .libelle-text {
+    font-weight: 600;
+  };
+  .user-info {
+    margin-bottom: 0 !important;
+  };
+  .btn {
+    color: white !important;
+    font-weight: 400;
+    width: 100% !important;
+  };
+  .bloc-error {
+    margin-top: 0.3rem !important;
+    color: red;
+  }
+}
+
+.container {
+  width: 100% !important;
+}
