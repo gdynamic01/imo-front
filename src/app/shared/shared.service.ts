@@ -1,4 +1,5 @@
 import { Injectable, ElementRef } from '@angular/core';
+import { HttpHeaders, HttpParams } from '@angular/common/http';
 
 declare var $: any;
 declare var M: any;
@@ -7,6 +8,13 @@ declare var M: any;
   providedIn: 'root'
 })
 export class SharedService {
+
+  /**
+   * Option dans la requete Http
+   */
+  public httpOptions = {
+    headers: this.getHeaders()
+  };  
 
   constructor() { }
 
@@ -55,7 +63,7 @@ export class SharedService {
    * 
    * @author Mamadou
    * @description Initialisation des modals
-   * @param modal Element
+   * @param modal reference du modal dans le template
    * 
    */
   public initModal(modal: ElementRef) {
@@ -66,12 +74,28 @@ export class SharedService {
    * 
    * @author Mamadou
    * @description Recupere l'instance du modal
-   * @param modal 
+   * @param modal reference du modal dans le template
    * @returns Instance modal
    * 
    */
   public getInstances(modal: ElementRef) {
     return M.Modal.getInstance(modal.nativeElement);
+  }
+
+  /**
+   * 
+   * @author Mamadou
+   * @description config du header pour les requetes http
+   * @returns header
+   * 
+   */
+  public getHeaders() {
+    const headers = new HttpHeaders();
+    headers.append('Access-Control-Allow-Origin', `http://localhost:4200`);
+    headers.append("Access-Control-Allow-Headers", "X-Auth-Token, Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    return headers;
   }
 
 }
