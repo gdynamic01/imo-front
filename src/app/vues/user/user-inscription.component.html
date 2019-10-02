@@ -1,4 +1,10 @@
 <div class="container">
+  <div class="row" *ngIf="messageErreur" id="message-err">
+    <div class="col s12 m12 l12 xl12">
+      <!-- message erreur serveur -->
+      <app-alerte-message [messages]="message" [colors_msg]="colors"></app-alerte-message>
+    </div>
+  </div>
   <div class="row bloc-inscription">
     <form class="col s12 m12 l12 xl12 form-inscription" novalidate="novalidate">
       <div class="row user-info">

@@ -4,8 +4,10 @@ import { UserMoral } from './../../models/users/user-moral';
 import { Injectable } from '@angular/core';
 import { IUser } from '../api/user/iuser';
 import { ImoResponse } from '../../models/response/imo-response';
-import { Observable, pipe } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+
 import { API } from '../../constantes/api-rest';
 
 
@@ -26,7 +28,13 @@ export class UtilisateurService implements IUser<UserMoral, UserPhysique> {
    */
   creationProfessionnel(object: UserMoral): Observable<ImoResponse<UserMoral>> {
     const datas = JSON.stringify(object);
-    return this.http.post<ImoResponse<UserMoral>>(API.profInscription, datas, this.sharedService.getHeadersConfig());
+    return this.http.post<ImoResponse<UserMoral>>(API.profInscription, datas, this.sharedService.getHeadersConfig())
+               .pipe(
+                  catchError (
+                    err => {
+                      return of(err.error);
+                    }
+                  ));
   }
 
   /**
@@ -39,7 +47,13 @@ export class UtilisateurService implements IUser<UserMoral, UserPhysique> {
    */
   creationParticulier(object: UserPhysique): Observable<ImoResponse<UserPhysique>> {
     const datas = JSON.stringify(object);
-    return this.http.post<ImoResponse<UserPhysique>>(API.parInscription, datas, this.sharedService.getHeadersConfig());
+    return this.http.post<ImoResponse<UserPhysique>>(API.parInscription, datas, this.sharedService.getHeadersConfig())
+               .pipe(
+                 catchError (
+                   err => {
+                     return of(err.error);
+                 }
+                ));
   }
   
 }

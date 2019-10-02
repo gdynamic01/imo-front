@@ -20,6 +20,9 @@ export class UserInscriptionComponent implements OnInit {
   particulier: UserPhysique;
   infoUser: RepresentantLegal;
   valideForm = false;
+  messageErreur = false;
+  colors: string; // parametre composant alerte-message
+  message: string // parametre composant alerte-message
 
   constructor(private errors: ErrorsFormGeneriquesService, private userService: UtilisateurService) {
      this.user = new User();
@@ -41,6 +44,9 @@ export class UserInscriptionComponent implements OnInit {
           data => {
             // Traitement resultat
             console.log('____________ data: ', data);
+            if ( data.statut === 400 ) {
+              this.alerteMessage();
+            }
           }
         );
       } else {
@@ -50,6 +56,9 @@ export class UserInscriptionComponent implements OnInit {
           data => {
             // Traitement resultat
             console.log('____________ data: ', data);
+            if ( data.statut === 400 ) {
+              this.alerteMessage();
+            }
           }
         );
       }
@@ -65,6 +74,12 @@ export class UserInscriptionComponent implements OnInit {
    */
   openform(type: string) {
     this.isBlocProfessionnel = (type === 'professionnel');
+  }
+
+  alerteMessage() {
+    this.messageErreur = true;
+    this.message = 'Le formulaire contient des erreurs, veuillez contacter le service loumo@contact.fr';
+    this.colors = 'red';
   }
 
 }

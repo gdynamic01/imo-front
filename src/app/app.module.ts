@@ -14,6 +14,7 @@ import { UserPhysiqueModule } from './vues/user/user-physique/modules/user-physi
 import { APP_BASE_HREF } from '@angular/common';
 import { HeaderComponent } from './vues/header/header.component';
 import { UserInscriptionComponent } from './vues/user/user-inscription.component';
+import { AlerteMessageComponent } from './vues/alerte-message/alerte-message.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UserInscriptionComponent } from './vues/user/user-inscription.component
     CreationCompteUserMoralComponent,
     HomeComponent,
     HeaderComponent,
-    UserInscriptionComponent
+    UserInscriptionComponent,
+    AlerteMessageComponent
   ],
   imports: [
     BrowserModule,
