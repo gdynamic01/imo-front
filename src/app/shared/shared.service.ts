@@ -1,5 +1,5 @@
 import { Injectable, ElementRef } from '@angular/core';
-import { HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpHeaders, HttpParams, HttpClient } from '@angular/common/http';
 
 declare var $: any;
 declare var M: any;
@@ -12,11 +12,10 @@ export class SharedService {
   /**
    * Option dans la requete Http
    */
-  public httpOptions = {
-    headers: this.getHeaders()
-  };  
+  public httpOptions = HttpClient;
 
-  constructor() { }
+  constructor() {
+  }
 
   /**
    * 
@@ -89,13 +88,12 @@ export class SharedService {
    * @returns header
    * 
    */
-  public getHeaders() {
-    const headers = new HttpHeaders();
-    headers.append('Access-Control-Allow-Origin', `http://localhost:4200`);
-    headers.append("Access-Control-Allow-Headers", "X-Auth-Token, Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
-    return headers;
+  public getHeadersConfig() {
+    const httpOptions = {
+      headers: ({'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json'}),
+      withCredentials: true
+    };
+    return httpOptions;
   }
 
 }

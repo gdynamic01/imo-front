@@ -1,3 +1,4 @@
+import { UtilisateurService } from './../../service/apiImpl/utilisateur.service';
 import { RepresentantLegal } from './../../models/representant-legal';
 import { UserPhysique } from './../../models/users/user-physique';
 import { UserMoral } from './../../models/users/user-moral';
@@ -20,7 +21,7 @@ export class UserInscriptionComponent implements OnInit {
   infoUser: RepresentantLegal;
   valideForm = false;
 
-  constructor(private errors: ErrorsFormGeneriquesService) { 
+  constructor(private errors: ErrorsFormGeneriquesService, private userService: UtilisateurService) {
      this.user = new User();
      this.professionnel = new UserMoral();
      this.particulier = new UserPhysique();
@@ -36,9 +37,21 @@ export class UserInscriptionComponent implements OnInit {
       if (this.isBlocProfessionnel) {
         // professionnel
         this.professionnel.init(this.user, this.infoUser);
+        this.userService.creationProfessionnel(this.professionnel).subscribe(
+          data => {
+            // Traitement resultat
+            console.log('____________ data: ', data);
+          }
+        );
       } else {
         // particulier
         this.particulier.init(this.user, this.infoUser);
+        this.userService.creationParticulier(this.particulier).subscribe(
+          data => {
+            // Traitement resultat
+            console.log('____________ data: ', data);
+          }
+        );
       }
     }
   }
