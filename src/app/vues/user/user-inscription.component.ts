@@ -45,6 +45,7 @@ export class UserInscriptionComponent implements OnInit {
             // Traitement resultat
             console.log('____________ data: ', data);
             if ( data.statut === 400 ) {
+              this.message = data.messageResponse;
               this.alerteMessage();
             }
           }
@@ -78,7 +79,6 @@ export class UserInscriptionComponent implements OnInit {
 
   alerteMessage() {
     this.messageErreur = true;
-    this.message = 'Le formulaire contient des erreurs, veuillez contacter le service loumo@contact.fr';
     this.colors = 'red';
   }
 
