@@ -30,5 +30,7 @@ export class UserMoral extends User {
       this.email = user.email;
       this.password = user.password;
       this.representantLegal = representantLegal;
+      this.typeUtilisateur = user.typeUtilisateur;
+      this.roles = user.roles;
     }
 }

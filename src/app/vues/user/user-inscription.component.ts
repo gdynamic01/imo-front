@@ -1,3 +1,4 @@
+import { Role } from './../../models/users/role';
 import { UtilisateurService } from './../../service/apiImpl/utilisateur.service';
 import { RepresentantLegal } from './../../models/representant-legal';
 import { UserPhysique } from './../../models/users/user-physique';
@@ -22,7 +23,7 @@ export class UserInscriptionComponent implements OnInit {
   valideForm = false;
   messageErreur = false;
   colors: string; // parametre composant alerte-message
-  message: string // parametre composant alerte-message
+  message: string; // parametre composant alerte-message
 
   constructor(private errors: ErrorsFormGeneriquesService, private userService: UtilisateurService) {
      this.user = new User();
@@ -37,17 +38,14 @@ export class UserInscriptionComponent implements OnInit {
   valider() {
     this.valideForm = this.errors.generateErrorsForm(CHAMPS_FORM_INSCRIPTION, 'form-inscription', 'class');
     if ( this.valideForm ) {
+      this.setRole();
       if (this.isBlocProfessionnel) {
         // professionnel
         this.professionnel.init(this.user, this.infoUser);
         this.userService.creationProfessionnel(this.professionnel).subscribe(
           data => {
             // Traitement resultat
-            console.log('____________ data: ', data);
-            if ( data.statut === 400 ) {
-              this.message = data.messageResponse;
-              this.alerteMessage();
-            }
+            this.traitementErreur(data.statut, data.messageResponse);
           }
         );
       } else {
@@ -56,10 +54,7 @@ export class UserInscriptionComponent implements OnInit {
         this.userService.creationParticulier(this.particulier).subscribe(
           data => {
             // Traitement resultat
-            console.log('____________ data: ', data);
-            if ( data.statut === 400 ) {
-              this.alerteMessage();
-            }
+            this.traitementErreur(data.statut, data.messageResponse);
           }
         );
       }
@@ -77,9 +72,45 @@ export class UserInscriptionComponent implements OnInit {
     this.isBlocProfessionnel = (type === 'professionnel');
   }
 
+  /**
+   *
+   * @author Mamadou
+   * @description set le message d'erreur renvoyer par le serveur et la couleur d'erreur
+   *
+   */
   alerteMessage() {
     this.messageErreur = true;
     this.colors = 'red';
+  }
+
+  /**
+   *
+   * @author Mamadou
+   * @description set le role et le type de l'utilisateur
+   *
+   */
+  setRole() {
+    if ( this.isBlocProfessionnel ) {
+      this.user.roles.push('USER_MORAL');
+      this.user.typeUtilisateur = 'ENTREPRISE';
+    } else {
+      this.user.roles.push('USER_PHYSIQUE');
+      this.user.typeUtilisateur = 'PARTICULIER';
+    }
+  }
+
+  /**
+   *
+   * @author Mamadou
+   * @param statut numero erreur
+   * @param messageResponse message reponse serveur
+   *
+   */
+  traitementErreur(statut: number, messageResponse: string) {
+    if ( statut === 400 || statut === 500) {
+      this.message = messageResponse;
+      this.alerteMessage();
+    }
   }
 
 }

@@ -10,5 +10,5 @@ export class User {
     public typeUtilisateur: string;
 
     /** liste des roles */
-    public roles: Role[];
+    public roles = new Array<string>();
 }

@@ -21,8 +21,10 @@ export class UserPhysique extends User {
      *
      */
     public init(user: User, representantLegal: RepresentantLegal) {
-        this.email = user.email;
-        this.password = user.password;
-        this.representantLegal = representantLegal;
-      }
+      this.email = user.email;
+      this.password = user.password;
+      this.representantLegal = representantLegal;
+      this.typeUtilisateur = user.typeUtilisateur;
+      this.roles = user.roles;
+    }
 }
