@@ -1,5 +1,6 @@
 import { Injectable, ElementRef } from '@angular/core';
-import { HttpHeaders, HttpParams, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 declare var $: any;
 declare var M: any;
@@ -14,8 +15,11 @@ export class SharedService {
    */
   public httpOptions = HttpClient;
 
-  constructor() {
-  }
+  confirmationMessageSubject : BehaviorSubject<String> = new BehaviorSubject(null);
+  currentConfirmationMessage = this.confirmationMessageSubject.asObservable();
+// let currentUser$ = currentUserSubject$.asObservable();
+
+  constructor() {}
 
   /**
    *
@@ -94,6 +98,17 @@ export class SharedService {
       withCredentials: true
     };
     return httpOptions;
+  }
+
+  /**
+   * 
+   * @author Mamadou
+   * @description set les nouvelles valeurs emis par l'observable 
+   * @param value nouvelle valeur
+   * 
+   */
+  public setConfirmationSubject(value: String) {
+    this.confirmationMessageSubject.next(value);
   }
 
 }

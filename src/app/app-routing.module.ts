@@ -7,7 +7,11 @@ import { MatSidenavModule } from '@angular/material';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'accueil', component: HomeComponent }
+  { path: 'accueil', component: HomeComponent },
+  {
+    path: 'confirmation',
+    loadChildren: () => import('../app/vues/confirmation/confirmation.module').then(mod => mod.ConfirmationModule)
+  },
 ];
 
 @NgModule({

@@ -5,7 +5,7 @@ import { UserPhysique } from './../../models/users/user-physique';
 import { UserMoral } from './../../models/users/user-moral';
 import { User } from './../../models/users/user';
 import { ErrorsFormGeneriquesService } from './../../errors/errors-form-generiques.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CHAMPS_FORM_INSCRIPTION } from '../../constantes/constantes-structures';
 
 @Component({
@@ -15,6 +15,7 @@ import { CHAMPS_FORM_INSCRIPTION } from '../../constantes/constantes-structures'
 })
 export class UserInscriptionComponent implements OnInit {
 
+  @Output() creationCompte = new EventEmitter<string>();
   isBlocProfessionnel = false;
   user: User;
   professionnel: UserMoral;
@@ -35,6 +36,12 @@ export class UserInscriptionComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   *
+   * @author Mamadou
+   * @description traite et envoie les données du formulaire au serveur
+   * 
+   */
   valider() {
     this.valideForm = this.errors.generateErrorsForm(CHAMPS_FORM_INSCRIPTION, 'form-inscription', 'class');
     if ( this.valideForm ) {
@@ -110,6 +117,8 @@ export class UserInscriptionComponent implements OnInit {
     if ( statut === 400 || statut === 500) {
       this.message = messageResponse;
       this.alerteMessage();
+    } else {
+      this.creationCompte.emit(messageResponse);
     }
   }
 

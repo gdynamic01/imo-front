@@ -1,6 +1,6 @@
 <nav class="red navbar-fixed">
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Loumo</a>
+    <a href="/accueil" class="brand-logo">Loumo</a>
     <a href="#" data-target="mobile-header" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul class="right hide-on-med-and-down menu-header">
       <li><span class="depot-offre">D&eacute;poser une annonce</span></li>
@@ -13,7 +13,7 @@
 <!-- menu pour mobile -->
 <ul class="sidenav" id="mobile-header">
   <li class="li_depot-offre"><span class="depot-offre">D&eacute;poser une annonce</span></li>
-  <li><a href="#">Inscription</a></li>
+  <li><a href="#modalIns">Inscription</a></li>
   <li><a href="#">Connexion</a></li>
 </ul>
 
@@ -22,6 +22,6 @@
   <div class="modal-content">
     <span (click)="clos()"><i class="material-icons fermeture">close</i></span>
     <h4>Inscription</h4>
-    <app-user-inscription></app-user-inscription>
+    <app-user-inscription (creationCompte)="confirmationCreationCompte($event)"></app-user-inscription>
   </div>
 </div>

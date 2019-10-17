@@ -7,19 +7,16 @@ import { MatSelectModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { CreationCompteUserMoralComponent } from './vues/user/user-moral/creation-compte-user-moral.component';
 import { HomeComponent } from './vues/home/home.component';
-import { UserMoralModule } from './vues/user/user-moral/modules/user-moral.module';
-import { UserPhysiqueModule } from './vues/user/user-physique/modules/user-physique.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { HeaderComponent } from './vues/header/header.component';
 import { UserInscriptionComponent } from './vues/user/user-inscription.component';
 import { AlerteMessageComponent } from './vues/alerte-message/alerte-message.component';
+import { ConfirmationModule } from './vues/confirmation/confirmation.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreationCompteUserMoralComponent,
     HomeComponent,
     HeaderComponent,
     UserInscriptionComponent,
@@ -28,13 +25,12 @@ import { AlerteMessageComponent } from './vues/alerte-message/alerte-message.com
   imports: [
     BrowserModule,
     AppRoutingModule,
-    UserMoralModule,
-    UserPhysiqueModule,
     MatSelectModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ConfirmationModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue: ''}],
   bootstrap: [AppComponent],
