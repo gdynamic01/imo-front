@@ -11,4 +11,7 @@ export class RepresentantLegal {
 
     /** telephone */
     public telephone: string;
+
+    /** sexe */
+    public sexe: string;
 }

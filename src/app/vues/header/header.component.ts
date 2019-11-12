@@ -1,6 +1,9 @@
-import { Component, OnInit, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { SharedService } from '../../shared/shared.service';
 import { Router } from '@angular/router';
+import { UserInscriptionComponent } from '../user/user-inscription.component';
+import { AuthentificationComponent } from '../auth/authentification.component';
 
 declare var $: any;
 declare var M: any;
@@ -12,42 +15,28 @@ declare var M: any;
 })
 export class HeaderComponent implements OnInit {
 
-  @ViewChild('modal', {static: false}) modal: ElementRef;
-  instance: any;
-
-  constructor(private sharedService: SharedService, private router: Router) {}
+  constructor(private sharedService: SharedService, public dialog: MatDialog
+             ) {}
 
   ngOnInit() {
     this.sharedService.initNavBar('sidenav', 'class'); // initialisation de la navbar
   }
 
-  // Lancement des composants apres initialisation
-  ngAfterViewInit(): void{
-    this.sharedService.initModal(this.modal); // initialisation du modal inscription
-    this.instance = this.sharedService.getInstances(this.modal);
-  }
-
   /**
-   * 
    * @author Mamadou
-   * @description fermeture de la popin
-   * 
+   * @description Ouverture de la popin
+   * @param popin 
    */
-  clos() {
-    this.instance.close();
+  openDialog(popin: string): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = popin === 'Insc' ? '80%' : '50%';
+    if(popin === 'Insc') {
+      this.dialog.open(UserInscriptionComponent, dialogConfig);
+    }
+    if(popin === 'Auth') {
+      this.dialog.open(AuthentificationComponent, dialogConfig);
+    }
   }
-
-  /**
-   * 
-   * @author Mamadou
-   * @description affiche le composant confirmation creation compte
-   * @param event message confirmation
-   * 
-   */
-  confirmationCreationCompte(event: string) {
-    this.clos();
-    this.sharedService.setConfirmationSubject(event);
-    this.router.navigate(['/confirmation']);
-  }
-
 }

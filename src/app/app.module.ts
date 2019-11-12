@@ -1,9 +1,8 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
-import { MatSelectModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -13,6 +12,9 @@ import { HeaderComponent } from './vues/header/header.component';
 import { UserInscriptionComponent } from './vues/user/user-inscription.component';
 import { AlerteMessageComponent } from './vues/alerte-message/alerte-message.component';
 import { ConfirmationModule } from './vues/confirmation/confirmation.module';
+import { MaterialModule } from './material.module';
+import { AuthentificationComponent } from './vues/auth/authentification.component';
+import { InterceptorService } from './service/configJwt/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -20,19 +22,31 @@ import { ConfirmationModule } from './vues/confirmation/confirmation.module';
     HomeComponent,
     HeaderComponent,
     UserInscriptionComponent,
-    AlerteMessageComponent
+    AlerteMessageComponent,
+    AuthentificationComponent
+  ],
+  entryComponents: [
+    UserInscriptionComponent,
+    AuthentificationComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatSelectModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    ConfirmationModule
+    ConfirmationModule,
+    MaterialModule
   ],
-  providers: [{provide: APP_BASE_HREF, useValue: ''}],
+  providers: [
+     {provide: APP_BASE_HREF, useValue: ''},
+     {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
+    ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

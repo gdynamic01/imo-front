@@ -1,19 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-.modal {
-  width: 50% !important;
-  overflow: auto !important;
-}
-.modal-content h4 {
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.header-modale h6 {
   text-align: center;
-  border-bottom: 1px solid #F44336;
-  padding-bottom: 1rem;
-  border-width: 3px;
-  margin-bottom: 2rem;
+  /*border-bottom: 1px solid #F44336;*/
+  padding-bottom: 10px;
+  /*border-width: 1.5px;*/
+  margin-bottom: 7px;
+  font-size: 25px;
 }
-.modal-overlay {
-  opacity: 0.9 !important;
+.header-modale {
+  margin-top: -19px;
 }
-.modal-content .fermeture {
+.header-modale .fermeture {
   float: right;
   color: #F44336;
   cursor: pointer;
@@ -40,13 +39,17 @@
 }
 /* orange */
 .msg-alert {
-   border-color: #ef6c00;
+  border-color: #ef6c00;
   background-color: #ff9800;
   color: white;
 }
 /* bleu */
-.msg-info{
+.msg-info {
   border-color: #0288d1;
   background-color: #29b6f6;
   color: white;
+}
+/* masque bloc */
+.masque-bloc {
+  display: none;
 }
