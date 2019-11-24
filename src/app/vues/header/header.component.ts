@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { TokenStorageService } from './../../service/config/token-storage.service';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { SharedService } from '../../shared/shared.service';
 import { Router } from '@angular/router';
@@ -15,11 +16,24 @@ declare var M: any;
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private sharedService: SharedService, public dialog: MatDialog
+  isActifButton: boolean = false;
+  destroySubscription: any;
+
+  constructor(private sharedService: SharedService, private dialog: MatDialog, 
+              private tokenStorage: TokenStorageService
              ) {}
 
   ngOnInit() {
     this.sharedService.initNavBar('sidenav', 'class'); // initialisation de la navbar
+    this.destroySubscription = this.sharedService.isEtatUser.subscribe(
+      value => {
+        this.isActifButton = value;
+      }
+    );
+
+    
+    console.log('_____________ sessionStorage: ', this.isActifButton);
+    console.log('_____________ getToken: ', this.tokenStorage.getToken());
   }
 
   /**
@@ -39,4 +53,11 @@ export class HeaderComponent implements OnInit {
       this.dialog.open(AuthentificationComponent, dialogConfig);
     }
   }
+
+  ngDestroy() {
+    if (this.tokenStorage.getToken() == null) {
+      this.destroySubscription.unsubscribe();
+    }
+  }
+
 }

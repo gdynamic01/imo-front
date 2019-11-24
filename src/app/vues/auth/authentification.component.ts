@@ -1,4 +1,4 @@
-import { TokenStorageService } from './../../service/configJwt/token-storage.service';
+import { TokenStorageService } from '../../service/config/token-storage.service';
 import { Component, OnInit, Optional } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
@@ -42,6 +42,7 @@ export class AuthentificationComponent implements OnInit {
             this.alerteMessage();
           } else {
             this.tokenStorage.saveToken(data.token);
+            this.sharedService.setIsEtatUser(true);
             this.clos();
           }
         }

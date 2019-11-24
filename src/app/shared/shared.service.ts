@@ -17,6 +17,9 @@ export class SharedService {
   confirmationMessageSubject : BehaviorSubject<String> = new BehaviorSubject(null);
   currentConfirmationMessage = this.confirmationMessageSubject.asObservable();
 
+  isEtatUserSubject : BehaviorSubject<boolean> = new BehaviorSubject(false);
+  isEtatUser = this.isEtatUserSubject.asObservable();
+
   constructor() {}
 
   /**
@@ -74,6 +77,14 @@ export class SharedService {
    */
   public setConfirmationSubject(value: String) {
     this.confirmationMessageSubject.next(value);
+  }
+
+  /**
+   * @author Mamadou
+   * @param value 
+   */
+  public setIsEtatUser(value: boolean) {
+    this.isEtatUserSubject.next(value);
   }
 
 }

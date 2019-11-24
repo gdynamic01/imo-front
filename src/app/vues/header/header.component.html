@@ -4,8 +4,8 @@
     <a href="#" data-target="mobile-header" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul class="right hide-on-med-and-down menu-header">
       <li><span class="depot-offre">D&eacute;poser une annonce</span></li>
-      <li><a (click)="openDialog('Insc')">Inscription</a></li>
-      <li><a (click)="openDialog('Auth')">Connexion</a></li>
+      <li *ngIf="!isActifButton"><a (click)="openDialog('Insc')">Inscription</a></li>
+      <li *ngIf="!isActifButton"><a (click)="openDialog('Auth')">Connexion</a></li>
     </ul>
   </div>
 </nav>
@@ -13,6 +13,6 @@
 <!-- menu pour mobile -->
 <ul class="sidenav" id="mobile-header">
   <li class="li_depot-offre"><span class="depot-offre">D&eacute;poser une annonce</span></li>
-  <li><a (click)="openDialog('Insc')">Inscription</a></li>
-  <li><a (click)="openDialog('Auth')">Connexion</a></li>
+  <li *ngIf="!isActifButton"><a (click)="openDialog('Insc')">Inscription</a></li>
+  <li *ngIf="!isActifButton"><a (click)="openDialog('Auth')">Connexion</a></li>
 </ul>

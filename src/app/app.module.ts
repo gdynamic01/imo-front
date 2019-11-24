@@ -14,7 +14,8 @@ import { AlerteMessageComponent } from './vues/alerte-message/alerte-message.com
 import { ConfirmationModule } from './vues/confirmation/confirmation.module';
 import { MaterialModule } from './material.module';
 import { AuthentificationComponent } from './vues/auth/authentification.component';
-import { InterceptorService } from './service/configJwt/interceptor.service';
+import { InterceptorService } from './service/config/interceptor.service';
+import { ConfirmationComponent } from './vues/confirmation/confirmation.component';
 
 @NgModule({
   declarations: [

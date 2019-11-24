@@ -63,7 +63,13 @@ export class UtilisateurService implements IUser<UserMoral, User> {
    */
   authentification(object: User): Observable<TokenResponse> {
     const data = JSON.stringify(object);
-    return this.http.post<TokenResponse>(API.auth, data, this.sharedService.getHeadersConfig());
+    return this.http.post<TokenResponse>(API.auth, data, this.sharedService.getHeadersConfig())
+               .pipe(
+                  catchError (
+                    err => {
+                      return of(err.error);
+                  }
+                ));
   }
   
 }

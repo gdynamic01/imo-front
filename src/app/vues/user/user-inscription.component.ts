@@ -34,7 +34,6 @@ export class UserInscriptionComponent implements OnInit {
      this.professionnel = new UserMoral();
      this.user.adresse = new Adresse();
      this.user.representantLegal = new RepresentantLegal();
-    //  this.infoUser = new RepresentantLegal();
   }
 
   ngOnInit() {
