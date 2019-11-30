@@ -5,7 +5,7 @@ import { User } from './../../models/users/user';
 import { ErrorsFormGeneriquesService } from './../../errors/errors-form-generiques.service';
 import { Component, OnInit, Output, EventEmitter, Optional } from '@angular/core';
 import { CHAMPS_FORM_INSCRIPTION } from '../../constantes/constantes-structures';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatDialogConfig, MatDialog } from '@angular/material';
 import { SharedService } from '../../shared/shared.service';
 import { Router } from '@angular/router';
 import { Adresse } from './../../models/adresse';
@@ -26,10 +26,12 @@ export class UserInscriptionComponent implements OnInit {
   messageErreur = false;
   colors: string; // parametre composant alerte-message
   message: string; // parametre composant alerte-message
+  loading = false;
 
   constructor(private errors: ErrorsFormGeneriquesService, private userService: UtilisateurService,
               @Optional() public dialogRef: MatDialogRef<UserInscriptionComponent>, 
-              private sharedService: SharedService, private router: Router) {
+              private sharedService: SharedService, private router: Router
+              ) {
      this.user = new User();
      this.professionnel = new UserMoral();
      this.user.adresse = new Adresse();
@@ -47,6 +49,7 @@ export class UserInscriptionComponent implements OnInit {
     this.valideForm = this.errors.generateErrorsForm(CHAMPS_FORM_INSCRIPTION, 'form-inscription', 'class');
     if ( this.valideForm ) {
       this.setRole();
+      this.loading = true;
       if (this.isBlocProfessionnel) {
         // professionnel
         this.professionnel.init(this.user);
@@ -105,6 +108,7 @@ export class UserInscriptionComponent implements OnInit {
    * @description traitement erreur serveur
    */
   traitementErreur(statut: number, messageResponse: string) {
+    this.loading = false;
     if ( statut === 400 || statut === 500) {
       this.message = messageResponse;
       this.alerteMessage();

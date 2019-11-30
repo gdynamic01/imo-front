@@ -36,8 +36,20 @@
   };
   a:hover, .depot-offre:hover {
     text-decoration: none !important;
-  }
+  };
   .li_depot-offre {
     margin-top: 13px;
+  }
+}
+.menu-compte {
+  .name-user {
+    margin-left: 7px;
+  };
+  button {
+    outline: none !important; 
+    background: 0 0 !important;
+    mat-icon {
+      font-weight: bold;
+    }
   }
 }

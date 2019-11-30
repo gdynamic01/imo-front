@@ -18,9 +18,6 @@ export class InterceptorService implements HttpInterceptor {
     if (this.token.getToken() != null) {
       authReq = request.clone({ headers: request.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + this .token.getToken())});
     }
-
     return next.handle(authReq);
-    
-
   }
 }

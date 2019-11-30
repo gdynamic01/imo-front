@@ -89,8 +89,11 @@
     </form>
   </div>
   <div mat-dialog-actions align="end" class="user-info">
-    <div>
-      <button mat-button class="btn red waves-effect waves-light" (click)="clos()">Annuler</button>
-      <button mat-button class="btn green waves-effect waves-light" (click)="valider()">Valider</button>
+    <div class="btn-submit">
+      <button mat-button class="btn btn-green waves-effect waves-light" [class.spinner]="loading" [disabled]="loading" (click)="valider()">Valider</button>
     </div>
+    <!-- <div class="separateur"></div>
+    <div class="inscription-mot-de-passe-oublie">
+      <span>Vous avez dejà un compte: </span><a class="connection-c" (click)="openDialog()"><u>Connectez-vous</u></a>
+    </div> -->
   </div>

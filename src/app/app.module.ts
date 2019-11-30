@@ -1,3 +1,4 @@
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,7 +16,6 @@ import { ConfirmationModule } from './vues/confirmation/confirmation.module';
 import { MaterialModule } from './material.module';
 import { AuthentificationComponent } from './vues/auth/authentification.component';
 import { InterceptorService } from './service/config/interceptor.service';
-import { ConfirmationComponent } from './vues/confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -43,10 +43,12 @@ import { ConfirmationComponent } from './vues/confirmation/confirmation.componen
   providers: [
      {provide: APP_BASE_HREF, useValue: ''},
      {
-      provide: HTTP_INTERCEPTORS,
-      useClass: InterceptorService,
-      multi: true
-    }
+        provide: HTTP_INTERCEPTORS,
+        useClass: InterceptorService,
+        multi: true
+     },
+     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+     JwtHelperService
     ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

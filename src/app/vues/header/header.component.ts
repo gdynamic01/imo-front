@@ -1,3 +1,4 @@
+import { AuthService } from './../../service/config/auth.service';
 import { TokenStorageService } from './../../service/config/token-storage.service';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
@@ -20,20 +21,21 @@ export class HeaderComponent implements OnInit {
   destroySubscription: any;
 
   constructor(private sharedService: SharedService, private dialog: MatDialog, 
-              private tokenStorage: TokenStorageService
+              private tokenStorage: TokenStorageService, private router: Router,
+              private authService: AuthService
              ) {}
 
   ngOnInit() {
     this.sharedService.initNavBar('sidenav', 'class'); // initialisation de la navbar
-    this.destroySubscription = this.sharedService.isEtatUser.subscribe(
+    this.destroySubscription = this.sharedService.isActifElement.subscribe(
       value => {
         this.isActifButton = value;
       }
     );
-
-    
-    console.log('_____________ sessionStorage: ', this.isActifButton);
-    console.log('_____________ getToken: ', this.tokenStorage.getToken());
+    this.sharedService.getUserName(this.authService.getInfoUser());
+    if(!this.isActifButton && this.tokenStorage.getToken() !== null && this.tokenStorage.getToken() !== "undefined") {
+      this.isActifButton = true;
+    }
   }
 
   /**
@@ -45,7 +47,7 @@ export class HeaderComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = popin === 'Insc' ? '80%' : '50%';
+    dialogConfig.width = popin === 'Insc' ? '70%' : '50%';
     if(popin === 'Insc') {
       this.dialog.open(UserInscriptionComponent, dialogConfig);
     }
@@ -54,6 +56,21 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  /**
+   * @author Mamadou
+   * @description deconnecte l'utilisateur
+   */
+  deconnexion() {
+    this.tokenStorage.signOut();
+    this.sharedService.setIsActifElement(false);
+    this.sharedService.userName = null;
+    this.router.navigate(['accueil']);
+  }
+
+  /**
+   * @author Mamadou
+   * @description unsubscribe l observable
+   */
   ngDestroy() {
     if (this.tokenStorage.getToken() == null) {
       this.destroySubscription.unsubscribe();

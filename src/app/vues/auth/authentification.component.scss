@@ -15,3 +15,33 @@
     color: red;
   };
 }
+.separateur {
+  border-bottom: 1px solid #f4433640;
+  width: 100%;
+  margin-top: 1rem;
+}
+.btn-submit {
+  width: 100%;
+  button {
+    width: 100%;
+  }
+}
+.inscription-mot-de-passe-oublie {
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 14px;
+  .mot-passe_o, .creation-c {
+    color: #369;
+    cursor: pointer;
+  };
+  .mot-passe_o u:hover, .creation-c u:hover {
+    font-weight: 600;
+  };
+  .creation-c {
+    margin-left: 6px;
+  }
+  .libelle-cpt {
+    color: grey;
+    font-weight: 600;
+  }
+}

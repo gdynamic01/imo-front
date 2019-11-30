@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'confirmation',
     loadChildren: () => import('../app/vues/confirmation/confirmation.module').then(mod => mod.ConfirmationModule)
-  },
+  }
 ];
 
 @NgModule({

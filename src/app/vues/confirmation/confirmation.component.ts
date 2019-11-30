@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class ConfirmationComponent implements OnInit {
 
   confirmationMessage: String;
+
   destroySubscription: any;
 
   constructor(private sharedService: SharedService, private router: Router) {}
@@ -20,9 +21,10 @@ export class ConfirmationComponent implements OnInit {
         this.confirmationMessage = value;
       }
     );
-    
     if(this.confirmationMessage === null) {
       this.router.navigate(['/accueil']);
+    } else {
+      this.sharedService.setIsActifElement(true);
     }
     
   }

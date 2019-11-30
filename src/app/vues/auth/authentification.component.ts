@@ -1,6 +1,8 @@
+import { UserInscriptionComponent } from './../user/user-inscription.component';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { AuthService } from './../../service/config/auth.service';
 import { TokenStorageService } from '../../service/config/token-storage.service';
 import { Component, OnInit, Optional } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 import { User } from '../../models/users/user';
 import { SharedService } from '../../shared/shared.service';
@@ -20,11 +22,13 @@ export class AuthentificationComponent implements OnInit {
   messageErreur = false;
   colors: string; // parametre composant alerte-message
   message: string; // parametre composant alerte-message
+  loading = false;
 
   constructor(@Optional() public dialogRef: MatDialogRef<AuthentificationComponent>,
               private router: Router, private errors: ErrorsFormGeneriquesService,
               private sharedService: SharedService, private userService: UtilisateurService,
-              private tokenStorage: TokenStorageService
+              private tokenStorage: TokenStorageService, private authService: AuthService,
+              private dialog: MatDialog
              ) {
                  this.user = new User();
               }
@@ -32,17 +36,24 @@ export class AuthentificationComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * @author Mamadou
+   * @description validation du formulaire
+   */
   valider() {
     this.valideForm = this.errors.generateErrorsForm(CHAMPS_FORM_CONNEXION, 'form-auth', 'class');
     if ( this.valideForm ) {
+      this.loading = true;
       this.userService.authentification(this.user).subscribe(
         data => {
+          this.loading = false;
           if (data.statut === 401) {
             this.message = data.messageResponse;
             this.alerteMessage();
           } else {
             this.tokenStorage.saveToken(data.token);
-            this.sharedService.setIsEtatUser(true);
+            this.sharedService.setIsActifElement(true);
+            this.sharedService.getUserName(this.authService.getInfoUser());
             this.clos();
           }
         }
@@ -65,6 +76,20 @@ export class AuthentificationComponent implements OnInit {
    */
   clos() {
     this.dialogRef.close();
+  }
+
+  /**
+   * @author Mamadou
+   * @description Ouverture de la popin
+   * @param popin 
+   */
+  openDialog(popin: string): void {
+    this.clos();
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '70%';
+    this.dialog.open(UserInscriptionComponent, dialogConfig);
   }
 
 }

@@ -20,3 +20,30 @@
     height: 2.6rem !important;
   }
 }
+
+.separateur {
+  border-bottom: 1px solid #f4433640;
+  width: 100%;
+  margin-top: 1rem;
+}
+.btn-submit {
+  width: 100%;
+  margin-bottom: 14px;
+  button {
+    width: 100%;
+  }
+}
+.inscription-mot-de-passe-oublie {
+  width: 100%;
+  margin-top: 8px;
+  .connection-c {
+    color: #369;
+    cursor: pointer;
+  };
+  .creation-c u:hover {
+    font-weight: 600;
+  };
+  .connection-c {
+    margin-left: 6px;
+  }
+}
