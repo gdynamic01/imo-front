@@ -30,12 +30,13 @@
   width: 100%;
   margin-top: 8px;
   margin-bottom: 14px;
+  font-weight: 600;
   .mot-passe_o, .creation-c {
     color: #369;
     cursor: pointer;
   };
-  .mot-passe_o u:hover, .creation-c u:hover {
-    font-weight: 600;
+  .mot-passe_o:hover, .creation-c:hover {
+    text-decoration: underline;
   };
   .creation-c {
     margin-left: 6px;

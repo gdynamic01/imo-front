@@ -10,4 +10,13 @@ export class ImoResponse <T> {
 
     /** code http */
     public statut: number;
+
+    /** nb element dans list */
+    public nbOffre: number;
+
+    /** taille offre particulier */
+    public nbOffreParticulier: number;
+
+    /** taille offre professionnel */
+    public nbOffreProfessionnel: number;
 }

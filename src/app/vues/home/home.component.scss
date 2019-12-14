@@ -1,14 +1,84 @@
 .btn {
   color: white !important;
-  font-weight: 400;
-  width: 100% !important;
+  width: auto !important;
 }
-
 .home {
   margin-top: 0.3em;
+}
+.recherche {
   background: #8080800d;
+  .bloc-recherche {
+    padding: 27px;
+  }
+}
+.bloc-offre {
+  .particulier label, .professionnel label, .dates-prix span,  .dates-prix label {
+    font-size: 14px;
+  };
+  .bloc-libelle h6 {
+
+  }
 }
 
-.bloc-recherche {
-  padding: 27px;
+.card-offre {
+  background: #8080800a;
+  padding: 10px 0 10px 0;
+  box-shadow: 3px 4px 8px -8px black;
+  .info-offres {
+    border-right: 1px solid #00000014;
+    border-left: 1px solid #00000014;
+  };
+  .titre, .type-service label {
+    font-size: 1.6rem;
+  };
+  .prix {
+    margin-top: -4px;
+    margin-left: 6px;
+    label {
+      font-size: 1.2rem;
+      color: #F44336;
+    }
+  };
+  .other-info {
+    margin-top: 4%;
+  };
+  .type-service label{
+    color:#0909c5d1 !important;
+  }
+}
+
+.card-offre:hover {
+  cursor: pointer;
+  box-shadow: 3px 4px 8px -2px #F44336;
+  .titre, .type-service label {
+    color: #F44336;
+  };
+}
+
+/** customer */
+@media only screen and (max-width: 804px) {
+  .bloc-tri {
+    .pro, .part {
+      visibility: hidden;
+    }
+  }
+}
+
+/** customer */
+@media only screen and (min-width: 804px) {
+  .bloc-tri .pro, .bloc-tri .part, .bloc-libelle h6 span {
+    visibility: visible;
+    color: #F44336;
+    font-weight: 500;
+  }
+}
+
+/** customer */
+@media only screen and (max-width: 600px) {
+  .btn {
+    width: 100% !important;
+  }
+  .recherche {
+    background: #fff;
+  }
 }

@@ -1,7 +1,7 @@
 export class Adresse {
 
     /** code postal */
-    public codePostal: string;
+    public codePostal: number;
 
     /** complement adresse */
     public complementAdresse: string;

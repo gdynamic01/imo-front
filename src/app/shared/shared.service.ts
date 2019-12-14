@@ -98,4 +98,15 @@ export class SharedService {
     this.userName = infoAll !== null ? infoAll[1] : null;
   }
 
+  /**
+   * @author Mamadou
+   * @description retourne le nombre de jour entre 2 dates [Attention: si date == dateDuJour alors on retournera 1]
+   * @param date 
+   * @returns nombre de jour
+   */
+  public convertDate(date: Date) {
+    let dateDuJour = new Date().getTime() / 86400000;
+    return new Number(dateDuJour - date.getTime() / 86400000).toFixed(0);
+  }
+
 }

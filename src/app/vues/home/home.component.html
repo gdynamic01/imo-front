@@ -2,14 +2,14 @@
   <div class="row home">
     <div class="col s12 m12 l12 xl12 contents">
       <!-- Bloc recherche -->
-      <div class="row">
+      <div class="row recherche">
         <div class="col s12 m12 l12 xl12 bloc-recherche">
           <h4 class="title-recherche">Trouver les meilleures offres</h4>
           <div class="form-recherche">
             <div class="input-field col s6 m3 l3 xl3">
               <input placeholder="Où cherchez-vous" type="text" class="lieu">
             </div>
-            <div class="input-field col s6 m4 l4 xl4">
+            <div class="input-field col s6 m3 l3 xl3">
               <input placeholder="Quelle date" type="text" class="datepicker date-recherche">
             </div>
             <div class="input-field col s12 m3 l3 xl3">
@@ -18,15 +18,70 @@
                 <option *ngFor="let types of typesDemandes" [value]="types">{{types}}</option>
               </select>
             </div>
-            <div class="input-field col s12 m2 l2 xl2">
-              <button class="btn btn-green waves-effect waves-light" type="submit" name="action"><i class="mdi-action-perm-identity"></i> Rechercher</button>
+            <div class="input-field col s12 m1 l1 xl1">
+              <button class="btn btn-green" type="submit"><i class="material-icons">search</i></button>
+            </div>
+          </div>
+        </div>
+      </div>   
+      <!-- Bloc offre -->
+      <div class="row bloc-offre"> 
+        <div class="col s12 m12 l12 xl12 bloc-libelle">
+          <h6>Toutes les annonces : <span> {{imoResponse.nbOffre}}</span></h6>
+          <div class="row bloc-tri">
+            <div class="col s12 m4 l3 xl3 input-field">
+              <mat-checkbox labelPosition="after" class="particulier"><label> Particuliers :</label></mat-checkbox>
+              <span class="part"> {{imoResponse.nbOffreParticulier}}</span>
+            </div>
+            <div class="col s12 m4 l4 xl3 input-field">
+              <mat-checkbox labelPosition="after" class="professionnel"><label> Professionnels :</label></mat-checkbox>
+              <span class="pro"> {{imoResponse.nbOffreProfessionnel}}</span>
+            </div>
+            <div class="col s12 m3 l3 xl2">
+              <select class="mdb-select colorful-select dropdown-danger">
+                <option value="">Trier</option>
+                <option value="Aujourdhui">Aujourd'hui</option>
+                <option value="Hier">Hier</option>
+                <option value="Plus recent">Plus récent</option>
+                <option value="Plus ancien">Plus ancien</option>
+                <option value="Prix bas">moins cher</option>
+                <option value="Prix eleve">Plus cher</option>
+              </select>
             </div>
           </div>
         </div>
       </div>
-                      
-      <!-- Bloc offre -->
-      <div class="row bloc-offre"> 
+      <div class="row card-offre" *ngFor="let offre of imoResponse.result">
+        <div class="col s3 m3 l3 xl3 photo">
+          <img [src]="offre.photosOffres[0]">
+        </div>
+        <div class="col s6 m6 l6 xl6 info-offres">
+          <div class="titre">
+            <strong>{{offre.titre}}</strong>
+          </div>
+          <div class="prix">
+            <label><strong>{{offre.prix}}</strong></label>
+          </div>
+          <div class="other-info">
+            <div class="type-offre">
+              <span>{{offre.typeOffre}}</span>
+            </div>
+            <div class="ville">
+              <span>{{offre.ville}}</span>
+            </div>
+            <div class="DateOffre">
+              <span>{{convertDate(offre.createAt)}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col s3 m3 l3 xl3 type-service">
+          <div class="type-service">
+            <label><strong>{{offre.typeServiceOffre}}</strong></label>
+          </div>
+          <div>
+            <strong>{{offre.typeAnnonce}}</strong>
+          </div>
+        </div>
       </div>
     </div>
   </div>

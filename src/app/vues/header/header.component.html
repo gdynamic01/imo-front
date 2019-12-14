@@ -13,7 +13,7 @@
     </div>
     <a href="#" data-target="mobile-header" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul class="right hide-on-med-and-down menu-header">
-      <li *ngIf="!isActifButton"><span class="depot-offre">D&eacute;poser une annonce</span></li>
+      <li *ngIf="!isActifButton"><label class="depot-offre"><mat-icon>add</mat-icon><strong>D&eacute;poser une annonce</strong></label></li>
       <li *ngIf="!isActifButton"><a (click)="openDialog('Insc')">Inscription</a></li>
       <li *ngIf="!isActifButton"><a (click)="openDialog('Auth')">Connexion</a></li>
     </ul>

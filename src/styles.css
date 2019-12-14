@@ -53,15 +53,12 @@
 .masque-bloc {
   display: none;
 }
-
 button {
   font-weight: bold;
 }
-
 .btn-green {
   background-color: #106113ad !important;
 }
-
 /** loader sur les boutons */
 @keyframes spinner {
   to {transform: rotate(360deg);}
