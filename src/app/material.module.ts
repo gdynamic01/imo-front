@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatMenuModule, MatIconModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatCardModule, MatGridListModule } from '@angular/material';
+import { MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatMenuModule, MatIconModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatCardModule, MatGridListModule, MatSelectModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
     MatIconModule, 
     MatCheckboxModule, 
     MatDatepickerModule,
+    MatSelectModule,
     MatNativeDateModule
   ]
 })

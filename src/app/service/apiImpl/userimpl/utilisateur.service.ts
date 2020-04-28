@@ -68,7 +68,7 @@ export class UtilisateurService implements IUser<UserMoral, User> {
                   catchError (
                     err => {
                       return of(err.error);
-                  }
+                 }
                 ));
   }
   

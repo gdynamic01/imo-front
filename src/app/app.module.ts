@@ -1,3 +1,5 @@
+import { OffreComponent } from './vues/offre/offre.component';
+
 import { TranslateModule } from '@ngx-translate/core';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,7 +30,8 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
     HeaderComponent,
     UserInscriptionComponent,
     AlerteMessageComponent,
-    AuthentificationComponent
+    AuthentificationComponent,
+    OffreComponent
   ],
   entryComponents: [
     UserInscriptionComponent,

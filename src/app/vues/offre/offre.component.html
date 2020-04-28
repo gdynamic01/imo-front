@@ -1,0 +1,120 @@
+<div class="container">
+
+    <div class="row home">
+      <div class="col s12 m12 l10 xl12 contents">
+
+        <form [formGroup]="myform" (ngSubmit)="submitForm()" novalidate> 
+            <div class="test">
+
+            
+                <mat-form-field>  
+                    <input matInput placeholder="Titre"  formControlName="titre" required>
+                </mat-form-field>
+                
+            </div>
+           <div>
+                <mat-form-textarea>
+                 <textarea  placeholder="Description" formControlName="description"  required></textarea>
+                </mat-form-textarea>
+            </div>
+            
+
+            <div formGroupName="Adresse">
+                <label> Adresse </label>
+                <mat-form-field>  
+                    <input matInput placeholder="Libelle rue" formControlName="libelleRue" required>
+                </mat-form-field>
+
+                <mat-form-field>  
+                    <input matInput placeholder="Numero rue"  formControlName="numeroRue" required>
+                </mat-form-field>
+
+              <mat-form-field>  
+                <input matInput placeholder="Complement adresse"  formControlName="complementAdresse" required>
+            </mat-form-field>
+
+            <mat-form-field>  
+              <input matInput placeholder="pays"  formControlName="pays" required>
+          </mat-form-field>
+          <mat-form-field>  
+              <input matInput placeholder="ville"  formControlName="ville" required>
+          </mat-form-field>
+          <mat-form-field>  
+            <input matInput placeholder="code Postal"  formControlName="codePostal" required>
+        </mat-form-field>
+
+            </div>
+            
+            <div>
+                 <mat-form-field>
+                    <select  [(value)]="selected"  matNativeControl  formControlName="typeOffre" required>
+                      <option value="none">Type offre</option>
+                      <option value="location">Location</option>
+                      <option value="vente">Vente</option>
+                    
+                    </select>
+                  </mat-form-field>
+                </div>
+
+                <div>
+                        <mat-form-field>
+                           <select   [(value)]="selected" matNativeControl  formControlName="typeServiceOffre" required >
+                             <option value="none">Type de service</option>
+                             <option value="location">Location</option>
+                             <option value="vente">Vente</option>
+                           
+                           </select>
+                         </mat-form-field>
+                       </div>
+
+                       <div>
+                            <mat-form-field> 
+                                <input matInput formControlName="prix" placeholder="prix" required>
+                             </mat-form-field>
+                       </div>
+                       <div>
+                            <mat-form-field> 
+                                <input matInput formControlName="duree" placeholder="durée location">
+                            </mat-form-field>
+                       </div>
+                       <div>
+                            <mat-form-field> 
+                                <input matInput  formControlName="surface" placeholder="surface">
+                            </mat-form-field>
+                       </div>
+                       <mat-form-field>
+                           <input matInput [matDatepicker]="myDatePicker" formControlName="datecirculation">
+                           <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
+                           <mat-datepicker #myDatePicker startView="year"></mat-datepicker>
+                         </mat-form-field> 
+                       <div>
+
+                       </div>
+                       <div>
+                            <mat-form-field>
+                               <select  [(value)]="selected" matNativeControl formControlName="typemoteur" required>
+                                 <option value="none">Type moteur</option>
+                                 <option value="vapeur">Vapeur</option>
+                                 <option value="electrique">Electrique</option>
+                               
+                               </select>
+                             </mat-form-field>
+                           
+                           </div>
+                           <div>
+                                <mat-form-fiel>
+                                    <label>Images</label>
+                                        <input type="file" accept="image/*" (change)="showPreview($event)" /> 
+                                        <app-file-upload formControlName="pathPhotos" [progress]="progress"></app-file-upload>          
+                                </mat-form-fiel>
+                                 </div>
+                                 <div><p></p>
+                                        <button mat-raised-button color="primary">Enregistrer</button>
+                                        <button mat-raised-button color="warn">Annuler</button>
+                                 </div>
+                                
+        </form>
+    </div>
+ </div>
+</div>
+

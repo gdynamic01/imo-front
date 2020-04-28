@@ -61,6 +61,7 @@ export class UserInscriptionComponent implements OnInit {
       } else {
         // particulier
         this.userService.creationParticulier(this.user).subscribe(
+          
           data => {
             this.traitementErreur(data.statut, data.messageResponse);
           }
