@@ -1,4 +1,4 @@
-import { Offres } from './../../../models/offres/offres';
+import { Offres, OffreGlobalDto } from '../../../models/offres/offre';
 
 import { ImoResponse } from '../../../models/response/imo-response';
 import { Observable } from 'rxjs';
@@ -17,7 +17,7 @@ export interface IOffre{
      * @description creation compte utilisateur physique
      * @param object user physique
      */
-    creationOffre(object: Offres): Observable<ImoResponse<Offres>>;
+    creationOffre(object: OffreGlobalDto): Observable<ImoResponse<OffreGlobalDto>>;
 
     
     

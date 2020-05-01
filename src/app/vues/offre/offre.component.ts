@@ -1,9 +1,16 @@
+
+
+
 import { Adresse } from './../../models/adresse';
 import { OffreService } from './../../service/apiImpl/offreimpl/offre.service';
 
-import { Offres } from './../../models/offres/offres';
+
+
+import { Offre, OffreGlobal, Immobilier, Mobile, Photo } from '../../models/offres/offre';
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms'
+import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-offre',
@@ -12,13 +19,21 @@ import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms'
 })
 export class OffreComponent implements OnInit {
 
-  offre: Offres;
+  
+  offreGlobal: OffreGlobal;
+  immobilierDto: Immobilier;
+  mobileDto: Mobile;
+  adresse: Adresse;
+  pathphoto: Photo;
+
   myform:FormGroup;
   constructor( private fb: FormBuilder,
                private  offreservice: OffreService ) {
 
   
-    this.offre= new Offres();
+    this.offreGlobal= new OffreGlobal();
+    
+             
     
    
    }
@@ -26,16 +41,24 @@ export class OffreComponent implements OnInit {
   ngOnInit() {
     this.myform=this.fb.group({
 
-      titre : this.fb.control("", Validators.required),
-      description: this.fb.control("", Validators.required),
-      prix: this.fb.control("", Validators.required),
-      surface: this.fb.control("", Validators.required),
-      duree: this.fb.control("", Validators.required),
-      typeOffre: this.fb.control("", Validators.required),
-      typeServiceOffre: this.fb.control("", Validators.required),
-      typemoteur: this.fb.control("", Validators.required),
-      datecirculation:this.fb.control("", Validators.required),
-      pathPhotos:this.fb.control("", Validators.required),
+    //  offre: this.fb.group({
+
+        titre:this.fb.control("", Validators.required),
+        description: this.fb.control("", Validators.required),
+        prix: this.fb.control("", Validators.required),
+        typeOffre: this.fb.control("", Validators.required),
+        typeServiceOffre:this.fb.control("", Validators.required),
+
+
+     // }),
+
+     mobileDto: this.fb.group({
+        typemoteur: this.fb.control("", Validators.required),
+      }),
+
+      immobilierDto: this.fb.group({
+        surface: this.fb.control("", Validators.required),
+      }),
 
       Adresse: this.fb.group({
 
@@ -51,13 +74,18 @@ export class OffreComponent implements OnInit {
     });
 
   }
+
+
+
  submitForm(){
-    this.offre=this.myform.value;
+    this.offreGlobal=this.myform.value;
+    console.log( this.myform.value);
+    console.log(this.offreGlobal);
 
-   this.offreservice.creationOffre(this.offre).subscribe(  
+  // this.offreservice.creationOffre(this.offreGlobal).subscribe(  
 
-    )
-console.log( this.myform.value);
+  //  )
+
     
 
   }

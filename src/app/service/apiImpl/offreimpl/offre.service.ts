@@ -1,4 +1,4 @@
-import { Offres } from '../../../models/offres/offres';
+import { OffreGlobal,Offre} from '../../../models/offres/offre';
 import { Injectable } from '@angular/core';
 import { IOffre } from '../../api/offre/ioffre';
 import { ImoResponse } from '../../../models/response/imo-response';
@@ -18,10 +18,10 @@ export class OffreService  implements IOffre{
      * @description creation compte utilisateur physique
      * @param object user physique
      */
-    creationOffre(offre: Offres): Observable<ImoResponse<Offres>>{
-      const datas = JSON.stringify(offre);
+    creationOffre(OffreGlobal: OffreGlobal): Observable<ImoResponse<OffreGlobal>>{
+      const datas = JSON.stringify(OffreGlobal);
 
-      return this.http.post<ImoResponse<Offres>>(API.offreInscription, datas, this.sharedService.getHeadersConfig())
+      return this.http.post<ImoResponse<OffreGlobal>>(API.offreInscription, datas, this.sharedService.getHeadersConfig())
       .pipe(
          catchError (
            err => {

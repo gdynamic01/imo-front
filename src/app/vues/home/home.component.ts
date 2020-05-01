@@ -1,6 +1,6 @@
 import { ImoResponse } from './../../models/response/imo-response';
 import { PipeTransformers } from '../../pipes/pipe-transformers';
-import { Offres } from './../../models/offres/offres';
+import { Offre } from '../../models/offres/offre';
 import { SharedService } from './../../shared/shared.service';
 import { TYPES_DEMANDES } from '../../constantes/constantes-datas';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
@@ -16,9 +16,9 @@ declare var $: any;
 export class HomeComponent implements OnInit, AfterViewInit {
 
   public typesDemandes: string[];
-  offres: Array<Offres> = new Array();
+  offres: Array<Offre> = new Array();
 
-  imoResponse: ImoResponse<Offres> = new ImoResponse<Offres>();
+  imoResponse: ImoResponse<Offre> = new ImoResponse<Offre>();
 
   constructor(private shared: SharedService, private datePipe: PipeTransformers) {
   }
