@@ -5,14 +5,14 @@
 
         <form [formGroup]="myform" (ngSubmit)="submitForm()" novalidate> 
             <div class="test">
-
+            <div formGroupName="offre">
             
                 <mat-form-field>  
                     <input matInput placeholder="Titre"  formControlName="titre" required>
                 </mat-form-field>
-                
-            </div>
-           <div>
+              </div>
+           
+           <div formGroupName="offre"> 
                 <mat-form-textarea>
                  <textarea  placeholder="Description" formControlName="description"  required></textarea>
                 </mat-form-textarea>
@@ -41,11 +41,11 @@
           </mat-form-field>
           <mat-form-field>  
             <input matInput placeholder="code Postal"  formControlName="codePostal" required>
-        </mat-form-field>
+             </mat-form-field>
 
             </div>
             
-            <div>
+            <div formGroupName="offre">
                  <mat-form-field>
                     <select  [(value)]="selected"  matNativeControl  formControlName="typeOffre" required>
                       <option value="none">Type offre</option>
@@ -56,7 +56,7 @@
                   </mat-form-field>
                 </div>
 
-                <div>
+                <div formGroupName="offre">
                         <mat-form-field>
                            <select   [(value)]="selected" matNativeControl  formControlName="typeServiceOffre" required >
                              <option value="none">Type de service</option>
@@ -67,7 +67,7 @@
                          </mat-form-field>
                        </div>
 
-                       <div>
+                       <div formGroupName="offre">
                             <mat-form-field> 
                                 <input matInput formControlName="prix" placeholder="prix" required>
                              </mat-form-field>
@@ -78,19 +78,20 @@
                             </mat-form-field>
                        </div> -->
                        <div>
-                            <mat-form-field> 
+                            <mat-form-field formGroupName="immobilier"> 
                                 <input matInput  formControlName="surface" placeholder="surface">
                             </mat-form-field>
                        </div>
+                       <div  formGroupName="mobile" >
                        <mat-form-field>
-                           <input matInput [matDatepicker]="myDatePicker" formControlName="datecirculation">
+                           <input matInput [matDatepicker]="myDatePicker" formControlName="dateMiseEnCircualtion">
                            <mat-datepicker-toggle [for]="myDatePicker" matSuffix></mat-datepicker-toggle>
                            <mat-datepicker #myDatePicker startView="year"></mat-datepicker>
                          </mat-form-field> 
-                       <div>
+                      
 
                        </div>
-                       <div>
+                       <div formGroupName="mobile">
                             <mat-form-field>
                                <select  [(value)]="selected" matNativeControl formControlName="typemoteur" required>
                                  <option value="none">Type moteur</option>
@@ -101,18 +102,18 @@
                              </mat-form-field>
                            
                            </div>
-                           <div>
+                           <div formGroupName="pathphoto">
                                 <mat-form-fiel>
                                     <label>Images</label>
-                                        <input type="file" accept="image/*" (change)="showPreview($event)" /> 
-                                        <app-file-upload formControlName="pathPhotos" [progress]="progress"></app-file-upload>          
+                                        <input type="file" accept="image/*" (change)="showPreview($event)" formControlName="pathPhotos"/> 
+                                              
                                 </mat-form-fiel>
                                  </div>
                                  <div><p></p>
                                         <button mat-raised-button color="primary">Enregistrer</button>
                                         <button mat-raised-button color="warn">Annuler</button>
                                  </div>
-                                
+            </div>                     
         </form>
     </div>
  </div>

@@ -3,7 +3,6 @@ import { Adresse } from '../adresse';
 
 export class Offre {
 
-	
     /** titre */
     public titre: string;
 

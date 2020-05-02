@@ -1,11 +1,6 @@
 
-
-
 import { Adresse } from './../../models/adresse';
 import { OffreService } from './../../service/apiImpl/offreimpl/offre.service';
-
-
-
 import { Offre, OffreGlobal, Immobilier, Mobile, Photo } from '../../models/offres/offre';
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
@@ -21,10 +16,11 @@ export class OffreComponent implements OnInit {
 
   
   offreGlobal: OffreGlobal;
-  immobilierDto: Immobilier;
-  mobileDto: Mobile;
+  immobilier: Immobilier;
+  mobile: Mobile;
   adresse: Adresse;
   pathphoto: Photo;
+  offre: Offre;
 
   myform:FormGroup;
   constructor( private fb: FormBuilder,
@@ -32,7 +28,6 @@ export class OffreComponent implements OnInit {
 
   
     this.offreGlobal= new OffreGlobal();
-    
              
     
    
@@ -41,22 +36,27 @@ export class OffreComponent implements OnInit {
   ngOnInit() {
     this.myform=this.fb.group({
 
-    //  offre: this.fb.group({
-
-        titre:this.fb.control("", Validators.required),
+      offre:this.fb.group({
+        titre :this.fb.control("", Validators.required),
         description: this.fb.control("", Validators.required),
         prix: this.fb.control("", Validators.required),
         typeOffre: this.fb.control("", Validators.required),
         typeServiceOffre:this.fb.control("", Validators.required),
 
 
-     // }),
+     }),
 
-     mobileDto: this.fb.group({
+     mobile: this.fb.group({
         typemoteur: this.fb.control("", Validators.required),
+        dateMiseEnCircualtion: this.fb.control("", Validators.required),
       }),
 
-      immobilierDto: this.fb.group({
+      pathphoto: this.fb.group({
+        pathPhotos: this.fb.control("", Validators.required),
+       
+      }),
+
+      immobilier: this.fb.group({
         surface: this.fb.control("", Validators.required),
       }),
 
@@ -82,9 +82,9 @@ export class OffreComponent implements OnInit {
     console.log( this.myform.value);
     console.log(this.offreGlobal);
 
-  // this.offreservice.creationOffre(this.offreGlobal).subscribe(  
+ this.offreservice.creationOffre(this.offreGlobal).subscribe(  
 
-  //  )
+    )
 
     
 
