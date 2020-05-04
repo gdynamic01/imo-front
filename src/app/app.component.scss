@@ -1,0 +1,28 @@
+.bloc-app {
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    
+    .brand-logo {
+      border-right: 1px solid #eee;
+      padding-right: 22px;
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+    };
+  
+    .icone-menu {
+      margin-top: 11px;
+      color: white;
+      font-weight: bold;
+      margin-left: 33px;
+    };
+  
+    .menu-res {
+      width: 153px;
+    };
+  
+  }
