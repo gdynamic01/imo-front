@@ -1,10 +1,10 @@
+import { Offre } from './../../models/offres/offre';
 
 import { Adresse } from './../../models/adresse';
 import { OffreService } from './../../service/apiImpl/offreimpl/offre.service';
 import { Offre, OffreGlobal, Immobilier, Mobile, Photo } from '../../models/offres/offre';
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
-import { getMatIconFailedToSanitizeLiteralError } from '@angular/material';
 
 
 
@@ -84,9 +84,10 @@ export class OffreComponent implements OnInit {
     this.offreGlobal=this.myform.value;
     console.log( this.myform.value);
     console.log(this.offreGlobal);
+
     
 
-    getMatIconFailedToSanitizeLiteralError(
+    this.initData(this.myform.value);
 
  this.offreservice.creationOffre(this.offreGlobal).subscribe(  
 
@@ -97,5 +98,14 @@ export class OffreComponent implements OnInit {
 
   }
 
+
+  initData( value: any){
+
+    if(value.offre.typeServiceOffre==="appartement"){
+      this.myform;
+    }
+  
+
+  }
 
 }
