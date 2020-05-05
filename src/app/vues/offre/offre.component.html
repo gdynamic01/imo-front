@@ -77,6 +77,12 @@
                                 <input matInput formControlName="duree" placeholder="durée location">
                             </mat-form-field>
                        </div> -->
+
+                       <div formGroupName="mobile">
+                        <mat-form-field> 
+                            <input matInput formControlName="model" placeholder="model" required>
+                         </mat-form-field>
+                   </div>
                        <div>
                             <mat-form-field formGroupName="immobilier"> 
                                 <input matInput  formControlName="surface" placeholder="surface">
@@ -93,7 +99,7 @@
                        </div>
                        <div formGroupName="mobile">
                             <mat-form-field>
-                               <select  [(value)]="selected" matNativeControl formControlName="typemoteur" required>
+                               <select  [(value)]="selected" matNativeControl formControlName="typeMobileMoteur" required>
                                  <option value="none">Type moteur</option>
                                  <option value="vapeur">Vapeur</option>
                                  <option value="electrique">Electrique</option>

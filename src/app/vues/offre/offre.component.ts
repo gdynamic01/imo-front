@@ -4,6 +4,7 @@ import { OffreService } from './../../service/apiImpl/offreimpl/offre.service';
 import { Offre, OffreGlobal, Immobilier, Mobile, Photo } from '../../models/offres/offre';
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import { getMatIconFailedToSanitizeLiteralError } from '@angular/material';
 
 
 
@@ -47,8 +48,10 @@ export class OffreComponent implements OnInit {
      }),
 
      mobile: this.fb.group({
-        typemoteur: this.fb.control("", Validators.required),
+      typeMobileMoteur: this.fb.control("", Validators.required),
         dateMiseEnCircualtion: this.fb.control("", Validators.required),
+        model: this.fb.control("", Validators.required),
+
       }),
 
       pathphoto: this.fb.group({
@@ -81,8 +84,12 @@ export class OffreComponent implements OnInit {
     this.offreGlobal=this.myform.value;
     console.log( this.myform.value);
     console.log(this.offreGlobal);
+    
+
+    getMatIconFailedToSanitizeLiteralError(
 
  this.offreservice.creationOffre(this.offreGlobal).subscribe(  
+
 
     )
 

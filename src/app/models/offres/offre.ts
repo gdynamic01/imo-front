@@ -91,7 +91,8 @@ export class OffreGlobal{
   
     /** mobileDto */
 
-    public  mobile: Mobile =new Mobile();
+	public  mobile: Mobile =new Mobile();
+	public offre: Offre=new Offre();
     
 	/** immobilierDto */
     public  immobilier:Immobilier = new Immobilier();
