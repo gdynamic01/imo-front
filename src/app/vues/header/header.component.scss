@@ -3,24 +3,25 @@
     cursor: pointer;
     padding: 5px 15px 5px 15px;
     font-size: medium;
+    color: var(--main-color-white);
   };
 
   a:hover {
-    background: radial-gradient(black, transparent);
+    background: var(--main-color-black-radial-gradient);
   };
 
   /* Deposer offre */
   a:nth-child(1) {
-    border: 1px solid lightgray;
+    border: 1px solid var(--main-color-lightgray);
     border-radius: 16px;
     border-width: 2px;
     margin-right: 105px;
   };
 
   .material-icons {
-    position: relative;
-    top: 6px;
-    left: -2px;
+    position: var(--main-material-icons-position);
+    top: var(--main-material-icons-top);
+    left: var(--main-material-icons-left);
   }
 }
 

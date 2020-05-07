@@ -1,96 +1,91 @@
-<div class="container">
-  <div class="row home">
-    <div class="col s12 m12 l12 xl12 contents">
-      <!-- Bloc recherche -->
-      <div class="row recherche">
-        <div class="col s12 m12 l12 xl12 bloc-recherche">
-          <h4 class="title-recherche">Trouver les meilleures offres</h4>
-          <div class="form-recherche">
-            <div class="input-field col s6 m3 l3 xl3">
-              <input placeholder="Où cherchez-vous" type="text" class="lieu">
-            </div>
-            <div class="input-field col s6 m3 l3 xl3">
-              <input placeholder="Quelle date" type="text" class="datepicker date-recherche">
-            </div>
-            <div class="input-field col s12 m3 l3 xl3">
-              <select class="mdb-select colorful-select dropdown-danger" multiple>
-                <option value="" disabled>Que cherchez-vous</option>
-                <option *ngFor="let types of typesDemandes" [value]="types">{{types}}</option>
-              </select>
-            </div>
-            <div class="input-field col s12 m1 l1 xl1">
-              <button class="btn btn-green" type="submit"><i class="material-icons">search</i></button>
-            </div>
-          </div>
+<div class="container" fxLayout="row wrap">
+  <div fxFlex="60" fxFlex.md="80" fxFlex.sm="90" fxFlex.xs="98" fxLayout="column" fxLayoutGap="7px">
+    <div class="card-recherche" fxLayout="column">
+      <h2 class="title-recherche">Trouver les meilleures offres</h2>
+      <div fxLayout="row wrap" fxLayoutGap="20px" class="form-recherche">
+        <div class="input-field">
+          <mat-form-field>
+            <input matInput class="lieu" placeholder="Où cherchez-vous">
+          </mat-form-field>
         </div>
-      </div>   
-      <!-- Bloc offre -->
-      <div class="row bloc-offre"> 
-        <div class="col s12 m12 l12 xl12 bloc-libelle">
-          <h6>Toutes les annonces : <span> {{imoResponse.nbOffre}}</span></h6>
-          <div class="row bloc-tri">
-            <div class="col s12 m4 l3 xl3 input-field">
-              <mat-checkbox labelPosition="after" class="particulier"><label> Particuliers :</label></mat-checkbox>
-              <span class="part"> {{imoResponse.nbOffreParticulier}}</span>
-            </div>
-            <div class="col s12 m4 l4 xl3 input-field">
-              <mat-checkbox labelPosition="after" class="professionnel"><label> Professionnels :</label></mat-checkbox>
-              <span class="pro"> {{imoResponse.nbOffreProfessionnel}}</span>
-            </div>
-            <div class="col s12 m3 l3 xl2">
-              <select class="mdb-select colorful-select dropdown-danger">
-                <option value="">Trier</option>
-                <option value="Aujourdhui">Aujourd'hui</option>
-                <option value="Hier">Hier</option>
-                <option value="Plus recent">Plus récent</option>
-                <option value="Plus ancien">Plus ancien</option>
-                <option value="Prix bas">moins cher</option>
-                <option value="Prix eleve">Plus cher</option>
-              </select>
-            </div>
+        <div class="input-field">
+          <mat-form-field>
+            <mat-label>Quelle date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="input-field type-demandes">
+          <mat-form-field>
+            <mat-label>Que cherchez-vous</mat-label>
+            <mat-select multiple>
+              <mat-option *ngFor="let types of typesDemandes" [value]="types">{{types}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="bloc-btn">
+          <button mat-raised-button color="primary"><i class="material-icons">search</i></button>
+        </div>
+      </div>
+    </div>   
+    <div class="tri-bloc" fxLayout="row wrap" fxLayoutGap="30px"> 
+      <div class="label-info">
+        <label>Annonces:</label><span>{{imoResponse.nbOffre}}</span>
+      </div>
+      <div class="input-field">
+        <mat-checkbox labelPosition="after" class="particulier"><label> Particuliers:</label></mat-checkbox>
+        <span class="part"> {{imoResponse.nbOffreParticulier}}</span>
+      </div>
+      <div class="input-field">
+        <mat-checkbox labelPosition="after" class="professionnel"><label> Professionnels:</label></mat-checkbox>
+        <span class="pro"> {{imoResponse.nbOffreProfessionnel}}</span>
+      </div>
+      <div class="select-tri">
+        <mat-form-field>
+          <mat-label>Trier</mat-label>
+          <mat-select [(value)]="selected">
+            <mat-option value="Aujourd'hui">Aujourd'hui</mat-option>
+            <mat-option value="Hier">Hier</mat-option>
+            <mat-option value="Plus recent">Plus récent</mat-option>
+            <mat-option value="Plus ancien">Plus ancien</mat-option>
+            <mat-option value="Prix bas">Moins cher</mat-option>
+            <mat-option value="Prix eleve">Plus cher</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="card-offre the-last-child" *ngFor="let offre of imoResponse.result">
+      <div class="photo">
+        <img [src]="offre.photosOffres[0]">
+      </div>
+      <div class="info-offres">
+        <div class="titre">
+          <label>{{offre.titre}}</label>
+        </div>
+        <div class="prix">
+          <label>{{offre.prix}}</label>
+        </div>
+        <div class="other-info">
+          <div class="type-offre">
+            <span>{{offre.typeOffre}}</span>
+          </div>
+          <div class="ville">
+            <span>{{offre.ville}}</span>
+          </div>
+          <div class="DateOffre">
+            <span>{{convertDate(offre.createAt)}}</span>
           </div>
         </div>
       </div>
-      <div class="row card-offre" *ngFor="let offre of imoResponse.result">
-        <div class="col s3 m3 l3 xl3 photo">
-          <img [src]="offre.photosOffres[0]">
+      <div class="card-service">
+        <div class="type-service">
+          <label>{{offre.typeServiceOffre}}</label>
         </div>
-        <div class="col s6 m6 l6 xl6 info-offres">
-          <div class="titre">
-            <strong>{{offre.titre}}</strong>
-          </div>
-          <div class="prix">
-            <label><strong>{{offre.prix}}</strong></label>
-          </div>
-          <div class="other-info">
-            <div class="type-offre">
-              <span>{{offre.typeOffre}}</span>
-            </div>
-            <div class="ville">
-              <span>{{offre.ville}}</span>
-            </div>
-            <div class="DateOffre">
-              <span>{{convertDate(offre.createAt)}}</span>
-            </div>
-          </div>
-        </div>
-        <div class="col s3 m3 l3 xl3 type-service">
-          <div class="type-service">
-            <label><strong>{{offre.typeServiceOffre}}</strong></label>
-          </div>
-          <div>
-            <strong>{{offre.typeAnnonce}}</strong>
-          </div>
+        <div class="type-annonce">
+          <span>{{offre.typeAnnonce}}</span>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-      
-
-
-
-
-
-

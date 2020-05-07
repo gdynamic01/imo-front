@@ -1,84 +1,145 @@
-.btn {
-  color: white !important;
-  width: auto !important;
-}
-.home {
-  margin-top: 0.3em;
-}
-.recherche {
-  background: #8080800d;
-  .bloc-recherche {
-    padding: 27px;
-  }
-}
-.bloc-offre {
-  .particulier label, .professionnel label, .dates-prix span,  .dates-prix label {
-    font-size: 14px;
+.container {
+  .card-recherche {
+    background: var(--main-color-white);
+    h2 {
+      font-family: var(--main-font-family);
+      position: relative;
+      top: 14px;
+    };
   };
-  .bloc-libelle h6 {
 
-  }
-}
-
-.card-offre {
-  background: #8080800a;
-  padding: 10px 0 10px 0;
-  box-shadow: 3px 4px 8px -8px black;
-  .info-offres {
-    border-right: 1px solid #00000014;
-    border-left: 1px solid #00000014;
-  };
-  .titre, .type-service label {
-    font-size: 1.6rem;
-  };
-  .prix {
-    margin-top: -4px;
-    margin-left: 6px;
-    label {
-      font-size: 1.2rem;
-      color: #F44336;
+  .tri-bloc {
+    position: relative;
+    top: 33px;
+    left: 4px;
+    .label-info {
+      label {
+        font-weight: bold;
+      }
+    };
+    .particulier label, .professionnel label {
+      font-weight: bold;
+    };
+    .select-tri {
+      mat-form-field {
+        top: -21px !important;
+      }
     }
   };
-  .other-info {
-    margin-top: 4%;
+  .card-offre, .tri-bloc {
+    display: flex;
+    align-items: flex-start;
   };
-  .type-service label{
-    color:#0909c5d1 !important;
+  // .card-offre:last-child {
+  //   margin-bottom: 78px;
+  // };
+  .card-service {
+    position: relative;
+    top: 20px;
+    left: 13px;
+    width: 28%;
+    .type-service, .type-annonce {
+      font-family: var(--main-font-family-arial);
+    };
+    .type-service {
+      font-size: 18px;
+      font-weight: 548;
+    };
+    .type-annonce {
+      font-size: 14px;
+    }
+  };
+  .card-offre {
+    border: 1px solid var(--main-color-gray-c);
+    background: var(--main-color-white);
+    .photo {
+      width: 30%;
+    };
+    .info-offres {
+      border-left: 1px solid var(--main-color-black-b);
+      border-right: 1px solid var(--main-color-black-b);
+      width: 50%;
+      font-family: var(--main-font-family);
+      margin-top: 7px;
+      padding-left: 12px;
+      padding-bottom: 11px;
+      .titre, .type-service label {
+        font-size: 23px;
+        font-weight: 600;
+      };
+      .prix {
+        margin-top: 5px;
+        margin-left: 3px;
+        label {
+          font-size: 15px;
+          color: var(--main-color-orange-a);
+        }
+      };
+      .other-info {
+        margin-top: 4%;
+        .type-offre, .DateOffre {
+          font-family: var(--main-font-family-arial);
+          font-size: 14px;
+        }
+      };
+      .type-service label{
+        color:#0909c5d1 !important;
+      }
+    }
+  };
+  .card-offre:hover {
+    cursor: pointer;
+    box-shadow: 3px 4px 8px -2px var(--main-color-gray-a);
+    .titre, .type-service label {
+      color: var(--main-color-orange-a);
+    };
   }
 }
 
-.card-offre:hover {
-  cursor: pointer;
-  box-shadow: 3px 4px 8px -2px #F44336;
-  .titre, .type-service label {
-    color: #F44336;
-  };
-}
-
-/** customer */
-@media only screen and (max-width: 804px) {
-  .bloc-tri {
-    .pro, .part {
-      visibility: hidden;
+@media only screen and (max-width: 847px) {
+  .tri-bloc {
+    .label-info, .input-field span {
+      display: none;
     }
   }
 }
 
-/** customer */
-@media only screen and (min-width: 804px) {
-  .bloc-tri .pro, .bloc-tri .part, .bloc-libelle h6 span {
-    visibility: visible;
-    color: #F44336;
-    font-weight: 500;
+@media only screen and (min-width: 848px) {
+  .tri-bloc {
+    .label-info, .input-field span {
+      display: inline-flex;
+      font-family: var(--main-font-family-arial);
+    };
+    .input-field span, .label-info span {
+      margin-left: 6px;
+      font-size: 14px;
+    }
   }
 }
 
-/** customer */
-@media only screen and (max-width: 600px) {
-  .btn {
-    width: 100% !important;
+@media only screen and (max-width: 854px) {
+  .card-recherche {
+    display: flex;
+    align-items: flex-start;
+    .bloc-btn {
+      width: 406px;
+    };
+    .bloc-btn button {
+      width: 100% !important;
+      min-width: unset !important;
+    };
+    
+  };
+
+  @media only screen and (min-width: 710px) and (max-width: 732px) {
+    .type-demandes mat-form-field {
+      width: 401px !important;
+   }
   }
-  .recherche {
-    background: #fff;
+
+  @media only screen and (max-width: 709px) {
+    .type-demandes mat-form-field {
+       width: 401px !important;
+    }
   }
 }

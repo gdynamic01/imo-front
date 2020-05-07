@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatMenuModule, MatIconModule, MatCheckboxModule, MatDatepickerModule, MatCardModule, MatGridListModule, MatTabsModule, MatToolbarModule } from '@angular/material';
+import { MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatMenuModule, MatIconModule, MatCheckboxModule, MatDatepickerModule, MatCardModule, MatGridListModule, MatTabsModule, MatToolbarModule, MatSelectModule, MatNativeDateModule } from '@angular/material';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
@@ -17,7 +17,10 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatTabsModule,
     MatToolbarModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatCardModule,
+    MatSelectModule,
+    MatNativeDateModule
   ]
 })
 export class MaterialModule {}

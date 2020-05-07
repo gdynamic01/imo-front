@@ -1,5 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
-/*@import '~@angular/material/prebuilt-themes/indigo-pink.css';*/
+:root {
+  --main-font-family: Roboto, Helvetica, Arial, sans-serif;
+  --main-font-family-arial: Arial;
+  --main-font-weight-600: 600;
+  --main-font-weight-500: 500;
+  --main-material-icons-position: relative;
+  --main-material-icons-top: 6px;
+  --main-material-icons-left: -5px;
+  --main-color-nevy: #000080;
+  --main-color-primary: #3f51b5;
+  --main-color-white: #fff;
+  --main-color-lightgray: lightgray;
+  --main-color-black-radial-gradient: radial-gradient(black, transparent);
+  --main-color-gray-a: #80808036;
+  --main-color-gray-b: #80808038;
+  --main-color-gray-c: #d3d3d340;
+  --main-color-btn-valid: #1a7c1e;
+  --main-color-black-a: #000;
+  --main-color-black-b: #00000014;
+  --main-color-orange-a: #ff4081;
+  --main-color-btn-back: #f44336;
+  --main-color-page-site:#e5e9ec;
+}
+.mat-drawer-container {
+  background: var(--main-color-black-b) !important;
+  color: rgba(0,0,0,.87) !important;
+}
+.container {
+  justify-content: space-evenly;
+  background: var(--main-color-page-site);
+  margin-top: 20px;
+}
+.title {
+  font-family: var(--main-font-family);
+  font-size: 20px;
+  text-align: center;
+}
+.the-last-child:last-child {
+  margin-bottom: 78px;
+};
 
 .header-modale h6 {
   text-align: center;

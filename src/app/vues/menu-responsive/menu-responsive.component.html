@@ -1,0 +1,9 @@
+<div class="mobile-header">
+    <ul>
+        <li *ngIf="!isActifButton" class="li_depot-offre">
+            <a><i class="material-icons">add_circle</i>D&eacute;poser une annonce</a>
+        </li>
+        <li *ngIf="!isActifButton"><a (click)="openDialog('Insc')"><i class="material-icons">person_add</i><span>Inscription</span></a></li>
+        <li *ngIf="!isActifButton"><a (click)="openDialog('Auth')"><i class="material-icons">perm_identity</i><span>Connexion</span></a></li>
+    </ul>
+</div>

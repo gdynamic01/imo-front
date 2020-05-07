@@ -81,7 +81,7 @@ export class AuthentificationComponent implements OnInit {
   /**
    * @author Mamadou
    * @description Ouverture de la popin
-   * @param popin 
+   * @param popin the type popin value
    */
   openDialog(popin: string): void {
     this.clos();

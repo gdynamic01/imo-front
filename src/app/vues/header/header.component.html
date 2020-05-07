@@ -1,6 +1,6 @@
 <div *ngIf="this.sharedService.userName !== null && this.sharedService.userName !== undefined" class="right menu-compte">
   <button mat-button [matMenuTriggerFor]="beforeMenu">
-    <mat-icon>account_circle</mat-icon>
+    <i class="material-icons">account_circle</i>
     <span class="name-user">{{sharedService.userName}}</span>
   </button>
   <mat-menu #beforeMenu="matMenu" xPosition="before">
@@ -9,37 +9,7 @@
   </mat-menu>
 </div>
 <div *ngIf="!isActifButton" class="menu-list">
-  <a><i class="material-icons">add</i>D&eacute;poser une annonce</a>
-  <a (click)="openDialog('Insc')">Inscription</a>
-  <a (click)="openDialog('Auth')">Connexion</a>
+  <a><i class="material-icons">add_circle</i><span>D&eacute;poser une annonce</span></a>
+  <a (click)="openDialog('Insc')"><i class="material-icons">person_add</i><span>Inscription</span></a>
+  <a (click)="openDialog('Auth')"><i class="material-icons">perm_identity</i><span>Connexion</span></a>
 </div>
-
-
-<!-- <nav class="red navbar-fixed">
-  <div class="nav-wrapper">
-    <a href="/accueil" class="brand-logo">Loumo</a>
-    <div *ngIf="this.sharedService.userName !== null && this.sharedService.userName !== undefined" class="right menu-compte">
-      <button mat-button [matMenuTriggerFor]="beforeMenu">
-        <mat-icon>account_circle</mat-icon>
-        <span class="name-user">{{sharedService.userName}}</span>
-      </button>
-      <mat-menu #beforeMenu="matMenu" xPosition="before">
-        <a mat-menu-item>Compte</a>
-        <a (click)="deconnexion()" mat-menu-item>Deconnexion</a>
-      </mat-menu>
-    </div>
-    <a href="#" data-target="mobile-header" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-    <ul class="right hide-on-med-and-down menu-header">
-      <li *ngIf="!isActifButton"><label class="depot-offre"><mat-icon>add</mat-icon><strong>D&eacute;poser une annonce</strong></label></li>
-      <li *ngIf="!isActifButton"><a (click)="openDialog('Insc')">Inscription</a></li>
-      <li *ngIf="!isActifButton"><a (click)="openDialog('Auth')">Connexion</a></li>
-    </ul>
-  </div>
-</nav>
-
-<!-- menu pour mobile -->
-<!--<ul class="sidenav" id="mobile-header">
-  <li *ngIf="!isActifButton" class="li_depot-offre"><span class="depot-offre">D&eacute;poser une annonce</span></li>
-  <li *ngIf="!isActifButton"><a (click)="openDialog('Insc')">Inscription</a></li>
-  <li *ngIf="!isActifButton"><a (click)="openDialog('Auth')">Connexion</a></li>
-</ul> -->

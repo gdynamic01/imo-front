@@ -18,6 +18,10 @@ import { MaterialModule } from './material.module';
 import { AuthentificationComponent } from './vues/auth/authentification.component';
 import { InterceptorService } from './service/config/interceptor.service';
 import localeFr from '@angular/common/locales/fr';
+import { MenuResponsiveComponent } from './vues/menu-responsive/menu-responsive.component';
+import { OffreComponent } from './vues/offre/offre.component';
+import { EnumToArrayPipe } from './pipes/pipe-transformers-enum';
+import { PipeTransformers } from './pipes/pipe-transformers';
 
 registerLocaleData(localeFr, 'fr'); // initialisation format date en français (A changer pour les autres formats)
 
@@ -28,7 +32,11 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
     HeaderComponent,
     UserInscriptionComponent,
     AlerteMessageComponent,
-    AuthentificationComponent
+    AuthentificationComponent,
+    MenuResponsiveComponent,
+    OffreComponent,
+    EnumToArrayPipe,
+    PipeTransformers
   ],
   entryComponents: [
     UserInscriptionComponent,
@@ -45,6 +53,7 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
     MaterialModule,
     TranslateModule.forRoot()
   ],
+  exports: [EnumToArrayPipe, PipeTransformers],
   providers: [
      {provide: APP_BASE_HREF, useValue: ''},
      {
@@ -53,7 +62,9 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
         multi: true
      },
      { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-     JwtHelperService
+     JwtHelperService,
+     EnumToArrayPipe,
+     PipeTransformers
     ],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

@@ -1,28 +1,42 @@
 .bloc-app {
-    height: 100vh;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    
-    .brand-logo {
-      border-right: 1px solid #eee;
-      padding-right: 22px;
-      color: white;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  main {
+    margin-top: 2px;
+  };
+  mat-toolbar {
+    background: var(--main-color-nevy);
+  };
+  .brand-logo {
+    border-right: 1px solid #eee;
+    padding-right: 22px;
+    color: var(--main-color-white);
+    font-weight: 600;
+    text-decoration: none;
+  };
+  .icone-menu {
+    margin-top: 11px;
+    color: var(--main-color-white);
+    font-weight: bold;
+    margin-left: 33px;
+  };
+  .menu-res {
+    width: 300px;
+    .fermer {
+      background: var(--main-color-gray-b);
+      border-radius: 0;
+      padding: 5px 0 5px 0;
       font-weight: 600;
-      text-decoration: none;
-    };
-  
-    .icone-menu {
-      margin-top: 11px;
-      color: white;
-      font-weight: bold;
-      margin-left: 33px;
-    };
-  
-    .menu-res {
-      width: 153px;
-    };
-  
+    }
+  };
+  .footer {
+    background: var(--main-color-black-a);
+    height: 100vh;
+    margin-top: 20px;
   }
+  
+}

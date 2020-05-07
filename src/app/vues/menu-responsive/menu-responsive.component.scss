@@ -1,0 +1,28 @@
+.mobile-header {
+    ul {
+        list-style-type: none;
+        padding: 0 16px 0 16px;
+        li {
+            border-bottom: 1px solid var(--main-color-gray-a);
+        }
+        li a{
+            display: block;
+            padding: 13px 8px;
+            text-decoration: none;
+            cursor: pointer;
+            color: #414042 !important;
+            font-weight: 600;
+            font-family: var(--main-font-family);
+            font-size: 14px;
+        }
+        li a:hover {
+            background: #80808021;
+        }
+    }
+
+    .material-icons {
+        position: var(--main-material-icons-position);
+        top: var(--main-material-icons-top);
+        left: var(--main-material-icons-left);
+    }
+}

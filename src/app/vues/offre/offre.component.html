@@ -1,0 +1,108 @@
+<div class="container">
+    <div fxFlex="60" fxFlex.md="70" fxFlex.sm="80" fxFlex.xs="98" fxLayout="column">
+        <div class="bloc-form">
+            <h4 class="title">Création offre</h4>
+            <form [formGroup]="offreForm">
+                <div class="offre" formGroupName="offre">
+                    <div class="input-field">
+                        <mat-form-field>
+                            <input matInput formControlName="titre" placeholder="Titre *">
+                        </mat-form-field>
+                    </div>
+                    <div class="input-field">
+                        <mat-form-field>
+                            <mat-label>Description</mat-label>
+                            <textarea matInput formControlName="description"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="input-field">
+                        <mat-form-field>
+                            <mat-label>Type offre *</mat-label>
+                            <mat-select formControlName="typeOffre" (selectionChange)="selectChange($event.value)">
+                                <mat-option *ngFor="let item of typeOffreEnum | enumToArray"
+                                [value]="item.name">
+                                    {{item.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="input-field">
+                        <mat-form-field>
+                            <mat-label>Type service *</mat-label>
+                            <mat-select formControlName="typeServiceOffre">
+                                <mat-option *ngFor="let item of typeServiceEnum | enumToArray"
+                                [value]="item.name">
+                                    {{item.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="input-field">
+                        <mat-form-field>
+                            <input matInput formControlName="prix" placeholder="Prix *">
+                        </mat-form-field>
+                    </div>
+                    <div class="adresse" formGroupName="adresse">
+                        <div class="input-field">
+                            <mat-form-field>
+                                <input matInput formControlName="numeroRue" placeholder="Numero voie">
+                            </mat-form-field>
+                        </div>
+                        <div class="input-field">
+                            <mat-form-field>
+                                <input matInput formControlName="libelleRue" placeholder="Nom voie">
+                            </mat-form-field>
+                        </div>
+                        <div class="input-field">
+                            <mat-form-field>
+                                <input matInput formControlName="codePostal" placeholder="Code postal">
+                            </mat-form-field>
+                        </div>
+                        <div class="input-field">
+                            <mat-form-field>
+                                <input matInput formControlName="ville" placeholder="ville">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="immobilier" formGroupName="immobilier" *ngIf="isImmobilier">
+                    <div class="input-field">
+                        <mat-form-field>
+                            <input matInput formControlName="surface" placeholder="surface en m²">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="mobile" formGroupName="mobile" *ngIf="isMobilie">
+                    <div class="input-field">
+                        <mat-form-field>
+                            <mat-label>Date mise en circulation *</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="dateMiseEnCircualtion">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="input-field">
+                        <mat-form-field>
+                            <mat-label>Type moteur *</mat-label>
+                            <mat-select formControlName="typeMobileMoteur">
+                                <mat-option *ngFor="let item of typeMobileMoteurEnum | enumToArray"
+                                [disabled]="isVelo && item.name !== 'Electrique'" [value]="item.name">
+                                  {{item.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="input-field">
+                        <mat-form-field>
+                            <input matInput formControlName="model" placeholder="Model">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="btn-bloc">
+                    <button [ngClass]="{'form-valid' : offreForm.valid, 'form-invalid' : !offreForm.valid}" mat-raised-button type="submit" [disabled]="!offreForm.valid" (click)="onSubmit()">Valider</button>
+                    <button type="button" mat-raised-button [routerLink]="['/accueil']">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

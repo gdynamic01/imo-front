@@ -1,4 +1,4 @@
-import { Injectable, ElementRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
@@ -14,13 +14,14 @@ export class SharedService {
    */
   public httpOptions = HttpClient;
 
-  confirmationMessageSubject : BehaviorSubject<String> = new BehaviorSubject(null);
+  confirmationMessageSubject: BehaviorSubject<string> = new BehaviorSubject(null);
   currentConfirmationMessage = this.confirmationMessageSubject.asObservable();
 
-  isActifElementSubject : BehaviorSubject<boolean> = new BehaviorSubject(false);
+  isActifElementSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
   isActifElement = this.isActifElementSubject.asObservable();
 
   userName: string;
+  email: string;
 
   constructor() {}
 
@@ -74,16 +75,16 @@ export class SharedService {
 
   /**
    * @author Mamadou
-   * @description set les nouvelles valeurs emis par l'observable 
+   * @description set les nouvelles valeurs emis par l'observable
    * @param value nouvelle valeur
    */
-  public setConfirmationSubject(value: String) {
+  public setConfirmationSubject(value: string) {
     this.confirmationMessageSubject.next(value);
   }
 
   /**
    * @author Mamadou
-   * @param value 
+   * @param value
    */
   public setIsActifElement(value: boolean) {
     this.isActifElementSubject.next(value);
@@ -91,7 +92,7 @@ export class SharedService {
 
   /**
    * @author Mamadou
-   * @param infoAll 
+   * @param infoAll
    * @returns userName
    */
   public getUserName(infoAll: string[]) {
@@ -101,12 +102,12 @@ export class SharedService {
   /**
    * @author Mamadou
    * @description retourne le nombre de jour entre 2 dates [Attention: si date == dateDuJour alors on retournera 1]
-   * @param date 
+   * @param date
    * @returns nombre de jour
    */
   public convertDate(date: Date) {
-    let dateDuJour = new Date().getTime() / 86400000;
-    return new Number(dateDuJour - date.getTime() / 86400000).toFixed(0);
+    const dateDuJour = new Date().getTime() / 86400000;
+    return Number(dateDuJour - date.getTime() / 86400000).toFixed(0);
   }
 
 }

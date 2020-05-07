@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class ConfirmationComponent implements OnInit {
 
-  confirmationMessage: String;
+  confirmationMessage: string;
 
   destroySubscription: any;
 

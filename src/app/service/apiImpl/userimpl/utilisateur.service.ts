@@ -71,5 +71,4 @@ export class UtilisateurService implements IUser<UserMoral, User> {
                   }
                 ));
   }
-  
 }

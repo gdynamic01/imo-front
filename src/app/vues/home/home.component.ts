@@ -1,8 +1,8 @@
 import { ImoResponse } from './../../models/response/imo-response';
 import { PipeTransformers } from '../../pipes/pipe-transformers';
-import { Offres } from './../../models/offres/offres';
+import { Offre, TypeOffreEnum, TypeServiceEnum } from '../../models/offre/offre';
 import { SharedService } from './../../shared/shared.service';
-import { TYPES_DEMANDES } from '../../constantes/constantes-datas';
+import { TYPE_SERVICE } from '../../constantes/constantes-datas';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 declare var $: any;
@@ -10,22 +10,21 @@ declare var $: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  providers: [PipeTransformers]
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
   public typesDemandes: string[];
-  offres: Array<Offres> = new Array();
+  offres: Array<Offre> = new Array();
 
-  imoResponse: ImoResponse<Offres> = new ImoResponse<Offres>();
+  imoResponse: ImoResponse<Offre> = new ImoResponse<Offre>();
 
   constructor(private shared: SharedService, private datePipe: PipeTransformers) {
   }
 
   ngOnInit() {
     this.shared.initDatePicker('datepicker', 'class');
-    this.typesDemandes = TYPES_DEMANDES;
+    this.typesDemandes = TYPE_SERVICE;
     this.bouchonOffre();
   }
 
@@ -64,10 +63,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         'createAt': new Date('2019/12/14'),
         'description': 'une belle voiture',
         'prix':52,
-        'typeOffre':'VOITURE',
+        'typeOffre':TypeOffreEnum.Voiture,
         'updateAt': new Date('2019/12/14'),
         'typeAnnonce': 'Particulier',
-        'typeServiceOffre': 'Vente',
+        'typeServiceOffre': TypeServiceEnum.Vente,
         'photosOffres': ['url.png', 'url2.png'],
         'symboleMonetaire': 'EUR'
       },
@@ -84,10 +83,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         'createAt': new Date('2019/12/06'),
         'description': 'une belle voiture',
         'prix':200,
-        'typeOffre':'VOITURE',
+        'typeOffre':TypeOffreEnum.Voiture,
         'updateAt': new Date('2019/12/06'),
         'typeAnnonce': 'Professionnel',
-        'typeServiceOffre': 'Location',
+        'typeServiceOffre': TypeServiceEnum.Location,
         'photosOffres': ['url.png', 'url2.png'],
         'symboleMonetaire': 'EUR'
       },
@@ -104,10 +103,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         'createAt': new Date('2019/12/05'),
         'description': 'une maison neuve',
         'prix':52,
-        'typeOffre':'MAISON',
+        'typeOffre':TypeOffreEnum.Maison,
         'updateAt': new Date('2019/12/05'),
         'typeAnnonce': 'Particulier',
-        'typeServiceOffre': 'Vente',
+        'typeServiceOffre': TypeServiceEnum.Vente,
         'photosOffres': ['url.png', 'url2.png'],
         'symboleMonetaire': 'FR Gui'
       },
@@ -124,10 +123,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         'createAt': new Date('2019/12/04'),
         'description': 'vente velo',
         'prix':52,
-        'typeOffre':'VELO',
+        'typeOffre':TypeOffreEnum.Velo,
         'updateAt': new Date('2019/12/04'),
         'typeAnnonce': 'Professionnel',
-        'typeServiceOffre': 'Location',
+        'typeServiceOffre': TypeServiceEnum.Location,
         'photosOffres': ['url.png', 'url2.png'],
         'symboleMonetaire': 'FR Gui'
       }
