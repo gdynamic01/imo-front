@@ -17,11 +17,9 @@ import { Adresse } from './../../models/adresse';
 })
 export class UserInscriptionComponent implements OnInit {
 
-  // @Output() creationCompte = new EventEmitter<string>();
   isBlocProfessionnel = false;
   user: User;
   professionnel: UserMoral;
-  // infoUser: RepresentantLegal;
   valideForm = false;
   messageErreur = false;
   colors: string; // parametre composant alerte-message
@@ -29,7 +27,7 @@ export class UserInscriptionComponent implements OnInit {
   loading = false;
 
   constructor(private errors: ErrorsFormGeneriquesService, private userService: UtilisateurService,
-              @Optional() public dialogRef: MatDialogRef<UserInscriptionComponent>, 
+              @Optional() public dialogRef: MatDialogRef<UserInscriptionComponent>,
               private sharedService: SharedService, private router: Router
               ) {
      this.user = new User();
@@ -114,7 +112,7 @@ export class UserInscriptionComponent implements OnInit {
       this.alerteMessage();
     } else {
       this.clos();
-      this.confirmationCreationCompte(messageResponse);
+      this.sharedService.setConfirmationSubject(messageResponse);
     }
   }
 
@@ -126,14 +124,14 @@ export class UserInscriptionComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  /**
-   * @author Mamadou
-   * @description affiche le composant confirmation creation compte
-   * @param message message confirmation de la creation compte
-   */
-  confirmationCreationCompte(message: string) {
-    this.sharedService.setConfirmationSubject(message);
-    this.router.navigate(['/confirmation']);
-  }
+  // /**
+  //  * @author Mamadou
+  //  * @description affiche le composant confirmation creation compte
+  //  * @param message message confirmation de la creation compte
+  //  */
+  // confirmationCreationCompte(message: string) {
+  //   this.sharedService.setConfirmationSubject(message);
+  //   this.router.navigate(['/confirmation']);
+  // }
 
 }

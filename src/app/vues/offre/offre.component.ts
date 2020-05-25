@@ -1,3 +1,5 @@
+import { SharedService } from './../../shared/shared.service';
+import { OffreService } from './../../service/apiImpl/offreimpl/offre.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -27,7 +29,8 @@ export class OffreComponent implements OnInit {
   valueDefaultMobile: string;
   valueDefaultDate = new Date();
 
-  constructor(private fb: FormBuilder, private enumToArrays: EnumToArrayPipe ) {
+  constructor(private fb: FormBuilder, private enumToArrays: EnumToArrayPipe,
+              private offreService: OffreService, private sharedService: SharedService) {
    }
 
   ngOnInit() {
@@ -52,7 +55,8 @@ export class OffreComponent implements OnInit {
           libelleRue: [''],
           numeroRue: [''],
           codePostal: [''],
-          ville: ['']
+          ville: ['', Validators.required],
+          pays: ['', Validators.required]
         })
       }),
       immobilier: this.fb.group ({
@@ -61,7 +65,7 @@ export class OffreComponent implements OnInit {
       mobile: this.fb.group({
         dateMiseEnCircualtion: ['', Validators.required],
         typeMobileMoteur: ['', Validators.required],
-        model: ['']
+        model: ['', Validators.required]
       })
     });
   }
@@ -102,12 +106,17 @@ export class OffreComponent implements OnInit {
     this.offreForm.get('mobile').patchValue({
       dateMiseEnCircualtion: !this.isMobilie ? this.valueDefaultDate : this.valueDefaultMobile,
       typeMobileMoteur: this.valueDefaultMobile,
+      model: this.valueDefaultMobile
     });
   }
 
   onSubmit() {
     this.initDataOffreGlobal(this.offreForm.value);
-    console.log('________ form: ', this.offreForm.value);
+    this.offreService.createOffre(this.offreGlobal).subscribe(
+      data => {
+        this.sharedService.setConfirmationSubject(data.messageResponse);
+      }
+    );
   }
 
   /**
@@ -116,24 +125,45 @@ export class OffreComponent implements OnInit {
    */
   initDataOffreGlobal(object: any) {
     if (this.isImmobilier) {
-      this.immobilier.surface = object.immobilier.surface;
-      this.immobilier.description = object.offre.description;
-      this.immobilier.adresse = object.offre.adresse;
-      this.immobilier.prix = object.offre.prix;
+      this.createImmobilier(object);
       this.mobile = null;
     }
     if (this.isMobilie) {
-      this.mobile.description = object.offre.description;
-      this.mobile.adresse = object.offre.adresse;
-      this.mobile.prix = object.offre.prix;
-      this.mobile.dateMiseEnCircualtion = object.mobile.dateMiseEnCircualtion;
-      this.mobile.model = object.mobile.model;
-      this.mobile.typeMobileMoteur = object.mobile.typeMobileMoteur;
+      this.createMobile(object);
       this.immobilier = null;
     }
     this.offreGlobal.immobilier = this.immobilier;
     this.offreGlobal.mobile = this.mobile;
     // test
-    // this.offreGlobal.email = 
+    this.offreGlobal.email = 'mamoudous2005@yahoo.fr';
+  }
+
+  createImmobilier(object: any) {
+    this.immobilier.titre = object.offre.titre;
+    this.immobilier.surface = object.immobilier.surface;
+    this.immobilier.description = object.offre.description;
+    this.immobilier.adresse = object.offre.adresse;
+    this.immobilier.prix = object.offre.prix;
+    this.immobilier.typeAnnonce = object.offre.typeAnnonce;
+    this.immobilier.typeOffre = object.offre.typeOffre.toUpperCase();
+    this.immobilier.typeServiceOffre = object.offre.typeServiceOffre.toUpperCase();
+    this.immobilier.adresse.ville = object.offre.adresse.ville;
+    this.immobilier.adresse.pays = object.offre.adresse.pays;
+  }
+
+  createMobile(object: any) {
+    this.mobile.titre = object.offre.titre;
+    this.mobile.description = object.offre.description;
+    this.mobile.adresse = object.offre.adresse;
+    this.mobile.prix = object.offre.prix;
+    this.mobile.dateMiseEnCircualtion = object.mobile.dateMiseEnCircualtion;
+    this.mobile.model = object.mobile.model;
+    this.mobile.typeMobileMoteur = object.mobile.typeMobileMoteur;
+    this.mobile.typeAnnonce = object.offre.typeAnnonce;
+    this.mobile.typeOffre = object.offre.typeOffre.toUpperCase();
+    this.mobile.typeServiceOffre = object.offre.typeServiceOffre.toUpperCase();
+    this.mobile.model = object.offre.model;
+    this.mobile.adresse.ville = object.offre.adresse.ville;
+    this.mobile.adresse.pays = object.offre.adresse.pays;
   }
 }

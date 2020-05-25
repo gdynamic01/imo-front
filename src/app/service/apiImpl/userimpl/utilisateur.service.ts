@@ -28,8 +28,8 @@ export class UtilisateurService implements IUser<UserMoral, User> {
    *
    */
   creationProfessionnel(object: UserMoral): Observable<ImoResponse<UserMoral>> {
-    const datas = JSON.stringify(object);
-    return this.http.post<ImoResponse<UserMoral>>(API.profInscription, datas, this.sharedService.getHeadersConfig())
+    const data = JSON.stringify(object);
+    return this.http.post<ImoResponse<UserMoral>>(API.profInscription, data, this.sharedService.getHeadersConfig())
                .pipe(
                   catchError (
                     err => {

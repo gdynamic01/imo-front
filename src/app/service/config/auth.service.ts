@@ -31,7 +31,6 @@ export class AuthService {
     public getInfoUser(): string[] {
       const token = this.tokenStorage.getToken();
       const username = this.jwtHelper.decodeToken(token);
-      console.log('_______ token: ',username);
       return (username !== null ? username.sub.split(' ') : null);
     }
 }

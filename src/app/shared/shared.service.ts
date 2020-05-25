@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
@@ -23,7 +24,7 @@ export class SharedService {
   userName: string;
   email: string;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   /**
    * @author Mamadou
@@ -80,6 +81,7 @@ export class SharedService {
    */
   public setConfirmationSubject(value: string) {
     this.confirmationMessageSubject.next(value);
+    this.router.navigate(['/confirmation']);
   }
 
   /**
@@ -92,11 +94,20 @@ export class SharedService {
 
   /**
    * @author Mamadou
-   * @param infoAll
+   * @param infoAll the info token value
    * @returns userName
    */
   public getUserName(infoAll: string[]) {
     this.userName = infoAll !== null ? infoAll[1] : null;
+  }
+
+  /**
+   * @author Mamadou
+   * @param infoAll the info token value
+   * @returns email
+   */
+  public getEmail(infoAll: string[]) {
+    this.email = infoAll !== null ? infoAll[2] : null;
   }
 
   /**
