@@ -8,7 +8,7 @@ export class Offre {
   public description: string;
 
   /** adresse de l'offre */
-  public adresse: Adresse;
+  public adresse: Adresse = new Adresse();
 
   /** Prix de l'offre */
   public prix: number;
