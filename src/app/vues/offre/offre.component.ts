@@ -95,7 +95,7 @@ export class OffreComponent implements OnInit {
   }
 
   /**
-   * @description initialisation des champs obligatoires
+   * @Description initialisation des champs obligatoires
    */
   updateFieldsManadatoryForm() {
     // immobilier

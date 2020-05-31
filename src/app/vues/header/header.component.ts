@@ -49,12 +49,7 @@ export class HeaderComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = popin === 'Insc' ? '70%' : '50%';
-    if(popin === 'Insc') {
-      this.dialog.open(UserInscriptionComponent, dialogConfig);
-    }
-    if(popin === 'Auth') {
-      this.dialog.open(AuthentificationComponent, dialogConfig);
-    }
+    this.dialog.open(AuthentificationComponent, dialogConfig);
   }
 
   /**

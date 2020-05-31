@@ -1,3 +1,4 @@
+import { UserInscriptionComponent } from './vues/user/user-inscription.component';
 import { HomeComponent } from './vues/home/home.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -9,6 +10,7 @@ import { OffreComponent } from './vues/offre/offre.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'accueil', component: HomeComponent },
+  { path: 'inscription', component: UserInscriptionComponent },
   {
     path: 'confirmation',
     loadChildren: () => import('../app/vues/confirmation/confirmation.module').then(mod => mod.ConfirmationModule)

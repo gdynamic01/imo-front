@@ -1,99 +1,118 @@
-  <div mat-dialog-title>
-    <div class="header-modale">
-      <span (click)="clos()" title='fermer'><i class="material-icons fermeture">close</i></span>
-      <h6>Inscription</h6>
+<div class="container">
+  <div fxFlex="60" fxFlex.md="70" fxFlex.sm="80" fxFlex.xs="98" fxLayout="column">
+    <div class="bloc-form">
+      <div *ngIf="messageErreur" id="message-error">
+        <div class="col s12 m12 l12 xl12">
+          <app-alerte-message [messages]="message" [colors_msg]="colors"></app-alerte-message>
+        </div>
+      </div>
+      <h2 class="title">Création compte</h2>
+      <form [formGroup]="utilisateurForm">
+        <div class="user" formGroupName="user">
+          <div class="input-field">
+            <label>Qui êtes-vous *</label>
+            <mat-radio-group formControlName="typeUtilisateur" (change)="onSelect($event)">
+              <mat-radio-button value="PARTICULIER">Particulier</mat-radio-button>
+              <mat-radio-button value="ENTREPRISE">Entreprise</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="representantLegal" formGroupName="representantLegal">
+            <div class="input-field">
+              <mat-form-field>
+                <input matInput formControlName="nom" placeholder="Nom *">
+              </mat-form-field>
+            </div>
+            <div class="input-field">
+              <mat-form-field>
+                <input matInput formControlName="prenom" placeholder="Prenom *">
+              </mat-form-field>
+            </div>
+            <div class="input-field">
+              <mat-form-field>
+                <mat-label>Votre genre *</mat-label>
+                <mat-select formControlName="sexe">
+                  <mat-option value="F">Feminin</mat-option>
+                  <mat-option value="M">Masculin</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="input-field">
+            <mat-form-field>
+              <input matInput formControlName="email" placeholder="Email *">
+            </mat-form-field>
+          </div>
+          <div class="passwords" formGroupName="passwords">
+            <div class="input-field">
+              <mat-form-field>
+                <mat-label>Mot de passe *</mat-label>
+                <input matInput [type]="hide ? 'text' : 'password'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="utilisateurForm.errors?.invalid">esssai</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="input-field">
+              <mat-form-field>
+                <input matInput type='password' formControlName="confirmPassword"  placeholder="Confirmation votre mot de passe *">
+              </mat-form-field>
+              <mat-error *ngIf="password.errors !== null && password.errors.invalid">
+                <span>Les mots de passe ne sont pas identiques</span>
+              </mat-error>
+            </div>
+          </div>
+          <div class="adresse" formGroupName="adresse">
+            <div class="input-field">
+              <mat-form-field>
+                <input matInput formControlName="numeroRue" placeholder="Numero voie">
+              </mat-form-field>
+            </div>
+            <div class="input-field">
+              <mat-form-field>
+                <input matInput formControlName="libelleRue" placeholder="Nom voie">
+              </mat-form-field>
+            </div>
+            <div class="input-field">
+              <mat-form-field>
+                <input matInput formControlName="codePostal" placeholder="Code postal">
+              </mat-form-field>
+            </div>
+            <div class="input-field">
+              <mat-form-field>
+                <input matInput formControlName="ville" placeholder="Ville *">
+              </mat-form-field>
+            </div>
+            <div class="input-field">
+              <mat-form-field>
+                <input matInput formControlName="pays" placeholder="Pays *">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isProfessionnel" class="userMoral" formGroupName="userMoral">
+          <div class="input-field">
+            <mat-form-field>
+              <input matInput formControlName="siret" placeholder="Siret *">
+            </mat-form-field>
+          </div>
+          <div class="input-field">
+            <mat-form-field>
+              <input matInput formControlName="raisonSocial" placeholder="RaisonSocial *">
+            </mat-form-field>
+          </div>
+          <div class="input-field">
+            <mat-form-field>
+              <input matInput formControlName="kbis" placeholder="Kbis">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="btn-bloc">
+          <button [ngClass]="{'form-valid' : utilisateurForm.valid, 'form-invalid' : !utilisateurForm.valid}" mat-raised-button 
+                  type="submit" [disabled]="!utilisateurForm.valid" (click)="onSubmit()">Valider</button>
+          <button type="button" mat-raised-button [routerLink]="['/accueil']">Annuler</button>
+        </div>
+      </form>
     </div>
   </div>
-  <div mat-dialog-content class="bloc-inscription">
-    <div *ngIf="messageErreur" id="message-err">
-      <!-- message erreur serveur -->
-      <div class="col s12 m12 l12 xl12">
-        <app-alerte-message [messages]="message" [colors_msg]="colors"></app-alerte-message>
-      </div>
-    </div>
-    <form class="form-inscription" novalidate="novalidate">
-      <div class="user-info">
-        <div class="type-user">
-          <span class="libelle-text">Qui êtes-vous </span><span class="red-text">*</span>
-          <label>
-            <input name="type_user" type="radio" (click)="addAndRemoveField('professionnel')" data-error=".errorTxt1"
-              aria-required="true" class="error" aria-describedby="type_user-error" aria-invalid="true" /><span>Professionnel</span>
-          </label>
-          <label>
-            <input name="type_user" type="radio" (click)="addAndRemoveField('particulier')" class="error" checked/><span>Particulier</span>
-          </label>
-          <div class="input-field errorTxt1 bloc-error">
-            <div id="type_user-error" class="error"></div>
-          </div>
-        </div>
-      </div>
-      <div class="user-info">
-        <div class="type-user">
-          <span class="libelle-text">Quel est votre sexe </span><span class="red-text">*</span>
-          <label>
-            <input name="sexe" type="radio" value="F" [(ngModel)]="user.representantLegal.sexe" data-error=".errorTxt7" aria-required="true" class="error"
-              aria-describedby="sexe-error" aria-invalid="true" /><span>Femme</span>
-          </label>
-          <label>
-            <input name="sexe" type="radio" value="M" [(ngModel)]="user.representantLegal.sexe" class="error" /><span>Homme</span>
-          </label>
-          <div class="input-field errorTxt7 bloc-error">
-            <div id="sexe-error" class="error"></div>
-          </div>
-        </div>
-      </div>
-      <div class="user-info"> 
-        <div class="input-field info-commune_text">
-          <input type="text" name="nom" placeholder="Nom *" class="nom error" [(ngModel)]="user.representantLegal.nom" data-error=".errorTxt5"
-            aria-required="true" aria-describedby="nom-error" aria-invalid="true">
-          <div class="input-field errorTxt2 bloc-error">
-            <div id="nom-error" class="error"></div>
-          </div>
-        </div>
-        <div class="input-field info-commune_text">
-          <input type="text" name="prenom" placeholder="Prénom *" [(ngModel)]="user.representantLegal.prenom" class="prenom error" data-error=".errorTxt6"
-            aria-required="true" aria-describedby="prenom-error" aria-invalid="true">
-          <div class="input-field errorTxt6 bloc-error">
-            <div id="prenom-error" class="error"></div>
-          </div>
-        </div>
-      </div>
-      <div class="user-info"> 
-        <div class="input-field info-commune_text">
-          <input type="email" name="email" placeholder="Email *" class="email error" [(ngModel)]="user.email" data-error=".errorTxt2"
-            aria-required="true" aria-describedby="email-error" aria-invalid="true">
-          <div class="input-field errorTxt2 bloc-error">
-            <div id="email-error" class="error"></div>
-          </div>
-        </div>
-      </div>
-      <div class="user-info"> 
-        <div class="input-field info-commune_text">
-          <input type="password" name="password" placeholder="Mot de passe *" [(ngModel)]="user.password" class="passwords error" data-error=".errorTxt3"
-            aria-required="true" aria-describedby="password-error" aria-invalid="true">
-          <div class="input-field errorTxt3 bloc-error">
-            <div id="password-error" class="error"></div>
-          </div>
-        </div>
-      </div>
-      <div class="user-info" *ngIf="isBlocProfessionnel">
-        <!-- info Entreprise -->
-        <div class="input-field info-professionnel">
-          <input type="text" name="siret" placeholder="Numero siret *" [(ngModel)]= "professionnel.siret" class="siret error" data-error=".errorTxt4"
-            aria-required="true" aria-describedby="siret-error" aria-invalid="true">
-          <div class="input-field errorTxt4 bloc-error">
-            <div id="siret-error" class="error"></div>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div mat-dialog-actions align="end" class="user-info">
-    <div class="btn-submit">
-      <button mat-button class="btn btn-green waves-effect waves-light" [class.spinner]="loading" [disabled]="loading" (click)="valider()">Valider</button>
-    </div>
-    <!-- <div class="separateur"></div>
-    <div class="inscription-mot-de-passe-oublie">
-      <span>Vous avez dejà un compte: </span><a class="connection-c" (click)="openDialog()"><u>Connectez-vous</u></a>
-    </div> -->
-  </div>
+</div>

@@ -1,49 +1,23 @@
-.form-inscription {
-  .type-user {
-    label {
-      margin-left: 2rem;
+.user:first-child {
+  padding-top: 27px;
+  .input-field:first-child {
+    font-family: var(--main-font-family);
+    mat-radio-group, mat-radio-group mat-radio-button {
+      margin-left: 14px; 
     }
-  };
-  .user-info {
-    margin-bottom: 0 !important;
-  };
-  .btn {
-    color: white !important;
-    font-weight: 400;
-    width: 100% !important;
-  };
-  .bloc-error {
-    margin-top: 0.3rem !important;
-    color: red;
-  };
-  .info-professionnel input, .info-commune_text input {
-    height: 2.6rem !important;
   }
 }
 
-.separateur {
-  border-bottom: 1px solid #f4433640;
-  width: 100%;
-  margin-top: 1rem;
-}
-.btn-submit {
-  width: 100%;
-  margin-bottom: 14px;
-  button {
-    width: 100%;
-  }
-}
-.inscription-mot-de-passe-oublie {
-  width: 100%;
-  margin-top: 8px;
-  .connection-c {
-    color: #369;
-    cursor: pointer;
+.bloc-form {
+  #message-error {
+    padding-top: 20px;
+    text-align: center;
+    color: var(--main-color-red);
+    font-family: var(--main-font-family);
   };
-  .creation-c u:hover {
-    font-weight: 600;
-  };
-  .connection-c {
-    margin-left: 6px;
+  .user {
+    mat-error {
+      margin-top: -12px;
+    }
   }
 }

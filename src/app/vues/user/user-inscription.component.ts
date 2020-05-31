@@ -1,14 +1,14 @@
+import { Router } from '@angular/router';
+import { SharedCustomValidate } from './../../shared/shared-custom-validate';
 import { UtilisateurService } from '../../service/apiImpl/userimpl/utilisateur.service';
 import { RepresentantLegal } from './../../models/representant-legal';
-import { UserMoral } from './../../models/users/user-moral';
-import { User } from './../../models/users/user';
+import { User, TypeUtilisateurEnum, UserMoral } from './../../models/users/user';
 import { ErrorsFormGeneriquesService } from './../../errors/errors-form-generiques.service';
-import { Component, OnInit, Output, EventEmitter, Optional } from '@angular/core';
-import { CHAMPS_FORM_INSCRIPTION } from '../../constantes/constantes-structures';
-import { MatDialogRef, MatDialogConfig, MatDialog } from '@angular/material';
+import { Component, OnInit, Optional } from '@angular/core';
+import { MatDialogRef, MatDialogConfig, MatDialog, MatRadioChange } from '@angular/material';
 import { SharedService } from '../../shared/shared.service';
-import { Router } from '@angular/router';
 import { Adresse } from './../../models/adresse';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-inscription',
@@ -16,20 +16,19 @@ import { Adresse } from './../../models/adresse';
   styleUrls: ['./user-inscription.component.scss']
 })
 export class UserInscriptionComponent implements OnInit {
-
-  isBlocProfessionnel = false;
+  utilisateurForm: FormGroup;
+  isProfessionnel = false;
   user: User;
   professionnel: UserMoral;
-  valideForm = false;
-  messageErreur = false;
-  colors: string; // parametre composant alerte-message
-  message: string; // parametre composant alerte-message
   loading = false;
-
-  constructor(private errors: ErrorsFormGeneriquesService, private userService: UtilisateurService,
-              @Optional() public dialogRef: MatDialogRef<UserInscriptionComponent>,
-              private sharedService: SharedService, private router: Router
-              ) {
+  message: string;
+  messageErreur: boolean;
+  colors: string;
+  
+  constructor(private userService: UtilisateurService,
+              private sharedService: SharedService, private router: Router, 
+              private fb: FormBuilder, private sharedCustomValidate: SharedCustomValidate
+             ) {
      this.user = new User();
      this.professionnel = new UserMoral();
      this.user.adresse = new Adresse();
@@ -37,43 +36,109 @@ export class UserInscriptionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initForm();
+    this.updateFieldsManadatoryForm('none');
+  }
+
+  initForm() {
+    this.utilisateurForm = this.fb.group({
+      user: this.fb.group({
+        typeUtilisateur: ['PARTICULIER'],
+        email: ['', Validators.required],
+        passwords: this.fb.group({
+          password: ['', Validators.required],
+          confirmPassword: ['', Validators.required],
+        },{
+          asyncValidators: this.sharedCustomValidate.passwordValidate()
+        }),
+        adresse: this.fb.group({
+          libelleRue: [''],
+          numeroRue: [''],
+          codePostal: [''],
+          ville: ['', Validators.required],
+          pays: ['', Validators.required]
+        }),
+        representantLegal: this.fb.group({
+          sexe: ['', Validators.required],
+          nom: ['', Validators.required],
+          prenom: ['', Validators.required],
+        }),
+        roles: this.fb.array([])
+      }),
+      userMoral: this.fb.group({
+        siret: ['', Validators.required],
+        raisonSocial: ['', Validators.required],
+        kbis: ['']
+      })
+    });
+  }
+
+  get password() {
+    return this.utilisateurForm.get('user').get('passwords');
+  }
+
+  onSelect(event: MatRadioChange) {
+    switch(event.value) {
+      case 'ENTREPRISE':
+        this.isProfessionnel = true;
+        this.updateFieldsManadatoryForm('');
+      break;
+      case 'PARTICULIER':
+        this.isProfessionnel = false;
+        this.updateFieldsManadatoryForm('none');
+      break;
+    }
   }
 
   /**
-   * @author Mamadou
-   * @description traite et envoie les données du formulaire au serveur
+   * @Description initialisation des champs obligatoires
    */
-  valider() {
-    this.valideForm = this.errors.generateErrorsForm(CHAMPS_FORM_INSCRIPTION, 'form-inscription', 'class');
-    if ( this.valideForm ) {
-      this.setRole();
-      this.loading = true;
-      if (this.isBlocProfessionnel) {
-        // professionnel
-        this.professionnel.init(this.user);
+  updateFieldsManadatoryForm(defaults: string) {
+    this.utilisateurForm.get('userMoral').patchValue({
+      siret: defaults,
+      raisonSocial: defaults
+    });
+  }
+
+  onSubmit() {
+    this.initDataUtilisateur(this.utilisateurForm.value);
+    if (this.isProfessionnel) {
+      this.professionnel.init(this.user);
         this.userService.creationProfessionnel(this.professionnel).subscribe(
           data => {
             this.traitementErreur(data.statut, data.messageResponse);
           }
         );
-      } else {
-        // particulier
-        this.userService.creationParticulier(this.user).subscribe(
-          data => {
-            this.traitementErreur(data.statut, data.messageResponse);
-          }
-        );
-      }
+    } else {
+      this.userService.creationParticulier(this.user).subscribe(
+        data => {
+          this.traitementErreur(data.statut, data.messageResponse);
+        }
+      );
     }
   }
 
-  /**
-   * @author Mamadou
-   * @description select bloc professionnel
-   * @param type est le type utilisateur
-   */
-  addAndRemoveField(type: string) {
-    this.isBlocProfessionnel = (type === 'professionnel');
+  initDataUtilisateur(object: any) {
+    this.setUser(object);
+    if (this.isProfessionnel) {
+      this.user.roles.push('USER_MORAL');
+      this.professionnel.init(this.user);
+      this.professionnel.raisonSocial = object.userMoral.raisonSocial;
+      this.professionnel.siret = object.userMoral.siret;
+      this.professionnel.kbis = object.userMoral.kbis;
+    } else {
+      this.user.roles.push('USER_PHYSIQUE');
+      this.professionnel = null;
+    }
+  }
+
+  setUser(object: any) {
+    this.user.representantLegal = object.user.representantLegal;
+    this.user.adresse = object.user.adresse;
+    this.user.email = object.user.email;
+    this.user.password = object.user.passwords.password;
+    this.user.confirmPassword = object.user.passwords.confirmPassword;
+    this.user.typeUtilisateur = object.user.typeUtilisateur;
   }
 
   /**
@@ -85,23 +150,10 @@ export class UserInscriptionComponent implements OnInit {
     this.colors = 'red';
   }
 
+ 
   /**
    * @author Mamadou
-   * @description set le role et le type de l'utilisateur
-   */
-  setRole() {
-    if ( this.isBlocProfessionnel ) {
-      this.user.roles.push('USER_MORAL');
-      this.user.typeUtilisateur = 'ENTREPRISE';
-    } else {
-      this.user.roles.push('USER_PHYSIQUE');
-      this.user.typeUtilisateur = 'PARTICULIER';
-    }
-  }
-
-  /**
-   * @author Mamadou
-   * @param statut numero erreur
+   * @param statut code erreur
    * @param messageResponse message reponse serveur
    * @description traitement erreur serveur
    */
@@ -111,27 +163,8 @@ export class UserInscriptionComponent implements OnInit {
       this.message = messageResponse;
       this.alerteMessage();
     } else {
-      this.clos();
       this.sharedService.setConfirmationSubject(messageResponse);
     }
   }
-
-  /**
-   * @author Mamadou
-   * @description Fermeture popin
-   */
-  clos() {
-    this.dialogRef.close();
-  }
-
-  // /**
-  //  * @author Mamadou
-  //  * @description affiche le composant confirmation creation compte
-  //  * @param message message confirmation de la creation compte
-  //  */
-  // confirmationCreationCompte(message: string) {
-  //   this.sharedService.setConfirmationSubject(message);
-  //   this.router.navigate(['/confirmation']);
-  // }
 
 }

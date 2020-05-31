@@ -1,5 +1,5 @@
+import { UserMoral } from './../../../models/users/user';
 import { SharedService } from '../../../shared/shared.service';
-import { UserMoral } from '../../../models/users/user-moral';
 import { User } from '../../../models/users/user';
 import { Injectable } from '@angular/core';
 import { IUser } from '../../api/user/iuser';
@@ -45,8 +45,8 @@ export class UtilisateurService implements IUser<UserMoral, User> {
    * @returns httpResponse reponse retourner par l'api
    */
   creationParticulier(object: User): Observable<ImoResponse<User>> {
-    const datas = JSON.stringify(object);
-    return this.http.post<ImoResponse<User>>(API.parInscription, datas, this.sharedService.getHeadersConfig())
+    const data = JSON.stringify(object);
+    return this.http.post<ImoResponse<User>>(API.parInscription, data, this.sharedService.getHeadersConfig())
                .pipe(
                  catchError (
                    err => {

@@ -120,5 +120,4 @@ export class SharedService {
     const dateDuJour = new Date().getTime() / 86400000;
     return Number(dateDuJour - date.getTime() / 86400000).toFixed(0);
   }
-
 }

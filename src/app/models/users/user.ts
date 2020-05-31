@@ -3,21 +3,38 @@ import { Adresse } from '../adresse';
 import { RepresentantLegal } from '../representant-legal';
 
 export class User {
-    /** email user */
-    public email: string;
+    email: string;
+    password: string;
+    typeUtilisateur: TypeUtilisateurEnum;
+    adresse: Adresse = new Adresse();
+    representantLegal: RepresentantLegal = new RepresentantLegal();
+    roles = new Array<string>();
+    confirmPassword: string;
+}
 
-    /** mot de passe utilisateur */
-    public password: string;
+export enum TypeUtilisateurEnum {
+    ENTREPRISE,
+    PARTICULIER
+}
 
-    public typeUtilisateur: string;
+export class UserMoral extends User {
+    kbis: string;
+    raisonSocial: string ;
+    siret: string;
 
-    /** adresse */
-    public adresse: Adresse;
-
-    /** representant legal */
-    public representantLegal: RepresentantLegal;
-
-    /** liste des roles */
-    public roles = new Array<string>();
-
+    /**
+     * @author Mamadou
+     * @description initialise l'objet user moral
+     * @param user identifiants user
+     * @param siret identifiant entreprise
+     * @param representantLegal info personnel utilisateu
+     */
+    public init(user: User) {
+      this.email = user.email;
+      this.password = user.password;
+      this.representantLegal = user.representantLegal;
+      this.typeUtilisateur = user.typeUtilisateur;
+      this.roles = user.roles;
+      this.adresse = user.adresse;
+    }
 }

@@ -10,6 +10,6 @@
 </div>
 <div *ngIf="!isActifButton" class="menu-list">
   <a><i class="material-icons">add_circle</i><span>D&eacute;poser une annonce</span></a>
-  <a (click)="openDialog('Insc')"><i class="material-icons">person_add</i><span>Inscription</span></a>
+  <a routerLink="inscription"><i class="material-icons">person_add</i><span>Inscription</span></a>
   <a (click)="openDialog('Auth')"><i class="material-icons">perm_identity</i><span>Connexion</span></a>
 </div>
