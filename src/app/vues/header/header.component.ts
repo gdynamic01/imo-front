@@ -1,9 +1,9 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../../service/config/auth.service';
 import { TokenStorageService } from './../../service/config/token-storage.service';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { SharedService } from '../../shared/shared.service';
-import { Router } from '@angular/router';
 import { UserInscriptionComponent } from '../user/user-inscription.component';
 import { AuthentificationComponent } from '../auth/authentification.component';
 
@@ -17,10 +17,10 @@ declare var M: any;
 })
 export class HeaderComponent implements OnInit {
 
-  isActifButton: boolean = false;
+  isActifButton = false;
   destroySubscription: any;
 
-  constructor(private sharedService: SharedService, private dialog: MatDialog, 
+  constructor(private sharedService: SharedService, private dialog: MatDialog,
               private tokenStorage: TokenStorageService, private router: Router,
               private authService: AuthService
              ) {}
@@ -32,8 +32,9 @@ export class HeaderComponent implements OnInit {
         this.isActifButton = value;
       }
     );
+
     this.sharedService.getUserName(this.authService.getInfoUser());
-    if(!this.isActifButton && this.tokenStorage.getToken() !== null && this.tokenStorage.getToken() !== "undefined") {
+    if (!this.isActifButton && this.tokenStorage.getToken() !== null && this.tokenStorage.getToken() !== 'undefined') {
       this.isActifButton = true;
     }
   }
@@ -41,7 +42,7 @@ export class HeaderComponent implements OnInit {
   /**
    * @author Mamadou
    * @description Ouverture de la popin
-   * @param popin 
+   * @param popin the value popin
    */
   openDialog(popin: string): void {
     const dialogConfig = new MatDialogConfig();

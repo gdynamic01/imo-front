@@ -60,7 +60,12 @@
                         </div>
                         <div class="input-field">
                             <mat-form-field>
-                                <input matInput formControlName="ville" placeholder="ville">
+                                <input matInput formControlName="ville" placeholder="Ville *">
+                            </mat-form-field>
+                        </div>
+                        <div class="input-field">
+                            <mat-form-field>
+                                <input matInput formControlName="pays" placeholder="Pays *">
                             </mat-form-field>
                         </div>
                     </div>
@@ -71,6 +76,30 @@
                             <input matInput formControlName="surface" placeholder="surface en m²">
                         </mat-form-field>
                     </div>
+                    <div class="input-field">
+                        <mat-form-field>
+                            <input matInput formControlName="parking" placeholder="parking">
+                        </mat-form-field>
+                    </div>
+                    <div class="input-field">
+                        <mat-form-field>
+                            <input matInput formControlName="piscine" placeholder="piscine">
+                        </mat-form-field>
+      
+                    </div>
+                    <div class="input-field">
+                        <mat-form-field>
+                            <input matInput formControlName="nombre_pieces" placeholder="nombre de pieces">
+                        </mat-form-field>
+                        
+                    </div>
+                    <div class="input-field">
+                        <mat-form-field>
+                            <mat-label>Zone geographique</mat-label>
+                            <textarea matInput formControlName="zone_geographique"></textarea>
+                        </mat-form-field>
+                    </div>
+
                 </div>
                 <div class="mobile" formGroupName="mobile" *ngIf="isMobilie">
                     <div class="input-field">
@@ -94,7 +123,7 @@
                     </div>
                     <div class="input-field">
                         <mat-form-field>
-                            <input matInput formControlName="model" placeholder="Model">
+                            <input matInput formControlName="model" placeholder="Model *">
                         </mat-form-field>
                     </div>
                 </div>
