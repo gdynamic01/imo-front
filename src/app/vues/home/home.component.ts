@@ -12,7 +12,7 @@ declare var $: any;
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
 
   public typesDemandes: string[];
   offres: Array<Offre> = new Array();
@@ -23,13 +23,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.shared.initDatePicker('datepicker', 'class');
     this.typesDemandes = TYPE_SERVICE;
     this.bouchonOffre();
-  }
-
-  ngAfterViewInit() {
-    this.shared.initSelect('mdb-select', 'class');
   }
 
   /**

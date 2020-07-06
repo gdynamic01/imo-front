@@ -1,46 +1,41 @@
-<div class="bloc-content">
-  <div mat-dialog-title>
-    <div class="header-modale">
-      <span (click)="clos()" title='fermer'><i class="material-icons fermeture">close</i></span>
-      <h6>Connectez-vous</h6>
+<h2 mat-dialog-title class="logo">Loumo</h2>
+<mat-dialog-content class="bloc-form">
+  <div *ngIf="messageErreur" id="message-error">
+    <div class="col s12 m12 l12 xl12">
+      <app-alerte-message [messages]="message" [colors_msg]="colors"></app-alerte-message>
     </div>
   </div>
-  <div mat-dialog-content class="bloc-auth">
-    <div *ngIf="messageErreur" id="message-err">
-      <!-- message erreur serveur -->
-      <div class="col s12 m12 l12 xl12">
-        <app-alerte-message [messages]="message" [colors_msg]="colors"></app-alerte-message>
-      </div>
+  <form [formGroup]="authForm">
+    <div class="input-field">
+      <mat-form-field>
+        <input matInput type="email" formControlName="email" placeholder="Email *">
+      </mat-form-field>
+      <mat-error>
+        <span *ngIf="email.hasError('required') && email.touched">L'Email est obligatoire</span>
+        <span *ngIf="email.hasError('pattern')">L'Email n'est pas valide</span>
+        <span *ngIf="email.hasError('notExist')">Cet Email n'existe pas, veuillez-vous inscrire</span>
+      </mat-error>
     </div>
-    <form class="form-auth" novalidate="novalidate">
-      <div class="user-info"> 
-        <div class="input-field info-commune_text">
-          <input type="email" name="email" placeholder="Email *" class="email error" [(ngModel)]="user.email" data-error=".errorTxt2"
-             aria-required="true" aria-describedby="email-error" aria-invalid="true">
-          <div class="input-field errorTxt2 bloc-error">
-            <div id="email-error" class="error"></div>
-          </div>
-        </div>
-      </div>
-      <div class="user-info"> 
-        <div class="input-field info-commune_text">
-          <input type="password" name="password" placeholder="Mot de passe *" [(ngModel)]="user.password" class="passwords error" data-error=".errorTxt3"
-            aria-required="true" aria-describedby="password-error" aria-invalid="true">
-          <div class="input-field errorTxt3 bloc-error">
-            <div id="password-error" class="error"></div>
-          </div>
-        </div>
-      </div>
-    </form>
+    <div class="input-field">
+      <mat-form-field>
+        <input matInput type="password" formControlName="password" placeholder="Mot de passe *">
+      </mat-form-field>
+      <mat-error>
+        <span *ngIf="password.hasError('required') && password.touched">Le mot de passe est obligatoire</span>
+      </mat-error>
+    </div>
+    <div class="mot-de-passe-oublie">
+      <a routerLink="" class="right">Mot de passe oublié</a>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button [ngClass]="{'form-valid' : authForm.valid, 'form-invalid' : !authForm.valid}" mat-raised-button 
+    type="submit" [disabled]="!authForm.valid" (click)="onSubmit()">CONNEXION</button>
+  <div class="separateur">
+    <span>OU</span>
   </div>
-  <div mat-dialog-actions  class="user-info">
-    <div class="btn-submit">
-        <button mat-button class="btn btn-green waves-effect waves-light" [class.spinner]="loading" [disabled]="loading" (click)="valider()">Valider</button>
-    </div>
-    <div class="separateur"></div>
-    <div class="inscription-mot-de-passe-oublie">
-      <span class="left libelle-cpt">Pas de compte: </span><a class="creation-c" (click)="openDialog()">Inscription</a>
-      <a class="right mot-passe_o">Mot de passe oublié</a>
-    </div>
+  <div class="inscription">
+    <a mat-dialog-close routerLink='/inscription'>Inscrivez-vous</a>
   </div>
-</div>
+</mat-dialog-actions>

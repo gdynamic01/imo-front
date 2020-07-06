@@ -13,6 +13,7 @@
   --main-color-lightgray: lightgray;
   --main-color-black-radial-gradient: radial-gradient(black, transparent);
   --main-color-gray-a: #80808036;
+  --main-color-gray: gray;
   --main-color-gray-b: #80808038;
   --main-color-gray-c: #d3d3d340;
   --main-color-btn-valid: #1a7c1e;
@@ -22,6 +23,16 @@
   --main-color-orange-b: #f44336;
   --main-color-page-site:#e5e9ec;
   --main-color-red:red;
+  --main-color-blue-a: #106cc8;
+  --main-color-lien-hypertext: #03a9f4;
+}
+.input-field mat-error {
+  font-family: var(--main-font-family);
+  font-size: 12px;
+  margin-top: -12px;
+}
+.cdk-overlay-dark-backdrop {
+  background: rgba(0, 0, 0, 0.88) !important;
 }
 .mat-drawer-container {
   background: var(--main-color-black-b) !important;
@@ -47,9 +58,15 @@
   font-size: 25px;
 }
 .bloc-form {
+  #message-error {
+    padding-top: 20px;
+    text-align: center;
+    color: var(--main-color-red);
+    font-family: var(--main-font-family);
+  };
+
   form {
     margin-top: -10px;
-    padding-left: 35px;
     padding: 0 36px 0 36px;
     .input-field mat-form-field {
       width: 100%;

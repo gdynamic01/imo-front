@@ -18,7 +18,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class UserInscriptionComponent implements OnInit {
   utilisateurForm: FormGroup;
   isProfessionnel = false;
-  user: User;
+  utilisateur: User;
   professionnel: UserMoral;
   loading = false;
   message: string;
@@ -29,10 +29,10 @@ export class UserInscriptionComponent implements OnInit {
               private sharedService: SharedService, private router: Router, 
               private fb: FormBuilder, private sharedCustomValidate: SharedCustomValidate
              ) {
-     this.user = new User();
+     this.utilisateur = new User();
      this.professionnel = new UserMoral();
-     this.user.adresse = new Adresse();
-     this.user.representantLegal = new RepresentantLegal();
+     this.utilisateur.adresse = new Adresse();
+     this.utilisateur.representantLegal = new RepresentantLegal();
   }
 
   ngOnInit() {
@@ -44,7 +44,12 @@ export class UserInscriptionComponent implements OnInit {
     this.utilisateurForm = this.fb.group({
       user: this.fb.group({
         typeUtilisateur: ['PARTICULIER'],
-        email: ['', Validators.required],
+        email: ['', 
+          {
+            validators: [Validators.required, Validators.pattern(this.sharedCustomValidate.emailExReg)],
+            asyncValidators: this.sharedCustomValidate.checkMailExist()
+          }
+        ],
         passwords: this.fb.group({
           password: ['', Validators.required],
           confirmPassword: ['', Validators.required],
@@ -73,8 +78,28 @@ export class UserInscriptionComponent implements OnInit {
     });
   }
 
+  get userMoral() {
+    return this.utilisateurForm.get('userMoral');
+  }
+
   get password() {
     return this.utilisateurForm.get('user').get('passwords');
+  }
+
+  get adresse() {
+    return this.utilisateurForm.get('user').get('adresse');
+  }
+
+  get representantLegal() {
+    return this.utilisateurForm.get('user').get('representantLegal');
+  }
+
+  get user() {
+    return this.utilisateurForm.get('user');
+  }
+
+  get email() {
+    return this.utilisateurForm.get('user').get('email');
   }
 
   onSelect(event: MatRadioChange) {
@@ -103,14 +128,14 @@ export class UserInscriptionComponent implements OnInit {
   onSubmit() {
     this.initDataUtilisateur(this.utilisateurForm.value);
     if (this.isProfessionnel) {
-      this.professionnel.init(this.user);
+      this.professionnel.init(this.utilisateur);
         this.userService.creationProfessionnel(this.professionnel).subscribe(
           data => {
             this.traitementErreur(data.statut, data.messageResponse);
           }
         );
     } else {
-      this.userService.creationParticulier(this.user).subscribe(
+      this.userService.creationParticulier(this.utilisateur).subscribe(
         data => {
           this.traitementErreur(data.statut, data.messageResponse);
         }
@@ -121,24 +146,24 @@ export class UserInscriptionComponent implements OnInit {
   initDataUtilisateur(object: any) {
     this.setUser(object);
     if (this.isProfessionnel) {
-      this.user.roles.push('USER_MORAL');
-      this.professionnel.init(this.user);
+      this.utilisateur.roles.push('USER_MORAL');
+      this.professionnel.init(this.utilisateur);
       this.professionnel.raisonSocial = object.userMoral.raisonSocial;
       this.professionnel.siret = object.userMoral.siret;
       this.professionnel.kbis = object.userMoral.kbis;
     } else {
-      this.user.roles.push('USER_PHYSIQUE');
+      this.utilisateur.roles.push('USER_PHYSIQUE');
       this.professionnel = null;
     }
   }
 
   setUser(object: any) {
-    this.user.representantLegal = object.user.representantLegal;
-    this.user.adresse = object.user.adresse;
-    this.user.email = object.user.email;
-    this.user.password = object.user.passwords.password;
-    this.user.confirmPassword = object.user.passwords.confirmPassword;
-    this.user.typeUtilisateur = object.user.typeUtilisateur;
+    this.utilisateur.representantLegal = object.user.representantLegal;
+    this.utilisateur.adresse = object.user.adresse;
+    this.utilisateur.email = object.user.email;
+    this.utilisateur.password = object.user.passwords.password;
+    this.utilisateur.confirmPassword = object.user.passwords.confirmPassword;
+    this.utilisateur.typeUtilisateur = object.user.typeUtilisateur;
   }
 
   /**

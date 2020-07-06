@@ -1,4 +1,17 @@
 .menu-list {
+  button .material-icons {
+    top: -4px !important;
+  };
+  button span {
+    top: -1px;
+  }
+  button span,  button .material-icons {
+    position: relative;
+    top: -1px !important;
+  };
+  button .material-icons, button span {
+    color: var(--main-color-white) !important;
+  };
   a {
     cursor: pointer;
     padding: 5px 15px 5px 15px;
@@ -6,90 +19,24 @@
     color: var(--main-color-white);
     text-decoration: none;
   };
-
   a:hover {
     background: var(--main-color-black-radial-gradient);
   };
-
-  /* Deposer offre */
-  a:nth-child(1) {
-    border: 1px solid var(--main-color-lightgray);
-    border-radius: 16px;
-    border-width: 2px;
-    margin-right: 105px;
-  };
-
   .material-icons {
     position: var(--main-material-icons-position);
     top: var(--main-material-icons-top);
     left: var(--main-material-icons-left);
   }
+  .depot-offre {
+    border: 1px solid var(--main-color-lightgray);
+    border-radius: 16px;
+    border-width: 2px;
+    margin-right: 105px;
+  };
 }
-
-// .depot-offre {
-//   padding: 5px 10px 5px 5px;
-//   cursor: pointer;
-// }
-// .brand-logo:hover {
-//   color: white !important;
-//   text-decoration: none !important;
-// }
-// .brand-logo {
-//   margin-left: 2rem;
-// }
-// .menu-header {
-//   .depot-offre {
-//     border: 1px solid #fff;
-//     border-width: 2px;
-//     margin-right: 88px;
-//     background: #fff;
-//     font-size: 15px;
-//   };
-//   .depot-offre strong {
-//     color: #000;
-//   };
-//   .depot-offre:hover {
-//     background-color: rgba(0,0,0,0.1);
-//     strong {
-//       color: #000;
-//     }
-//   };
-//   a:hover, .depot-offre:hover {
-//     color: white !important;
-//     text-decoration: none !important;
-//   };
-//   li a {
-//     font-weight: bold;
-//     font-family: eim,Arial,Helvetica,sans-serif;
-//   }
-
-// }
-// #mobile-header {
-//   .depot-offre {
-//     border: 1px solid red;
-//     border-width: 4px ;
-//     margin-left: 9px;
-//     font-weight: 500;
-//   };
-//   .depot-offre:hover {
-//     background-color: rgba(0,0,0,0.05);
-//   };
-//   a:hover, .depot-offre:hover {
-//     text-decoration: none !important;
-//   };
-//   .li_depot-offre {
-//     margin-top: 13px;
-//   }
-// }
-// .menu-compte {
-//   .name-user {
-//     margin-left: 7px;
-//   };
-//   button {
-//     outline: none !important; 
-//     background: 0 0 !important;
-//     mat-icon {
-//       font-weight: bold;
-//     }
-//   }
-// }
+#menu-content .material-icons {
+  position: relative;
+  top: 8px;
+  right: 6px;
+  color: var(--main-color-gray);
+}; 

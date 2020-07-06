@@ -7,6 +7,7 @@ export const httpOptions = {
 export const API = {
     profInscription: pointEntries + 'inscription/professionnel',  // api inscription user professionnel
     parInscription: pointEntries + 'inscription/particulier', // api inscription user particulier
-    auth: pointEntries + 'authentification', // api authentification
-    offreCrate: pointEntries + 'creation-offre' // api creation offre
+    auth: pointEntries + 'authentification/', // api authentification
+    offreCrate: pointEntries + 'creation-offre', // api creation offre
+    checkEmail: pointEntries + 'email/' // api verification email
 };

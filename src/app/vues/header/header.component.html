@@ -1,15 +1,17 @@
-<div *ngIf="this.sharedService.userName !== null && this.sharedService.userName !== undefined" class="right menu-compte">
+<div *ngIf="userName !== null && userName !== undefined" class="right menu-list">
+  <a routerLink="accueil"><i class="material-icons">home</i><span>Accueil</span></a>
   <button mat-button [matMenuTriggerFor]="beforeMenu">
     <i class="material-icons">account_circle</i>
-    <span class="name-user">{{sharedService.userName}}</span>
+    <span class="name-user">{{userName}}</span>
   </button>
   <mat-menu #beforeMenu="matMenu" xPosition="before">
-    <a mat-menu-item>Compte</a>
-    <a (click)="deconnexion()" mat-menu-item>Deconnexion</a>
+    <a id="menu-content" mat-menu-item><i class="material-icons">settings</i>Compte</a>
+    <a id="menu-content" (click)="deconnexion()" mat-menu-item><i class="material-icons">power_settings_new</i>Deconnexion</a>
   </mat-menu>
 </div>
 <div *ngIf="!isActifButton" class="menu-list">
-  <a><i class="material-icons">add_circle</i><span>D&eacute;poser une annonce</span></a>
+  <a class="depot-offre"><i class="material-icons">add_circle</i><span>D&eacute;poser une annonce</span></a>
+  <a routerLink="accueil"><i class="material-icons">home</i><span>Accueil</span></a>
   <a routerLink="inscription"><i class="material-icons">person_add</i><span>Inscription</span></a>
   <a (click)="openDialog('Auth')"><i class="material-icons">perm_identity</i><span>Connexion</span></a>
 </div>

@@ -61,14 +61,22 @@ export class UtilisateurService implements IUser<UserMoral, User> {
    * @param object user
    * @returns httpResponse reponse retourner par l'api
    */
-  authentification(object: User): Observable<TokenResponse> {
-    const data = JSON.stringify(object);
-    return this.http.post<TokenResponse>(API.auth, data, this.sharedService.getHeadersConfig())
+  authentification(email: string, password: string): Observable<TokenResponse> {
+    const paramUri = email + '/' + password;
+    return this.http.get<TokenResponse>(API.auth + paramUri, this.sharedService.getHeadersConfig())
                .pipe(
                   catchError (
                     err => {
                       return of(err.error);
-                  }
-                ));
+                    }
+                  ));
+  }
+
+  /**
+   * recupération email
+   * @param email the value email
+   */
+  getEmail(email: string): Observable<ImoResponse<string>> {
+    return this.http.get<ImoResponse<string>>(API.checkEmail + email, this.sharedService.getHeadersConfig());
   }
 }

@@ -26,7 +26,6 @@ export class ConfirmationComponent implements OnInit {
     } else {
       this.sharedService.setIsActifElement(true);
     }
-    
   }
 
   ngDestroy() {

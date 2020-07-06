@@ -1,4 +1,8 @@
+import { TokenStorageService } from './../../service/config/token-storage.service';
+import { AuthService } from './../../service/config/auth.service';
+import { SharedService } from './../../shared/shared.service';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menu-responsive',
@@ -7,9 +11,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuResponsiveComponent implements OnInit {
 
-  constructor() { }
+  isActifButton = false;
+  subscriptions: Subscription[] = [];
+
+  constructor(private sharedService: SharedService, private authService: AuthService,
+              private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
+    this.subscriptions.push(this.sharedService.isActifElement.subscribe(
+      value => {
+        this.isActifButton = value;
+      }
+    ));
+    this.sharedService.setInfosUsers(this.authService.getInfoUser());
+    if (!this.isActifButton && this.tokenStorage.getToken() !== null && this.tokenStorage.getToken() !== 'undefined') {
+      this.isActifButton = true;
+    }
   }
 
 }

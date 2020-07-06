@@ -24,7 +24,14 @@ export interface IUser <T, D> {
     /**
      * @author Mamadou
      * @description authentification user
-     * @param object 
+     * @param object user
      */
-    authentification(object: D): Observable<TokenResponse>;
+    authentification(email: string, password: string): Observable<TokenResponse>;
+
+    /**
+     * @author Mamadou
+     * @description récupération email
+     * @param object string
+     */
+    getEmail(email: string): Observable<ImoResponse<string>>;
 }

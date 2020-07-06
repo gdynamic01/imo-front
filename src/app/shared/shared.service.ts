@@ -21,45 +21,10 @@ export class SharedService {
   isActifElementSubject: BehaviorSubject<boolean> = new BehaviorSubject(false);
   isActifElement = this.isActifElementSubject.asObservable();
 
-  userName: string;
-  email: string;
+  userNameSubject: BehaviorSubject<string> = new BehaviorSubject(null);
+  emailSubject: BehaviorSubject<string> = new BehaviorSubject(null);
 
   constructor(private router: Router) {}
-
-  /**
-   * @author Mamadou
-   * @description Initialisation champ date en datePicker
-   * @param cible qui definit l'input
-   * @param type qui definit si [class ou id]
-   */
-  public initDatePicker(cible: string, type: string) {
-    const caractere = type === 'class' ? '.' : '#';
-    $(caractere + cible).datepicker({
-      format: 'dd/mm/yyyy'
-    });
-  }
-
-  /**
-   * @author Mamadou
-   * @description Initialisation champ select
-   * @param cible qui definit l'input
-   * @param type qui definit si [class ou id]
-   */
-  public initSelect(cible: string, type: string) {
-    const caractere = type === 'class' ? '.' : '#';
-    $(caractere + cible).formSelect();
-  }
-
-  /**
-   * @author Mamadou
-   * @description initialise la barre de navigation du header (responsive)
-   * @param cible qui definit l'input
-   * @param type qui definit si [class ou id]
-   */
-  initNavBar(cible: string, type: string) {
-    const caractere = type === 'class' ? '.' : '#';
-    $(caractere + cible).sidenav();
-  }
 
   /**
    * @author Mamadou
@@ -97,17 +62,11 @@ export class SharedService {
    * @param infoAll the info token value
    * @returns userName
    */
-  public getUserName(infoAll: string[]) {
-    this.userName = infoAll !== null ? infoAll[1] : null;
-  }
-
-  /**
-   * @author Mamadou
-   * @param infoAll the info token value
-   * @returns email
-   */
-  public getEmail(infoAll: string[]) {
-    this.email = infoAll !== null ? infoAll[2] : null;
+  public setInfosUsers(infoAll: string[]) {
+    if (infoAll !== null) {
+      this.userNameSubject.next(infoAll[1]);
+      this.emailSubject.next(infoAll[2]);
+    }
   }
 
   /**

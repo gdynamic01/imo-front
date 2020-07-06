@@ -6,6 +6,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { SharedService } from '../../shared/shared.service';
 import { UserInscriptionComponent } from '../user/user-inscription.component';
 import { AuthentificationComponent } from '../auth/authentification.component';
+import { Subscription } from 'rxjs';
 
 declare var $: any;
 declare var M: any;
@@ -15,10 +16,11 @@ declare var M: any;
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   isActifButton = false;
-  destroySubscription: any;
+  subscriptions: Subscription[] = [];
+  userName: string;
 
   constructor(private sharedService: SharedService, private dialog: MatDialog,
               private tokenStorage: TokenStorageService, private router: Router,
@@ -26,14 +28,16 @@ export class HeaderComponent implements OnInit {
              ) {}
 
   ngOnInit() {
-    this.sharedService.initNavBar('sidenav', 'class'); // initialisation de la navbar
-    this.destroySubscription = this.sharedService.isActifElement.subscribe(
+    this.subscriptions.push(this.sharedService.isActifElement.subscribe(
       value => {
         this.isActifButton = value;
       }
-    );
-
-    this.sharedService.getUserName(this.authService.getInfoUser());
+    ));
+    this.subscriptions.push(this.sharedService.userNameSubject.subscribe(
+      value => {
+        this.userName = value;
+      }
+    ));
     if (!this.isActifButton && this.tokenStorage.getToken() !== null && this.tokenStorage.getToken() !== 'undefined') {
       this.isActifButton = true;
     }
@@ -46,9 +50,9 @@ export class HeaderComponent implements OnInit {
    */
   openDialog(popin: string): void {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.width = popin === 'Insc' ? '70%' : '50%';
+    dialogConfig.width = '30%';
+    dialogConfig.height = '76%';
     this.dialog.open(AuthentificationComponent, dialogConfig);
   }
 
@@ -59,17 +63,16 @@ export class HeaderComponent implements OnInit {
   deconnexion() {
     this.tokenStorage.signOut();
     this.sharedService.setIsActifElement(false);
-    this.sharedService.userName = null;
+    this.sharedService.userNameSubject.next(null);
+    this.userName = null;
     this.router.navigate(['accueil']);
   }
 
-  /**
-   * @author Mamadou
-   * @description unsubscribe l observable
-   */
-  ngDestroy() {
+  ngOnDestroy() {
     if (this.tokenStorage.getToken() == null) {
-      this.destroySubscription.unsubscribe();
+      this.subscriptions.forEach(
+        subscription => subscription.unsubscribe()
+      );
     }
   }
 

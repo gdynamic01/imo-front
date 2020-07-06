@@ -21,11 +21,17 @@
               <mat-form-field>
                 <input matInput formControlName="nom" placeholder="Nom *">
               </mat-form-field>
+              <mat-error>
+                <span *ngIf="representantLegal.get('nom').hasError('required') && representantLegal.get('nom').touched">Le nom est obligatoire</span>
+              </mat-error>
             </div>
             <div class="input-field">
               <mat-form-field>
                 <input matInput formControlName="prenom" placeholder="Prenom *">
               </mat-form-field>
+              <mat-error>
+                <span *ngIf="representantLegal.get('prenom').hasError('required') && representantLegal.get('prenom').touched">Le prenom est obligatoire</span>
+              </mat-error>
             </div>
             <div class="input-field">
               <mat-form-field>
@@ -35,12 +41,20 @@
                   <mat-option value="M">Masculin</mat-option>
                 </mat-select>
               </mat-form-field>
+              <mat-error>
+                <span *ngIf="representantLegal.get('sexe').hasError('required') && representantLegal.get('sexe').touched">Le genre est obligatoire</span>
+              </mat-error>
             </div>
           </div>
           <div class="input-field">
             <mat-form-field>
               <input matInput formControlName="email" placeholder="Email *">
             </mat-form-field>
+            <mat-error>
+              <span *ngIf="email.hasError('required') && user.get('email').touched">L'Email est obligatoire</span>
+              <span *ngIf="email.hasError('pattern')">L'Email n'est pas valide</span>
+              <span *ngIf="email.hasError('exist')">Cet Email existe, veuillez-vous connecter</span>
+            </mat-error>
           </div>
           <div class="passwords" formGroupName="passwords">
             <div class="input-field">
@@ -50,15 +64,18 @@
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                   <mat-icon>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
                 </button>
-                <mat-error *ngIf="utilisateurForm.errors?.invalid">esssai</mat-error>
               </mat-form-field>
+              <mat-error>
+                <span *ngIf="password.get('password').hasError('required') && password.get('password').touched">Le mot de passe est obligatoire</span>
+              </mat-error>
             </div>
             <div class="input-field">
               <mat-form-field>
                 <input matInput type='password' formControlName="confirmPassword"  placeholder="Confirmation votre mot de passe *">
               </mat-form-field>
-              <mat-error *ngIf="password.errors !== null && password.errors.invalid">
-                <span>Les mots de passe ne sont pas identiques</span>
+              <mat-error >
+                <span *ngIf="password.get('confirmPassword').hasError('required') && password.get('confirmPassword').touched">Confirmation mot de passe obligatoire</span>
+                <span *ngIf="password.errors !== null && password.errors.invalid">Les mots de passe ne sont pas identiques</span>
               </mat-error>
             </div>
           </div>
@@ -82,11 +99,17 @@
               <mat-form-field>
                 <input matInput formControlName="ville" placeholder="Ville *">
               </mat-form-field>
+              <mat-error>
+                <span *ngIf="adresse.get('ville').hasError('required') && adresse.get('ville').touched">La ville est obligatoire</span>
+              </mat-error>
             </div>
             <div class="input-field">
               <mat-form-field>
                 <input matInput formControlName="pays" placeholder="Pays *">
               </mat-form-field>
+              <mat-error>
+                <span *ngIf="adresse.get('pays').hasError('required') && adresse.get('pays').touched">Le pays est obligatoire</span>
+              </mat-error>
             </div>
           </div>
         </div>
@@ -95,11 +118,17 @@
             <mat-form-field>
               <input matInput formControlName="siret" placeholder="Siret *">
             </mat-form-field>
+            <mat-error>
+              <span *ngIf="userMoral.get('siret').hasError('required') && userMoral.get('siret').touched">Le siret est obligatoire</span>
+            </mat-error>
           </div>
           <div class="input-field">
             <mat-form-field>
               <input matInput formControlName="raisonSocial" placeholder="RaisonSocial *">
             </mat-form-field>
+            <mat-error>
+              <span *ngIf="userMoral.get('raisonSocial').hasError('required') && userMoral.get('raisonSocial').touched">Le raisonSocial est obligatoire</span>
+            </mat-error>
           </div>
           <div class="input-field">
             <mat-form-field>

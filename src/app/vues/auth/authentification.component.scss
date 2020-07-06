@@ -1,48 +1,45 @@
-.form-auth {
-  .libelle-text {
-    font-weight: 600;
-  };
-  .user-info {
-    margin-bottom: 0 !important;
-  };
-  .btn {
-    color: white !important;
-    font-weight: 400;
-    width: 100% !important;
-  };
-  .bloc-error {
-    margin-top: 0.3rem !important;
-    color: red;
-  };
+h2 {
+  display: flex;
+  justify-content: center;
 }
-.separateur {
-  border-bottom: 1px solid #f4433640;
-  width: 100%;
-  margin-top: 1rem;
+mat-dialog-content {
+  margin-top: 40px;
 }
-.btn-submit {
-  width: 100%;
+.bloc-form {
+  form {
+    margin-top: 0;
+    padding: 0 6px 0 6px;
+  }
+  .mot-de-passe-oublie {
+    margin-top: -11px;
+    .right {
+      display: flex;
+      justify-content: flex-end;
+      color: var(--main-color-lien-hypertext) !important;
+      font-weight: bold;
+    }
+  }
+}
+mat-dialog-actions {
   button {
+    background: var(--main-color-blue-a);
+    color: var(--main-color-white);
+    width: 80%;
+    font-size: 15px;
+    margin-top: 46px;
+  };
+  .inscription {
+    margin-top: 15px;
+    a {
+      color: var(--main-color-lien-hypertext) !important;
+      font-weight: bold;
+    };
+  };
+  .separateur {
     width: 100%;
-  }
-}
-.inscription-mot-de-passe-oublie {
-  width: 100%;
-  margin-top: 8px;
-  margin-bottom: 14px;
-  font-weight: 600;
-  .mot-passe_o, .creation-c {
-    color: #369;
-    cursor: pointer;
-  };
-  .mot-passe_o:hover, .creation-c:hover {
-    text-decoration: underline;
-  };
-  .creation-c {
-    margin-left: 6px;
-  }
-  .libelle-cpt {
-    color: grey;
-    font-weight: 600;
+    margin-top: 8%;
+    span {
+      font-weight: bold;
+    }
   }
 }
