@@ -21,11 +21,6 @@ export class ConfirmationComponent implements OnInit {
         this.confirmationMessage = value;
       }
     );
-    if(this.confirmationMessage === null) {
-      this.router.navigate(['/accueil']);
-    } else {
-      this.sharedService.setIsActifElement(true);
-    }
   }
 
   ngDestroy() {

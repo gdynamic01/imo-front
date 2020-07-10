@@ -4,7 +4,6 @@ import { TokenStorageService } from './../../service/config/token-storage.servic
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { SharedService } from '../../shared/shared.service';
-import { UserInscriptionComponent } from '../user/user-inscription.component';
 import { AuthentificationComponent } from '../auth/authentification.component';
 import { Subscription } from 'rxjs';
 
