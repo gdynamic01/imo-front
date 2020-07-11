@@ -48,6 +48,18 @@ export class Mobile extends Offre {
 
 export class Immobilier extends Offre {
   surface: number;
+  sanitaire: string;
+  type_de_bien: TypeBienImmobilierEnum;
+  parking: String;
+  nombre_pieces: number;
+  piscine: boolean;
+  electricite: boolean;
+  eau: boolean;
+  service_menage: boolean;
+  autre_service: String;
+  zone_geographique: String
+  
+
 }
 
 export class OffreGlobal {
@@ -64,16 +76,28 @@ export enum TypeMobileMoteurEnum {
 }
 
 export enum TypeOffreEnum {
-  Voiture,
-  Velo,
-  Moto,
-  Appartement,
-  Maison,
-  Terrain
+Immobilier,
+Mobile
 }
 
 export enum TypeServiceEnum {
   Location,
   Vente
+}
+
+export enum TypeBienImmobilierEnum {
+  Appartement,
+  Studio,
+  Villa,
+  Maison,
+  Salle,
+  Terrain
+
+
+}
+
+export enum TypeSanitaireEnum {
+  Exterieur,
+  Interieur
 }
 

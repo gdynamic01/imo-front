@@ -1,9 +1,10 @@
+import { Immobilier } from './../../models/offre/offre';
 import { SharedService } from './../../shared/shared.service';
 import { OffreService } from './../../service/apiImpl/offreimpl/offre.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { OffreGlobal, Offre, Immobilier, Mobile, TypeOffreEnum, TypeServiceEnum, TypeMobileMoteurEnum } from '../../models/offre/offre';
+import { OffreGlobal, Offre, Mobile, TypeOffreEnum, TypeServiceEnum, TypeMobileMoteurEnum, TypeSanitaireEnum, TypeBienImmobilierEnum } from '../../models/offre/offre';
 import { EnumToArrayPipe } from '../../pipes/pipe-transformers-enum';
 import { TYPE_OFFRE_IMMOBILIER, TYPE_OFFRE_MOBILE } from '../../constantes/constantes-datas';
 
@@ -22,6 +23,8 @@ export class OffreComponent implements OnInit {
   typeOffreEnum = TypeOffreEnum;
   typeServiceEnum = TypeServiceEnum;
   typeMobileMoteurEnum = TypeMobileMoteurEnum;
+  typeSanitaireEnum=TypeSanitaireEnum;
+  typeDeBienEnum=TypeBienImmobilierEnum;
   isImmobilier: boolean;
   isMobilie: boolean;
   isVelo: boolean;
@@ -57,10 +60,23 @@ export class OffreComponent implements OnInit {
           codePostal: [''],
           ville: ['', Validators.required],
           pays: ['', Validators.required]
+
         })
       }),
       immobilier: this.fb.group ({
-        surface: ['', Validators.required]
+        surface: ['', Validators.required],
+        parking: [''],
+        serviceMenage: [''],
+        eau: [''],
+        electricite: [''],
+        zoneGeographique: ['', Validators.required],
+        piscine: [''],
+        sanitaire: [''],
+        typeDeBien: ['', Validators.required],
+        nombrePieces: ['', Validators.required],
+        autreService: [''],
+
+
       }),
       mobile: this.fb.group({
         dateMiseEnCircualtion: ['', Validators.required],
@@ -75,15 +91,16 @@ export class OffreComponent implements OnInit {
    * @param event the typeOffre value
    */
   selectChange(value: any) {
+   // console.log(value);
     switch (value) {
-      case (TYPE_OFFRE_IMMOBILIER.find(e => value === e)):
+      case 'Immobilier':
         this.isImmobilier = true;
         this.isMobilie = false;
         this.valueDefaultMobile = 'none';
         this.valueDefaultImmo = '';
         this.updateFieldsManadatoryForm();
         break;
-      case (TYPE_OFFRE_MOBILE.find(e => value === e)):
+      case 'Mobile':
         this.isImmobilier = false;
         this.isMobilie = true;
         this.isVelo = value === 'Velo';
@@ -100,7 +117,19 @@ export class OffreComponent implements OnInit {
   updateFieldsManadatoryForm() {
     // immobilier
     this.offreForm.get('immobilier').patchValue({
-      surface: this.valueDefaultImmo
+      surface: this.valueDefaultImmo,
+      piscine: this.valueDefaultImmo,
+      zone_geographique: this.valueDefaultImmo,
+      service_menage: this.valueDefaultImmo,
+      parking: this.valueDefaultImmo,
+      electricite: this.valueDefaultImmo,
+      eau: this.valueDefaultImmo,
+      type_de_bien: this.valueDefaultImmo,
+      nombre_pieces: this.valueDefaultImmo,
+      sanitaire: this.valueDefaultImmo
+
+      
+
     });
     // mobile
     this.offreForm.get('mobile').patchValue({
@@ -149,6 +178,13 @@ export class OffreComponent implements OnInit {
     this.immobilier.typeServiceOffre = object.offre.typeServiceOffre.toUpperCase();
     this.immobilier.adresse.ville = object.offre.adresse.ville;
     this.immobilier.adresse.pays = object.offre.adresse.pays;
+    this.immobilier.sanitaire = object.immobilier.sanitaire;
+    this.immobilier.zone_geographique = object.immobilier.zone_geographique;
+    this.immobilier.service_menage= object.immobilier.service_menage;
+    this.immobilier.piscine = object.immmobilier.piscine;
+    this.immobilier.eau = object.immobilier.eau;
+    this.immobilier.electricite = object.immobilier.electricite;
+    this.immobilier.nombre_pieces = object.immobilier.nombrePieces
   }
 
   createMobile(object: any) {

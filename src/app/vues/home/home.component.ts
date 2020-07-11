@@ -1,6 +1,7 @@
+import { Immobilier } from './../../models/offre/offre';
 import { ImoResponse } from './../../models/response/imo-response';
 import { PipeTransformers } from '../../pipes/pipe-transformers';
-import { Offre, TypeOffreEnum, TypeServiceEnum } from '../../models/offre/offre';
+import { Offre, TypeOffreEnum, TypeServiceEnum, TypeBienImmobilierEnum } from '../../models/offre/offre';
 import { SharedService } from './../../shared/shared.service';
 import { TYPE_SERVICE } from '../../constantes/constantes-datas';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
@@ -63,7 +64,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         'createAt': new Date('2019/12/14'),
         'description': 'une belle voiture',
         'prix':52,
-        'typeOffre':TypeOffreEnum.Voiture,
+        'typeOffre':TypeOffreEnum.Mobile,
         'updateAt': new Date('2019/12/14'),
         'typeAnnonce': 'Particulier',
         'typeServiceOffre': TypeServiceEnum.Vente,
@@ -83,7 +84,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         'createAt': new Date('2019/12/06'),
         'description': 'une belle voiture',
         'prix':200,
-        'typeOffre':TypeOffreEnum.Voiture,
+        'typeOffre':TypeOffreEnum.Mobile,
         'updateAt': new Date('2019/12/06'),
         'typeAnnonce': 'Professionnel',
         'typeServiceOffre': TypeServiceEnum.Location,
@@ -103,7 +104,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         'createAt': new Date('2019/12/05'),
         'description': 'une maison neuve',
         'prix':52,
-        'typeOffre':TypeOffreEnum.Maison,
+        'typeOffre':TypeOffreEnum.Immobilier,
         'updateAt': new Date('2019/12/05'),
         'typeAnnonce': 'Particulier',
         'typeServiceOffre': TypeServiceEnum.Vente,
@@ -123,7 +124,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         'createAt': new Date('2019/12/04'),
         'description': 'vente velo',
         'prix':52,
-        'typeOffre':TypeOffreEnum.Velo,
+        'typeOffre':TypeOffreEnum.Mobile,
         'updateAt': new Date('2019/12/04'),
         'typeAnnonce': 'Professionnel',
         'typeServiceOffre': TypeServiceEnum.Location,
