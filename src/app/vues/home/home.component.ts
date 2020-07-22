@@ -58,12 +58,14 @@ export class HomeComponent implements OnInit {
         createAt: new Date('2019/12/14'),
         description: 'une belle voiture',
         prix: 52,
-        typeOffre: TypeOffreEnum.Voiture,
+        typeOffre: TypeOffreEnum.Mobile,
         updateAt: new Date('2019/12/14'),
         typeAnnonce: 'Particulier',
         typeServiceOffre: TypeServiceEnum.Vente,
         photosOffres: ['url.png', 'url2.png'],
-        symboleMonetaire: 'EUR'
+        symboleMonetaire: 'EUR',
+        dateDebut: new Date(),
+        dateFin: new Date()
       },
       {
         titre: 'annnoce 2',
@@ -78,12 +80,14 @@ export class HomeComponent implements OnInit {
         createAt: new Date('2019/12/06'),
         description: 'une belle voiture',
         prix: 200,
-        typeOffre: TypeOffreEnum.Voiture,
+        typeOffre: TypeOffreEnum.Mobile,
         updateAt: new Date('2019/12/06'),
         typeAnnonce: 'Professionnel',
         typeServiceOffre: TypeServiceEnum.Location,
         photosOffres: ['url.png', 'url2.png'],
-        symboleMonetaire: 'EUR'
+        symboleMonetaire: 'EUR',
+        dateDebut: new Date(),
+        dateFin: new Date()
       },
       {
         titre: 'annnoce 3',
@@ -98,12 +102,14 @@ export class HomeComponent implements OnInit {
         createAt: new Date('2019/12/05'),
         description: 'une maison neuve',
         prix: 52,
-        typeOffre: TypeOffreEnum.Maison,
+        typeOffre: TypeOffreEnum.Immobilier,
         updateAt: new Date('2019/12/05'),
         typeAnnonce: 'Particulier',
         typeServiceOffre: TypeServiceEnum.Vente,
         photosOffres: ['url.png', 'url2.png'],
-        symboleMonetaire: 'FR Gui'
+        symboleMonetaire: 'FR Gui',
+        dateDebut: new Date(),
+        dateFin: new Date()
       },
       {
         titre: 'annnoce 4',
@@ -118,12 +124,14 @@ export class HomeComponent implements OnInit {
         createAt: new Date('2019/12/04'),
         description: 'vente velo',
         prix: 52,
-        typeOffre: TypeOffreEnum.Velo,
+        typeOffre: TypeOffreEnum.Mobile,
         updateAt: new Date('2019/12/04'),
         typeAnnonce: 'Professionnel',
         typeServiceOffre: TypeServiceEnum.Location,
         photosOffres: ['url.png', 'url2.png'],
-        symboleMonetaire: 'FR Gui'
+        symboleMonetaire: 'FR Gui',
+        dateDebut: new Date(),
+        dateFin: new Date()
       }
     ];
     this.imoResponse.result = this.offres;

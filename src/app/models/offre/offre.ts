@@ -1,38 +1,19 @@
 import { Adresse } from '../adresse';
 
 export class Offre {
-  /** titre */
-  public titre: string;
-
-  /** Description de l'offre */
-  public description: string;
-
-  /** adresse de l'offre */
-  public adresse: Adresse = new Adresse();
-
-  /** Prix de l'offre */
-  public prix: number;
-
-  /** date publication */
-  public createAt: Date;
-
-  /** date mise a jour publication */
-  public updateAt: Date;
-
-  /** type d'offre */
-  public typeOffre: TypeOffreEnum;
-
-  /** type annonce [Particulier, Professionnel] */
-  public typeAnnonce: string;
-
-  /** type service offre [Location, Vente] */
-  public typeServiceOffre: TypeServiceEnum;
-
-  /** photos offres */
-  public photosOffres: Array<string>;
-
-  /** Symboles monetaires */
-  public symboleMonetaire: string;
+  titre: string;
+  description: string;
+  adresse: Adresse = new Adresse();
+  prix: number;
+  createAt: Date;
+  updateAt: Date;
+  typeOffre: TypeOffreEnum;
+  typeAnnonce: string;
+  typeServiceOffre: TypeServiceEnum;
+  photosOffres: Array<string>;
+  symboleMonetaire: string;
+  dateDebut: Date;
+  dateFin: Date;
 }
 
 export class Mobile extends Offre {
@@ -48,6 +29,16 @@ export class Mobile extends Offre {
 
 export class Immobilier extends Offre {
   surface: number;
+  typeDeBien: TypeBienImmobilierEnum;
+  nbrePieces: number;
+  piscine: boolean;
+  sanitaire: TypeSanitaireEnum;
+  eau: boolean;
+  autreService: string;
+  serviceMenage: boolean;
+  zoneGeographique: string;
+  parking: boolean;
+  electricite: boolean;
 }
 
 export class OffreGlobal {
@@ -64,16 +55,34 @@ export enum TypeMobileMoteurEnum {
 }
 
 export enum TypeOffreEnum {
-  Voiture,
-  Velo,
-  Moto,
+  Mobile,
+  Immobilier
+}
+
+export enum TypeBienImmobilierEnum {
   Appartement,
   Maison,
+  Villa,
+  Studio,
+  Immeuble,
+  Bureau,
+  Salle,
   Terrain
+}
+
+export enum TypeBienMobileEnum {
+  Voiture,
+  Velo,
+  Moto
 }
 
 export enum TypeServiceEnum {
   Location,
   Vente
+}
+
+export enum TypeSanitaireEnum {
+  Exterieur,
+  Interieur
 }
 

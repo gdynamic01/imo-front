@@ -20,7 +20,7 @@
                         <mat-label>Type offre *</mat-label>
                         <mat-select formControlName="typeOffre" (selectionChange)="selectChange($event.value)">
                           <mat-option *ngFor="let item of typeOffreEnum | enumToArray"
-                            [value]="item.name">
+                            [value]="item.name | uppercase">
                               {{item.name}}
                           </mat-option>
                         </mat-select>
@@ -29,12 +29,28 @@
                     <div class="input-field">
                       <mat-form-field>
                         <mat-label>Type service *</mat-label>
-                        <mat-select formControlName="typeServiceOffre">
+                        <mat-select formControlName="typeServiceOffre" (selectionChange)="selectService($event.value)">
                           <mat-option *ngFor="let item of typeServiceEnum | enumToArray"
-                            [value]="item.name">
+                            [value]="item.name | uppercase">
                               {{item.name}}
                           </mat-option>
                         </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div *ngIf="isLocation" class="input-field">
+                      <mat-form-field>
+                        <mat-label>Debut de la location</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="dateDebut" [min]="minDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                       </mat-form-field>
+                    </div>
+                    <div *ngIf="isLocation" class="input-field">
+                      <mat-form-field>
+                        <mat-label>Fin de la location</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="dateFin" [min]="minDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
                       </mat-form-field>
                     </div>
                     <div class="input-field">
@@ -73,8 +89,81 @@
                 <div class="immobilier" formGroupName="immobilier" *ngIf="isImmobilier">
                   <div class="input-field">
                     <mat-form-field>
-                      <input matInput formControlName="surface" placeholder="surface en m²">
+                      <mat-label>Type de bien *</mat-label>
+                      <mat-select formControlName="bien" (selectionChange)="selectChangeBienImmo($event.value)">
+                        <mat-option *ngFor="let item of typeDeBienImmobilier | enumToArray"
+                          [value]="item.name | uppercase">
+                            {{item.name}}
+                        </mat-option>
+                      </mat-select>
                     </mat-form-field>
+                  </div>
+                  <div class="input-field">
+                    <mat-form-field>
+                      <input matInput formControlName="surface" placeholder="surface en m² *">
+                    </mat-form-field>
+                  </div>
+                  <div class="input-field">
+                    <mat-form-field>
+                      <input matInput formControlName="nombrePieces" placeholder="nombre de pieces *">
+                    </mat-form-field>
+                  </div>
+                  <div class="input-field">
+                    <mat-form-field>
+                      <mat-label>Sanitaire </mat-label>
+                      <mat-select formControlName="sanitaire">
+                        <mat-option *ngFor="let item of typeSanitaireEnum | enumToArray"
+                          [value]="item.name | uppercase">
+                            {{item.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="input-field" *ngIf="isTerrain">
+                    <mat-form-field>
+                      <input matInput formControlName="autreService" placeholder="Autre service">
+                    </mat-form-field>
+                  </div> 
+                  <div class="input-field">
+                    <mat-form-field>
+                      <mat-label>Zone géographique *</mat-label>
+                      <textarea matInput formControlName="zoneGeographique"></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="input-field">
+                    <label class="input-field">Electricité:</label>
+                    <mat-radio-group  name="electricite" formControlName="electricite" (change) ="onChange($event)">
+                      <mat-radio-button class="input-field" value="oui" >Oui</mat-radio-button>
+                      <mat-radio-button class="input-field" value="non"> Non</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div class="input-field">
+                    <label class="input-field">Eau:</label>
+                    <mat-radio-group  name="eau" formControlName="eau">
+                      <mat-radio-button class="input-field" value="oui">Oui</mat-radio-button>
+                      <mat-radio-button class="input-field" value="non">Non</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div class="input-field">
+                    <label class="input-field">Piscine: </label>
+                    <mat-radio-group  name="piscine" formControlName="piscine">
+                      <mat-radio-button class="input-field" value="oui">Oui</mat-radio-button>
+                      <mat-radio-button class="input-field" value="non">Non</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div class="input-field" *ngIf="isTerrain">
+                    <label class="input-field">Service menage:</label>
+                    <mat-radio-group  name ="serviceMenage" formControlName="serviceMenage">
+                      <mat-radio-button class="input-field" value="oui">Oui</mat-radio-button>
+                      <mat-radio-button class="input-field" value="non">Non</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div class="input-field">
+                    <label class="input-field">Parking:</label>
+                    <mat-radio-group name="parking" formControlName="parking">
+                      <mat-radio-button class="input-field" value="oui">Oui</mat-radio-button>
+                      <mat-radio-button class="input-field" value="non">Non</mat-radio-button>
+                    </mat-radio-group>
                   </div>
                 </div>
                 <div class="mobile" formGroupName="mobile" *ngIf="isMobilie">
@@ -91,15 +180,10 @@
                         <mat-label>Type moteur *</mat-label>
                         <mat-select formControlName="typeMobileMoteur">
                           <mat-option *ngFor="let item of typeMobileMoteurEnum | enumToArray"
-                            [disabled]="isVelo && item.name !== 'Electrique'" [value]="item.name">
+                            [disabled]="isVelo && item.name !== 'Electrique'" [value]="item.name | uppercase">
                               {{item.name}}
                           </mat-option>
                         </mat-select>
-                      </mat-form-field>
-                    </div>
-                    <div class="input-field">
-                      <mat-form-field>
-                        <input matInput formControlName="model" placeholder="Model *">
                       </mat-form-field>
                     </div>
                 </div>
