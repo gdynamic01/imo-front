@@ -1,4 +1,4 @@
-import { catchError } from 'rxjs/operators';
+import { catchError, shareReplay } from 'rxjs/operators';
 import { API, httpOptions } from './../../../constantes/api-rest';
 import { ImoResponse } from './../../../models/response/imo-response';
 import { Observable, of } from 'rxjs';
@@ -17,7 +17,7 @@ export class OffreService implements IOffre<OffreGlobal, Offre> {
 
   createOffre(object: OffreGlobal): Observable<ImoResponse<OffreGlobal>> {
     const data = JSON.stringify(object);
-    return this.http.post<ImoResponse<OffreGlobal>>(API.offreCrate, data, httpOptions)
+    return this.http.post<ImoResponse<OffreGlobal>>(API.offreUri, data, httpOptions)
     .pipe(
       catchError (
         err => {
@@ -27,6 +27,6 @@ export class OffreService implements IOffre<OffreGlobal, Offre> {
   }
 
   getListOffre(): Observable<ImoResponse<Offre>> {
-    return of(null);
+    return this.http.get<ImoResponse<Offre>>(API.offreUri, httpOptions).pipe(shareReplay(1));
   }
 }

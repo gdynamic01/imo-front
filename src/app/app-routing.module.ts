@@ -1,3 +1,4 @@
+import { AuthGuardService as AuthGard } from './service/config/auth.guard.service';
 import { UserInscriptionComponent } from './vues/user/user-inscription.component';
 import { HomeComponent } from './vues/home/home.component';
 import { NgModule } from '@angular/core';
@@ -15,7 +16,7 @@ const routes: Routes = [
     path: 'confirmation',
     loadChildren: () => import('../app/vues/confirmation/confirmation.module').then(mod => mod.ConfirmationModule)
   },
-  { path: 'creation-offre', component: OffreComponent }
+  { path: 'creation-offre', component: OffreComponent, canActivate: [AuthGard] }
 ];
 
 @NgModule({

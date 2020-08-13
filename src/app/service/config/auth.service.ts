@@ -1,13 +1,15 @@
+import { Router } from '@angular/router';
 import { TokenStorageService } from './token-storage.service';
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from "@auth0/angular-jwt";
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
-    constructor(public jwtHelper: JwtHelperService, private tokenStorage: TokenStorageService) {}
+    constructor(public jwtHelper: JwtHelperService, private tokenStorage: TokenStorageService,
+                public router: Router) {}
 
     /**
      * @author Mamadou
@@ -16,11 +18,11 @@ export class AuthService {
      */
     public isAuthenticated(): boolean {
       const token = this.tokenStorage.getToken(); // recuperer le token
-      if(this.jwtHelper.isTokenExpired(token)) {
+      if (this.jwtHelper.isTokenExpired(token)) {
         this.tokenStorage.signOut();
-        return true;
+        return false;
       }
-      return false;
+      return true;
     }
 
     /**

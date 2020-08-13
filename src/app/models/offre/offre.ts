@@ -14,6 +14,7 @@ export class Offre {
   symboleMonetaire: string;
   dateDebut: Date;
   dateFin: Date;
+  nombreDeJour: number;
 }
 
 export class Mobile extends Offre {

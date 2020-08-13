@@ -1,4 +1,5 @@
 <div *ngIf="userName !== null && userName !== undefined" class="right menu-list">
+  <a class="depot-offre" routerLink="/creation-offre"><i class="material-icons">add_circle</i><span>D&eacute;poser une annonce</span></a>
   <a routerLink="accueil"><i class="material-icons">home</i><span>Accueil</span></a>
   <button mat-button [matMenuTriggerFor]="beforeMenu">
     <i class="material-icons">account_circle</i>
@@ -10,8 +11,8 @@
   </mat-menu>
 </div>
 <div *ngIf="!isActifButton" class="menu-list">
-  <a class="depot-offre"><i class="material-icons">add_circle</i><span>D&eacute;poser une annonce</span></a>
+  <a class="depot-offre" routerLink="/creation-offre"><i class="material-icons">add_circle</i><span>D&eacute;poser une annonce</span></a>
   <a routerLink="accueil"><i class="material-icons">home</i><span>Accueil</span></a>
   <a routerLink="inscription"><i class="material-icons">person_add</i><span>Inscription</span></a>
-  <a (click)="openDialog('Auth')"><i class="material-icons">perm_identity</i><span>Connexion</span></a>
+  <a (click)="openDialog()"><i class="material-icons">perm_identity</i><span>Connexion</span></a>
 </div>

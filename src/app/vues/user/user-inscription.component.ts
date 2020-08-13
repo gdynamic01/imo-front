@@ -25,9 +25,9 @@ export class UserInscriptionComponent implements OnInit {
   messageErreur: boolean;
   colors: string;
   
-  constructor(private userService: UtilisateurService,
-              private sharedService: SharedService, private router: Router, 
-              private fb: FormBuilder, private sharedCustomValidate: SharedCustomValidate
+  constructor(private userService: UtilisateurService, private errorsService: ErrorsFormGeneriquesService,
+              private sharedService: SharedService, private router: Router, private fb: FormBuilder, 
+              private sharedCustomValidate: SharedCustomValidate
              ) {
      this.utilisateur = new User();
      this.professionnel = new UserMoral();
@@ -36,8 +36,26 @@ export class UserInscriptionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.errorsService.isMessageErreur.next(false);
+    this.errorsService.colorsErreur.next(null);
+    this.errorsService.messageResponse.next(null);
     this.initForm();
     this.updateFieldsManadatoryForm('none');
+    this.errorsService.isMessageErreur.subscribe(
+      value => {
+        this.messageErreur = value;
+      }
+    );
+    this.errorsService.colorsErreur.subscribe(
+      value => {
+        this.colors = value;
+      }
+    );
+    this.errorsService.messageResponse.subscribe(
+      value => {
+        this.message = value;
+      }
+    );
   }
 
   initForm() {
@@ -131,13 +149,17 @@ export class UserInscriptionComponent implements OnInit {
       this.professionnel.init(this.utilisateur);
         this.userService.creationProfessionnel(this.professionnel).subscribe(
           data => {
-            this.traitementErreur(data.statut, data.messageResponse);
+            if (!this.errorsService.traitementErreur(data.statut, data.messageResponse)) {
+              this.sharedService.setConfirmationSubject(data.messageResponse);
+            }
           }
         );
     } else {
       this.userService.creationParticulier(this.utilisateur).subscribe(
         data => {
-          this.traitementErreur(data.statut, data.messageResponse);
+          if (!this.errorsService.traitementErreur(data.statut, data.messageResponse)) {
+            this.sharedService.setConfirmationSubject(data.messageResponse);
+          }
         }
       );
     }
@@ -170,26 +192,25 @@ export class UserInscriptionComponent implements OnInit {
    * @author Mamadou
    * @description set le message d'erreur renvoyer par le serveur et la couleur d'erreur
    */
-  alerteMessage() {
-    this.messageErreur = true;
-    this.colors = 'red';
-  }
-
+  // alerteMessage() {
+  //   this.messageErreur = true;
+  //   this.colors = 'red';
+  // }
  
-  /**
-   * @author Mamadou
-   * @param statut code erreur
-   * @param messageResponse message reponse serveur
-   * @description traitement erreur serveur
-   */
-  traitementErreur(statut: number, messageResponse: string) {
-    this.loading = false;
-    if ( statut === 400 || statut === 500) {
-      this.message = messageResponse;
-      this.alerteMessage();
-    } else {
-      this.sharedService.setConfirmationSubject(messageResponse);
-    }
-  }
+  // /**
+  //  * @author Mamadou
+  //  * @param statut code erreur
+  //  * @param messageResponse message reponse serveur
+  //  * @description traitement erreur serveur
+  //  */
+  // traitementErreur(statut: number, messageResponse: string) {
+  //   this.loading = false;
+  //   if ( statut === 400 || statut === 500) {
+  //     this.message = messageResponse;
+  //     this.alerteMessage();
+  //   } else {
+  //     this.sharedService.setConfirmationSubject(messageResponse);
+  //   }
+  // }
 
 }

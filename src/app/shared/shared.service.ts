@@ -3,8 +3,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 
-declare var $: any;
-
 @Injectable({
   providedIn: 'root'
 })
@@ -67,16 +65,5 @@ export class SharedService {
       this.userNameSubject.next(infoAll[1]);
       this.emailSubject.next(infoAll[2]);
     }
-  }
-
-  /**
-   * @author Mamadou
-   * @description retourne le nombre de jour entre 2 dates [Attention: si date == dateDuJour alors on retournera 1]
-   * @param date
-   * @returns nombre de jour
-   */
-  public convertDate(date: Date) {
-    const dateDuJour = new Date().getTime() / 86400000;
-    return Number(dateDuJour - date.getTime() / 86400000).toFixed(0);
   }
 }

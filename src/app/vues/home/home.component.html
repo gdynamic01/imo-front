@@ -55,9 +55,13 @@
         </mat-form-field>
       </div>
     </div>
+    <div *ngIf="messageErreur" id="message-error">
+      {{messageError}}
+    </div>
     <div class="card-offre the-last-child" *ngFor="let offre of imoResponse.result">
       <div class="photo">
-        <img [src]="offre.photosOffres[0]">
+        <img *ngIf="offre.photosOffres.length !== 0" [src]="offre.photosOffres[0]">
+        <i *ngIf="offre.photosOffres.length === 0" class="material-icons">insert_photo</i>
       </div>
       <div class="info-offres">
         <div class="titre">
@@ -74,7 +78,7 @@
             <span>{{offre.ville}}</span>
           </div>
           <div class="DateOffre">
-            <span>{{convertDate(offre.createAt)}}</span>
+            <span>{{convertDate(offre.nombreDeJour, offre.createAt)}}</span>
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { SharedPopinGeneriques } from './../../shared/shared-popin-generiques';
 import { Router } from '@angular/router';
 import { AuthService } from './../../service/config/auth.service';
 import { TokenStorageService } from './../../service/config/token-storage.service';
@@ -23,7 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private sharedService: SharedService, private dialog: MatDialog,
               private tokenStorage: TokenStorageService, private router: Router,
-              private authService: AuthService
+              private authService: AuthService, private sharedPopinGeneriques: SharedPopinGeneriques
              ) {}
 
   ngOnInit() {
@@ -42,17 +43,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  /**
-   * @author Mamadou
-   * @description Ouverture de la popin
-   * @param popin the value popin
-   */
-  openDialog(popin: string): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '30%';
-    dialogConfig.height = '76%';
-    this.dialog.open(AuthentificationComponent, dialogConfig);
+  openDialog(): void {
+    this.sharedPopinGeneriques.openDialog();
   }
 
   /**

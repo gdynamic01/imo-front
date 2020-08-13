@@ -1,4 +1,4 @@
-import { SharedService } from './../../shared/shared.service';
+import { SharedPopinGeneriques } from './../../shared/shared-popin-generiques';
 import { AuthService } from './auth.service';
 
 import { Injectable } from '@angular/core';
@@ -9,24 +9,27 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 })
 export class AuthGuardService implements CanActivate {
 
-    constructor(public authService: AuthService, private router: Router) {}
+    constructor(public authService: AuthService, private router: Router, 
+                private sharedPopinGeneriques: SharedPopinGeneriques) {}
 
     /**
      * @author Mamadou
      * @description gère les accès sur les differents routes (pages)
      * @param route
-     * @param state 
+     * @param state
      */
-    canActivate(
-                route: ActivatedRouteSnapshot, 
-                state: RouterStateSnapshot
-               ): boolean {
-        
-                if(!this.authService.isAuthenticated()){
-                    this.router.navigate['accueil'];
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+                if (!this.authService.isAuthenticated()) {
+                    switch (state.url) {
+                        case '/creation-offre':
+                            this.sharedPopinGeneriques.openDialog();
+                            break;
+                            default:
+                                this.router.navigate(['accueil']);
+                                break;
+                    }
                     return false;
-                } 
+                }
                 return true;
     }
-
 }

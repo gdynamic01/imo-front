@@ -42,11 +42,15 @@
       font-family: var(--main-font-family-arial);
     };
     .type-service {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 548;
+      position: relative;
+      top: -7px;
     };
     .type-annonce {
       font-size: 14px;
+      position: relative;
+      top: -4px;
     }
   };
   .card-offre {
@@ -54,6 +58,11 @@
     background: var(--main-color-white);
     .photo {
       width: 30%;
+      text-align: center;
+      font-size: 76px !important;
+      i {
+        color: var(--main-color-lightgray);
+      }
     };
     .info-offres {
       border-left: 1px solid var(--main-color-black-b);
@@ -64,7 +73,7 @@
       padding-left: 12px;
       padding-bottom: 11px;
       .titre, .type-service label {
-        font-size: 23px;
+        font-size: 20px;
         font-weight: 600;
       };
       .prix {
