@@ -21,13 +21,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isActifButton = false;
   subscriptions: Subscription[] = [];
   userName: string;
+  itemSelected: string = null;
 
-  constructor(private sharedService: SharedService, private dialog: MatDialog,
-              private tokenStorage: TokenStorageService, private router: Router,
-              private authService: AuthService, private sharedPopinGeneriques: SharedPopinGeneriques
+  constructor(private sharedService: SharedService, private authService: AuthService,
+              private tokenStorage: TokenStorageService, private router: Router
              ) {}
 
   ngOnInit() {
+    this.sharedService.itemSelectedSubject.subscribe(
+      value => {
+        this.itemSelected = value;
+      }
+    );
     this.subscriptions.push(this.sharedService.isActifElement.subscribe(
       value => {
         this.isActifButton = value;
@@ -43,8 +48,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-  openDialog(): void {
-    this.sharedPopinGeneriques.openDialog();
+  redirection(uri: string) {
+    if (this.userName === null && uri === 'creation-offre') {
+      uri = 'connexion';
+      this.sharedService.itemSelectedSubject.next('connexion');
+    } else if (this.userName !== null && uri === 'creation-offre') {
+      this.sharedService.itemSelectedSubject.next('creation-offre');
+    }
+    this.sharedService.redirection(uri);
   }
 
   /**

@@ -9,18 +9,25 @@
     position: relative;
     top: -1px !important;
   };
-  button .material-icons, button span {
+  button .material-icons {
     color: var(--main-color-white) !important;
   };
+  button span {
+    color: var(--main-color-lightslategray);
+  };
+  .item-color {
+    color: var(--main-color-white) !important;
+  }
   a {
     cursor: pointer;
     padding: 5px 15px 5px 15px;
     font-size: medium;
-    color: var(--main-color-white);
+    color: var(--main-color-lightslategray);
     text-decoration: none;
   };
   a:hover {
     background: var(--main-color-black-radial-gradient);
+    color: white;
   };
   .material-icons {
     position: var(--main-material-icons-position);

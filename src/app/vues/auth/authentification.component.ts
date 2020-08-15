@@ -1,10 +1,9 @@
+import { Router } from '@angular/router';
+import { ErrorsFormGeneriquesService } from './../../errors/errors-form-generiques.service';
 import { SharedCustomValidate } from './../../shared/shared-custom-validate';
-import { UserInscriptionComponent } from './../user/user-inscription.component';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from './../../service/config/auth.service';
 import { TokenStorageService } from '../../service/config/token-storage.service';
 import { Component, OnInit, Optional } from '@angular/core';
-import { Router } from '@angular/router';
 import { User } from '../../models/users/user';
 import { SharedService } from '../../shared/shared.service';
 import { UtilisateurService } from '../../service/apiImpl/userimpl/utilisateur.service';
@@ -18,19 +17,32 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class AuthentificationComponent implements OnInit {
 
   user: User;
-  messageErreur = false;
-  colors: string; // parametre composant alerte-message
-  message: string; // parametre du composant alerte-message
+  messageErreur: boolean;
+  colors: string;
+  message: string;
   loading = false;
   authForm: FormGroup;
 
   constructor(private sharedService: SharedService, private userService: UtilisateurService,
               private tokenStorage: TokenStorageService, private authService: AuthService,
               private fb: FormBuilder, private sharedCustomValidate: SharedCustomValidate,
-              public dialogRef: MatDialogRef<AuthentificationComponent>
+              private errorsService: ErrorsFormGeneriquesService, private router: Router
              ) {}
 
   ngOnInit() {
+    this.sharedService.itemSelectedSubject.next('connexion');
+    this.errorsService.messageResponse.next(null);
+    this.errorsService.isMessageErreur.next(false);
+    this.errorsService.messageResponse.subscribe(
+      value => {
+        this.message = value;
+      }
+    );
+    this.errorsService.isMessageErreur.subscribe(
+      value => {
+        this.messageErreur = value;
+      }
+    );
     this.user = new User();
     this.initForm();
   }
@@ -61,38 +73,13 @@ export class AuthentificationComponent implements OnInit {
     const values = this.authForm.value;
     this.userService.authentification(values.email, values.password).subscribe(
       data => {
-        if (data.statut === 401) {
-          this.message = data.messageResponse;
-          this.alerteMessage();
-        } else {
+        if (!this.errorsService.traitementErreur(data.statut, data.messageResponse)) {
           this.tokenStorage.saveToken(data.token);
           this.sharedService.setIsActifElement(true);
           this.sharedService.setInfosUsers(this.authService.getInfoUser());
-          this.dialogRef.close();
+          this.router.navigate(['accueil']);
         }
       }
     );
   }
-
-  /**
-   * @author Mamadou
-   * @description set le message d'erreur renvoyer par le serveur et la couleur d'erreur
-   */
-  alerteMessage() {
-    this.messageErreur = true;
-    this.colors = 'red';
-  }
-
-  /**
-   * @author Mamadou
-   * @description Ouverture de la popin
-   * @param popin the type popin value
-   */
-  openDialog(popin: string): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '70%';
-  }
-
 }

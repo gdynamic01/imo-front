@@ -1,41 +1,62 @@
-<h2 mat-dialog-title class="logo">Loumo</h2>
-<mat-dialog-content class="bloc-form">
-  <div *ngIf="messageErreur" id="message-error">
-    <div class="col s12 m12 l12 xl12">
-      <app-alerte-message [messages]="message" [colors_msg]="colors"></app-alerte-message>
+<div class="container">
+  <div class="principal" fxFlex="40" fxFlex.md="40" fxFlex.sm="55" fxFlex.xs="98" fxLayout="column">
+    <div class="bloc-form">
+      <h2 class="title">Loumo</h2>
+      <div *ngIf="messageErreur" id="message-error">
+        <app-alerte-message [messages]="message" [colors_msg]="colors"></app-alerte-message>
+      </div>
+      <form [formGroup]="authForm">
+        <div class="input-field">
+          <mat-form-field>
+            <input matInput type="email" formControlName="email" placeholder="Email *">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="email.hasError('required') && email.touched">L'Email est obligatoire</span>
+            <span *ngIf="email.hasError('pattern')">L'Email n'est pas valide</span>
+            <span *ngIf="email.hasError('notExist')">Cet Email n'existe pas, veuillez-vous inscrire</span>
+          </mat-error>
+        </div>
+        <div class="input-field">
+          <mat-form-field>
+            <input matInput type="password" formControlName="password" placeholder="Mot de passe *">
+          </mat-form-field>
+          <mat-error>
+            <span *ngIf="password.hasError('required') && password.touched">Le mot de passe est obligatoire</span>
+          </mat-error>
+        </div>
+        <div class="mot-de-passe-oublie">
+          <a routerLink="" class="right">Mot de passe oublié</a>
+        </div>
+        <div class="btn-bloc">
+          <button [ngClass]="{'form-valid' : authForm.valid, 'form-invalid' : !authForm.valid}" mat-raised-button 
+            type="submit" [disabled]="!authForm.valid" (click)="onSubmit()">CONNEXION
+          </button>
+          <div class="separateur">
+            <span>OU</span>
+          </div>
+          <div class="inscription">
+            <a mat-dialog-close routerLink='/inscription'>Inscrivez-vous</a>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-  <form [formGroup]="authForm">
-    <div class="input-field">
-      <mat-form-field>
-        <input matInput type="email" formControlName="email" placeholder="Email *">
-      </mat-form-field>
-      <mat-error>
-        <span *ngIf="email.hasError('required') && email.touched">L'Email est obligatoire</span>
-        <span *ngIf="email.hasError('pattern')">L'Email n'est pas valide</span>
-        <span *ngIf="email.hasError('notExist')">Cet Email n'existe pas, veuillez-vous inscrire</span>
-      </mat-error>
-    </div>
-    <div class="input-field">
-      <mat-form-field>
-        <input matInput type="password" formControlName="password" placeholder="Mot de passe *">
-      </mat-form-field>
-      <mat-error>
-        <span *ngIf="password.hasError('required') && password.touched">Le mot de passe est obligatoire</span>
-      </mat-error>
-    </div>
-    <div class="mot-de-passe-oublie">
-      <a routerLink="" class="right">Mot de passe oublié</a>
-    </div>
-  </form>
+</div>
+
+
+
+
+
+<!-- <mat-dialog-content class="bloc-form">
+  
+  
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-  <button [ngClass]="{'form-valid' : authForm.valid, 'form-invalid' : !authForm.valid}" mat-raised-button 
-    type="submit" [disabled]="!authForm.valid" (click)="onSubmit()">CONNEXION</button>
+  
   <div class="separateur">
     <span>OU</span>
   </div>
   <div class="inscription">
     <a mat-dialog-close routerLink='/inscription'>Inscrivez-vous</a>
   </div>
-</mat-dialog-actions>
+</mat-dialog-actions> -->

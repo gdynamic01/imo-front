@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ErrorsFormGeneriquesService {
 
-  status: Array<string> = ['400', '404', '500'];
+  status: Array<string> = ['400', '404', '500', '401'];
   messageResponse: BehaviorSubject<string> = new BehaviorSubject(null);
   isMessageErreur: BehaviorSubject<boolean> = new BehaviorSubject(false);
   colorsErreur: BehaviorSubject<string> = new BehaviorSubject(null);
@@ -14,7 +14,7 @@ export class ErrorsFormGeneriquesService {
   constructor() { }
 
   traitementErreur(statut: number, message: string) {
-    if (status.includes(statut.toString())) {
+    if (this.status.includes(statut.toString())) {
       this.messageResponse.next(message);
       this.isMessageErreur.next(true);
       this.colorsErreur.next('red');

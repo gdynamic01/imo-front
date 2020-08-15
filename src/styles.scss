@@ -24,7 +24,10 @@
   --main-color-page-site:#e5e9ec;
   --main-color-red:red;
   --main-color-blue-a: #106cc8;
-  --main-color-lien-hypertext: #03a9f4;
+  --main-color-lightslategray: lightslategray;
+}
+.principal {
+  box-shadow: 0 0 8px #ccc;
 }
 .input-field mat-error {
   font-family: var(--main-font-family);
@@ -47,6 +50,7 @@
   font-family: var(--main-font-family);
   font-size: 20px;
   text-align: center;
+  margin-top: 32px;
 }
 .the-last-child:last-child {
   margin-bottom: 78px;

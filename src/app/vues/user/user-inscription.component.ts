@@ -29,6 +29,9 @@ export class UserInscriptionComponent implements OnInit {
               private sharedService: SharedService, private router: Router, private fb: FormBuilder, 
               private sharedCustomValidate: SharedCustomValidate
              ) {
+     this.messageErreur = false;
+     this.message = null;
+     this.colors = null;
      this.utilisateur = new User();
      this.professionnel = new UserMoral();
      this.utilisateur.adresse = new Adresse();
@@ -36,6 +39,7 @@ export class UserInscriptionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.sharedService.itemSelectedSubject.next('inscription');
     this.errorsService.isMessageErreur.next(false);
     this.errorsService.colorsErreur.next(null);
     this.errorsService.messageResponse.next(null);

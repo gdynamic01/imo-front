@@ -22,11 +22,12 @@ export class HomeComponent implements OnInit {
 
   imoResponse: ImoResponse<Offre> = new ImoResponse<Offre>();
 
-  constructor(private shared: SharedService, private datePipe: PipeTransformers,
+  constructor(private sharedService: SharedService, private datePipe: PipeTransformers,
               private offreService: OffreService, private errorsService: ErrorsFormGeneriquesService) {
   }
 
   ngOnInit() {
+    this.sharedService.itemSelectedSubject.next('accueil');
     this.errorsService.messageResponse.next(null);
     this.errorsService.messageResponse.subscribe(
       value => {

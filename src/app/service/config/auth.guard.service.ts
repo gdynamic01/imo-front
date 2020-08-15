@@ -9,7 +9,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 })
 export class AuthGuardService implements CanActivate {
 
-    constructor(public authService: AuthService, private router: Router, 
+    constructor(public authService: AuthService, private router: Router,
                 private sharedPopinGeneriques: SharedPopinGeneriques) {}
 
     /**
@@ -22,7 +22,7 @@ export class AuthGuardService implements CanActivate {
                 if (!this.authService.isAuthenticated()) {
                     switch (state.url) {
                         case '/creation-offre':
-                            this.sharedPopinGeneriques.openDialog();
+                            this.router.navigate(['connexion']);
                             break;
                             default:
                                 this.router.navigate(['accueil']);

@@ -22,6 +22,8 @@ export class SharedService {
   userNameSubject: BehaviorSubject<string> = new BehaviorSubject(null);
   emailSubject: BehaviorSubject<string> = new BehaviorSubject(null);
 
+  itemSelectedSubject: BehaviorSubject<string> = new BehaviorSubject(null);
+  
   constructor(private router: Router) {}
 
   /**
@@ -64,6 +66,29 @@ export class SharedService {
     if (infoAll !== null) {
       this.userNameSubject.next(infoAll[1]);
       this.emailSubject.next(infoAll[2]);
+    }
+  }
+
+  public setItemSelectedSubject(item: string) {
+    this.itemSelectedSubject.next(item);
+  }
+
+  public redirection(uri: string) {
+    switch (uri) {
+      case 'creation-offre':
+        this.router.navigate(['creation-offre']);
+        break;
+        case 'accueil':
+          this.router.navigate(['accueil']);
+          break;
+          case 'inscription':
+            this.router.navigate(['inscription']);
+            break;
+            case 'connexion':
+              this.router.navigate(['connexion']);
+              break;
+              default:
+                this.router.navigate(['accueil']);
     }
   }
 }
