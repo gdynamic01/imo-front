@@ -1,8 +1,8 @@
 <div class="mobile-header">
   <ul>
-    <li><a><i class="material-icons">add_circle</i>D&eacute;poser une annonce</a></li>
-    <li><a routerLink="accueil"><i class="material-icons">home</i><span>Accueil</span></a></li>
-    <li *ngIf="!isActifButton"><a (click)="openDialog('Insc')"><i class="material-icons">person_add</i><span>Inscription</span></a></li>
-    <li *ngIf="!isActifButton"><a (click)="openDialog('Auth')"><i class="material-icons">perm_identity</i><span>Connexion</span></a></li>
+    <li><a [ngClass]="{'item-color': itemSelected === 'creation-offre'}" (click)="redirection('creation-offre')"><i class="material-icons">add_circle</i>D&eacute;poser une annonce</a></li>
+    <li><a [ngClass]="{'item-color': itemSelected === 'accueil'}" (click)="redirection('accueil')"><i class="material-icons">home</i><span>Accueil</span></a></li>
+    <li *ngIf="!isActifButton"><a [ngClass]="{'item-color': itemSelected === 'inscription'}" (click)="redirection('inscription')"><i class="material-icons">person_add</i><span>Inscription</span></a></li>
+    <li *ngIf="!isActifButton"><a [ngClass]="{'item-color': itemSelected === 'connexion'}" (click)="redirection('connexion')"><i class="material-icons">perm_identity</i><span>Connexion</span></a></li>
   </ul>
 </div>

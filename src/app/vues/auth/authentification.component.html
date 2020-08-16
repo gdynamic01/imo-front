@@ -29,13 +29,10 @@
         </div>
         <div class="btn-bloc">
           <button [ngClass]="{'form-valid' : authForm.valid, 'form-invalid' : !authForm.valid}" mat-raised-button 
-            type="submit" [disabled]="!authForm.valid" (click)="onSubmit()">CONNEXION
+            type="submit" [disabled]="!authForm.valid" (click)="onSubmit()">Se connecter
           </button>
-          <div class="separateur">
-            <span>OU</span>
-          </div>
           <div class="inscription">
-            <a mat-dialog-close routerLink='/inscription'>Inscrivez-vous</a>
+            <span>Pour nous rejoindre: </span><a routerLink='/inscription'>Inscrivez-vous</a>
           </div>
         </div>
       </form>

@@ -28,11 +28,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
              ) {}
 
   ngOnInit() {
-    this.sharedService.itemSelectedSubject.subscribe(
+    this.subscriptions.push(this.sharedService.itemSelectedSubject.subscribe(
       value => {
         this.itemSelected = value;
       }
-    );
+    ));
     this.subscriptions.push(this.sharedService.isActifElement.subscribe(
       value => {
         this.isActifButton = value;
