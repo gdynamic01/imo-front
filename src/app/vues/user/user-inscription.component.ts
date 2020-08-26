@@ -24,7 +24,7 @@ export class UserInscriptionComponent implements OnInit {
   message: string;
   messageErreur: boolean;
   colors: string;
-  
+
   constructor(private userService: UtilisateurService, private errorsService: ErrorsFormGeneriquesService,
               private sharedService: SharedService, private router: Router, private fb: FormBuilder, 
               private sharedCustomValidate: SharedCustomValidate
@@ -129,11 +129,11 @@ export class UserInscriptionComponent implements OnInit {
       case 'ENTREPRISE':
         this.isProfessionnel = true;
         this.updateFieldsManadatoryForm('');
-      break;
+        break;
       case 'PARTICULIER':
         this.isProfessionnel = false;
         this.updateFieldsManadatoryForm('none');
-      break;
+        break;
     }
   }
 
@@ -151,7 +151,7 @@ export class UserInscriptionComponent implements OnInit {
     this.initDataUtilisateur(this.utilisateurForm.value);
     if (this.isProfessionnel) {
       this.professionnel.init(this.utilisateur);
-        this.userService.creationProfessionnel(this.professionnel).subscribe(
+      this.userService.creationProfessionnel(this.professionnel).subscribe(
           data => {
             if (!this.errorsService.traitementErreur(data.statut, data.messageResponse)) {
               this.sharedService.setConfirmationSubject(data.messageResponse);
@@ -172,13 +172,13 @@ export class UserInscriptionComponent implements OnInit {
   initDataUtilisateur(object: any) {
     this.setUser(object);
     if (this.isProfessionnel) {
-      this.utilisateur.roles.push('USER_MORAL');
+      this.utilisateur.roles.push('ROLE_USER_MORAL');
       this.professionnel.init(this.utilisateur);
       this.professionnel.raisonSocial = object.userMoral.raisonSocial;
       this.professionnel.siret = object.userMoral.siret;
       this.professionnel.kbis = object.userMoral.kbis;
     } else {
-      this.utilisateur.roles.push('USER_PHYSIQUE');
+      this.utilisateur.roles.push('ROLE_USER_PHYSIQUE');
       this.professionnel = null;
     }
   }
