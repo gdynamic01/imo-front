@@ -27,6 +27,6 @@ export class OffreService implements IOffre<OffreGlobal, Offre> {
   }
 
   getListOffre(): Observable<ImoResponse<Offre>> {
-    return this.http.get<ImoResponse<Offre>>(API.offreUri, httpOptions).pipe(shareReplay(1));
+    return this.http.get<ImoResponse<Offre>>(API.getOffres, httpOptions).pipe(shareReplay(1));
   }
 }

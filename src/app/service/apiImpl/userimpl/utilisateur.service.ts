@@ -1,3 +1,4 @@
+import { httpOptions } from './../../../constantes/api-rest';
 import { UserMoral } from './../../../models/users/user';
 import { SharedService } from '../../../shared/shared.service';
 import { User } from '../../../models/users/user';
@@ -29,7 +30,7 @@ export class UtilisateurService implements IUser<UserMoral, User> {
    */
   creationProfessionnel(object: UserMoral): Observable<ImoResponse<UserMoral>> {
     const data = JSON.stringify(object);
-    return this.http.post<ImoResponse<UserMoral>>(API.profInscription, data, this.sharedService.getHeadersConfig())
+    return this.http.post<ImoResponse<UserMoral>>(API.profInscription, data, httpOptions)
                .pipe(
                   catchError (
                     err => {
@@ -46,7 +47,7 @@ export class UtilisateurService implements IUser<UserMoral, User> {
    */
   creationParticulier(object: User): Observable<ImoResponse<User>> {
     const data = JSON.stringify(object);
-    return this.http.post<ImoResponse<User>>(API.parInscription, data, this.sharedService.getHeadersConfig())
+    return this.http.post<ImoResponse<User>>(API.parInscription, data, httpOptions)
                .pipe(
                  catchError (
                    err => {
@@ -63,7 +64,7 @@ export class UtilisateurService implements IUser<UserMoral, User> {
    */
   authentification(email: string, password: string): Observable<TokenResponse> {
     const paramUri = email + '/' + password;
-    return this.http.get<TokenResponse>(API.auth + paramUri, this.sharedService.getHeadersConfig())
+    return this.http.get<TokenResponse>(API.auth + paramUri, httpOptions)
                .pipe(
                   catchError (
                     err => {
@@ -77,6 +78,6 @@ export class UtilisateurService implements IUser<UserMoral, User> {
    * @param email the value email
    */
   getEmail(email: string): Observable<ImoResponse<string>> {
-    return this.http.get<ImoResponse<string>>(API.checkEmail + email, this.sharedService.getHeadersConfig());
+    return this.http.get<ImoResponse<string>>(API.checkEmail + email, httpOptions);
   }
 }

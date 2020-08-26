@@ -23,21 +23,8 @@ export class SharedService {
   emailSubject: BehaviorSubject<string> = new BehaviorSubject(null);
 
   itemSelectedSubject: BehaviorSubject<string> = new BehaviorSubject(null);
-  
-  constructor(private router: Router) {}
 
-  /**
-   * @author Mamadou
-   * @description config du header pour les requetes http
-   * @returns header
-   */
-  public getHeadersConfig() {
-    const httpOptions = {
-      headers: ({'Content-Type': 'application/json; charset=utf-8', Accept: 'application/json'}),
-      withCredentials: true
-    };
-    return httpOptions;
-  }
+  constructor(private router: Router) {}
 
   /**
    * @author Mamadou

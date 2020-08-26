@@ -1,3 +1,4 @@
+import { PipeTransformers } from './../../pipes/pipe-transformers';
 import { TypeBienImmobilierEnum, TypeSanitaireEnum } from './../../models/offre/offre';
 import { SharedService } from './../../shared/shared.service';
 import { OffreService } from './../../service/apiImpl/offreimpl/offre.service';
@@ -41,7 +42,8 @@ export class OffreComponent implements OnInit {
   minDate = new Date();
 
   constructor(private fb: FormBuilder, private enumToArrays: EnumToArrayPipe,
-              private offreService: OffreService, private sharedService: SharedService) {
+              private offreService: OffreService, private sharedService: SharedService,
+              private dateFormat: PipeTransformers) {
                 this.isVente = false;
                 this.isTerrain = false;
                 this.isLocation = false;
@@ -78,8 +80,8 @@ export class OffreComponent implements OnInit {
           ville: ['', {validators: Validators.required}],
           pays: ['', {validators: Validators.required}]
         }),
-        dateDebut: [new Date(), Validators.required],
-        dateFin: [new Date(), Validators.required]
+        dateDebut: [this.dateFormat.transform(new Date(), 'yyyy-MM-dd'), Validators.required],
+        dateFin: [this.dateFormat.transform(new Date(), 'yyyy-MM-dd'), Validators.required]
       }),
       immobilier: this.fb.group ({
         bien: ['', {validators: Validators.required}],
@@ -290,5 +292,4 @@ export class OffreComponent implements OnInit {
   get dateMiseEnCircualtion() {
     return this.mobile.get('dateMiseEnCircualtion');
   }
-
 }
