@@ -26,7 +26,7 @@ export class UserInscriptionComponent implements OnInit {
   colors: string;
 
   constructor(private userService: UtilisateurService, private errorsService: ErrorsFormGeneriquesService,
-              private sharedService: SharedService, private router: Router, private fb: FormBuilder, 
+              private sharedService: SharedService, private router: Router, private fb: FormBuilder,
               private sharedCustomValidate: SharedCustomValidate
              ) {
      this.messageErreur = false;
@@ -66,7 +66,7 @@ export class UserInscriptionComponent implements OnInit {
     this.utilisateurForm = this.fb.group({
       user: this.fb.group({
         typeUtilisateur: ['PARTICULIER'],
-        email: ['', 
+        email: ['',
           {
             validators: [Validators.required, Validators.pattern(this.sharedCustomValidate.emailExReg)],
             asyncValidators: this.sharedCustomValidate.checkMailExist()
@@ -75,7 +75,8 @@ export class UserInscriptionComponent implements OnInit {
         passwords: this.fb.group({
           password: ['', Validators.required],
           confirmPassword: ['', Validators.required],
-        },{
+        },
+        {
           asyncValidators: this.sharedCustomValidate.passwordValidate()
         }),
         adresse: this.fb.group({
@@ -125,7 +126,7 @@ export class UserInscriptionComponent implements OnInit {
   }
 
   onSelect(event: MatRadioChange) {
-    switch(event.value) {
+    switch (event.value) {
       case 'ENTREPRISE':
         this.isProfessionnel = true;
         this.updateFieldsManadatoryForm('');
@@ -191,30 +192,4 @@ export class UserInscriptionComponent implements OnInit {
     this.utilisateur.confirmPassword = object.user.passwords.confirmPassword;
     this.utilisateur.typeUtilisateur = object.user.typeUtilisateur;
   }
-
-  /**
-   * @author Mamadou
-   * @description set le message d'erreur renvoyer par le serveur et la couleur d'erreur
-   */
-  // alerteMessage() {
-  //   this.messageErreur = true;
-  //   this.colors = 'red';
-  // }
- 
-  // /**
-  //  * @author Mamadou
-  //  * @param statut code erreur
-  //  * @param messageResponse message reponse serveur
-  //  * @description traitement erreur serveur
-  //  */
-  // traitementErreur(statut: number, messageResponse: string) {
-  //   this.loading = false;
-  //   if ( statut === 400 || statut === 500) {
-  //     this.message = messageResponse;
-  //     this.alerteMessage();
-  //   } else {
-  //     this.sharedService.setConfirmationSubject(messageResponse);
-  //   }
-  // }
-
 }

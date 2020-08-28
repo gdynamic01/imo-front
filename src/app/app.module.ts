@@ -22,6 +22,7 @@ import { MenuResponsiveComponent } from './vues/menu-responsive/menu-responsive.
 import { OffreComponent } from './vues/offre/offre.component';
 import { EnumToArrayPipe } from './pipes/pipe-transformers-enum';
 import { PipeTransformers } from './pipes/pipe-transformers';
+import { AuthentificationModule } from './vues/auth/authentification.module';
 
 registerLocaleData(localeFr, 'fr'); // initialisation format date en français (A changer pour les autres formats)
 
@@ -32,16 +33,12 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
     HeaderComponent,
     UserInscriptionComponent,
     AlerteMessageComponent,
-    AuthentificationComponent,
     MenuResponsiveComponent,
     OffreComponent,
     EnumToArrayPipe,
     PipeTransformers
   ],
-  entryComponents: [
-    UserInscriptionComponent,
-    AuthentificationComponent
-  ],
+  entryComponents: [],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -51,6 +48,7 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
     HttpClientModule,
     ConfirmationModule,
     MaterialModule,
+    AuthentificationModule,
     TranslateModule.forRoot()
   ],
   exports: [EnumToArrayPipe, PipeTransformers],

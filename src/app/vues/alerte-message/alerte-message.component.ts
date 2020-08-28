@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class AlerteMessageComponent implements OnInit {
 
   @Input() messages: string;
-  @Input() colors_msg: string;
+  @Input() colorsMsg: string;
 
   constructor() { }
 

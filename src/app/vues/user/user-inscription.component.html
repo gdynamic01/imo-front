@@ -2,7 +2,7 @@
   <div class="principal" fxFlex="60" fxFlex.md="70" fxFlex.sm="80" fxFlex.xs="98" fxLayout="column">
     <div class="bloc-form">
       <div *ngIf="messageErreur" id="message-error">
-        <app-alerte-message [messages]="message" [colors_msg]="colors"></app-alerte-message>
+        <app-alerte-message [messages]="message" [colorsMsg]="colors"></app-alerte-message>
       </div>
       <h2 class="title">Création compte</h2>
       <form [formGroup]="utilisateurForm">
