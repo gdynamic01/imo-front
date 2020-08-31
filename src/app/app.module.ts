@@ -11,18 +11,16 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './vues/home/home.component';
 import { APP_BASE_HREF, registerLocaleData } from '@angular/common';
 import { HeaderComponent } from './vues/header/header.component';
-import { UserInscriptionComponent } from './vues/user/user-inscription.component';
 import { AlerteMessageComponent } from './vues/alerte-message/alerte-message.component';
 import { ConfirmationModule } from './vues/confirmation/confirmation.module';
 import { MaterialModule } from './material.module';
-import { AuthentificationComponent } from './vues/auth/authentification.component';
 import { InterceptorService } from './service/config/interceptor.service';
 import localeFr from '@angular/common/locales/fr';
 import { MenuResponsiveComponent } from './vues/menu-responsive/menu-responsive.component';
-import { OffreComponent } from './vues/offre/offre.component';
-import { EnumToArrayPipe } from './pipes/pipe-transformers-enum';
 import { PipeTransformers } from './pipes/pipe-transformers';
 import { AuthentificationModule } from './vues/auth/authentification.module';
+import { OffreModule } from './vues/offre/offre.module';
+import { UserInscriptionModule } from './vues/user/user-inscription.module';
 
 registerLocaleData(localeFr, 'fr'); // initialisation format date en français (A changer pour les autres formats)
 
@@ -31,11 +29,8 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    UserInscriptionComponent,
     AlerteMessageComponent,
     MenuResponsiveComponent,
-    OffreComponent,
-    EnumToArrayPipe,
     PipeTransformers
   ],
   entryComponents: [],
@@ -49,9 +44,11 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
     ConfirmationModule,
     MaterialModule,
     AuthentificationModule,
+    OffreModule,
+    UserInscriptionModule,
     TranslateModule.forRoot()
   ],
-  exports: [EnumToArrayPipe, PipeTransformers],
+  exports: [PipeTransformers],
   providers: [
      {provide: APP_BASE_HREF, useValue: ''},
      {
@@ -61,7 +58,6 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
      },
      { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
      JwtHelperService,
-     EnumToArrayPipe,
      PipeTransformers
     ],
   bootstrap: [AppComponent],

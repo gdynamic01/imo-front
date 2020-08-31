@@ -1,0 +1,26 @@
+import { EnumToArrayPipe } from './../../pipes/pipe-transformers-enum';
+import { OffreComponent } from './offre.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MaterialModule } from './../../material.module';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { OffreRoutingModule } from './offre-routing.module';
+
+
+@NgModule({
+  declarations: [OffreComponent, EnumToArrayPipe],
+  imports: [
+    CommonModule,
+    OffreRoutingModule,
+    OffreRoutingModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule
+  ],
+  providers: [
+    { provide: EnumToArrayPipe }
+   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+})
+export class OffreModule { }

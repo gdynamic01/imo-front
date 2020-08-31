@@ -6,19 +6,27 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { MatSidenavModule } from '@angular/material';
-import { OffreComponent } from './vues/offre/offre.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
   { path: 'accueil', component: HomeComponent },
-  { path: 'inscription', component: UserInscriptionComponent },
+  {
+    path: 'inscription',
+    loadChildren: () => import('../app/vues/user/user-inscription.module').then(mod => mod.UserInscriptionModule)
+  },
   {
     path: 'confirmation',
     loadChildren: () => import('../app/vues/confirmation/confirmation.module').then(mod => mod.ConfirmationModule)
   },
-  { path: 'creation-offre', component: OffreComponent, canActivate: [AuthGard] },
-  { path: 'connexion', component: AuthentificationComponent }
+  {
+    path: 'creation-offre',
+    loadChildren: () => import('../app/vues/offre/offre.module').then(mod => mod.OffreModule)
+  },
+  {
+    path: 'connexion',
+    loadChildren: () => import('../app/vues/auth/authentification.module').then(mod => mod.AuthentificationModule)
+  }
 ];
 
 @NgModule({
