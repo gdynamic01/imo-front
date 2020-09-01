@@ -59,7 +59,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * @author Mamadou
    * @description deconnecte l'utilisateur
    */
   deconnexion() {

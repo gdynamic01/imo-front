@@ -17,7 +17,7 @@
   };
   .item-color {
     color: var(--main-color-white) !important;
-  }
+  };
   a {
     cursor: pointer;
     padding: 5px 15px 5px 15px;
@@ -33,9 +33,9 @@
     position: var(--main-material-icons-position);
     top: var(--main-material-icons-top);
     left: var(--main-material-icons-left);
-  }
+  };
   .depot-offre {
-    border: 1px solid var(--main-color-lightgray);
+    border: 1px solid var(--main-color-lightslategray);
     border-radius: 16px;
     border-width: 2px;
     margin-right: 105px;

@@ -80,18 +80,27 @@
           <div class="adresse" formGroupName="adresse">
             <div class="input-field">
               <mat-form-field>
-                <input matInput formControlName="numeroRue" placeholder="Numero voie">
+                <input matInput formControlName="numeroRue" placeholder="Numero voie {{isAdresseObligatoire ? '*' : ''}}">
               </mat-form-field>
+              <mat-error>
+                <span *ngIf="adresse.get('numeroRue').hasError('required') && adresse.get('numeroRue').touched">Le numero de rue est obligatoire</span>
+              </mat-error>
             </div>
             <div class="input-field">
               <mat-form-field>
-                <input matInput formControlName="libelleRue" placeholder="Nom voie">
+                <input matInput formControlName="libelleRue" placeholder="Nom voie {{isAdresseObligatoire ? '*' : ''}}">
               </mat-form-field>
+              <mat-error>
+                <span *ngIf="adresse.get('libelleRue').hasError('required') && adresse.get('libelleRue').touched">La rue est obligatoire</span>
+              </mat-error>
             </div>
             <div class="input-field">
               <mat-form-field>
-                <input matInput formControlName="codePostal" placeholder="Code postal">
+                <input matInput formControlName="codePostal" placeholder="Code postal {{isAdresseObligatoire ? '*' : ''}}">
               </mat-form-field>
+              <mat-error>
+                <span *ngIf="adresse.get('codePostal').hasError('required') && adresse.get('codePostal').touched">Le code postal est obligatoire</span>
+              </mat-error>
             </div>
             <div class="input-field">
               <mat-form-field>
@@ -103,7 +112,7 @@
             </div>
             <div class="input-field">
               <mat-form-field>
-                <input matInput formControlName="pays" placeholder="Pays *">
+                <input matInput formControlName="pays" placeholder="Pays *" (keyup)="onKey($event.target.value)">
               </mat-form-field>
               <mat-error>
                 <span *ngIf="adresse.get('pays').hasError('required') && adresse.get('pays').touched">Le pays est obligatoire</span>

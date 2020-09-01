@@ -1,11 +1,12 @@
+import { PAYS_AVEC_ADRESSE_COMPLETE } from './../../constantes/constantes-datas';
 import { Router } from '@angular/router';
 import { SharedCustomValidate } from './../../shared/shared-custom-validate';
 import { UtilisateurService } from '../../service/apiImpl/userimpl/utilisateur.service';
 import { RepresentantLegal } from './../../models/representant-legal';
-import { User, TypeUtilisateurEnum, UserMoral } from './../../models/users/user';
+import { User, UserMoral } from './../../models/users/user';
 import { ErrorsFormGeneriquesService } from './../../errors/errors-form-generiques.service';
 import { Component, OnInit, Optional } from '@angular/core';
-import { MatDialogRef, MatDialogConfig, MatDialog, MatRadioChange } from '@angular/material';
+import { MatRadioChange } from '@angular/material';
 import { SharedService } from '../../shared/shared.service';
 import { Adresse } from './../../models/adresse';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -24,6 +25,7 @@ export class UserInscriptionComponent implements OnInit {
   message: string;
   messageErreur: boolean;
   colors: string;
+  isAdresseObligatoire: boolean;
 
   constructor(private userService: UtilisateurService, private errorsService: ErrorsFormGeneriquesService,
               private sharedService: SharedService, private router: Router, private fb: FormBuilder,
@@ -136,6 +138,23 @@ export class UserInscriptionComponent implements OnInit {
         this.updateFieldsManadatoryForm('none');
         break;
     }
+  }
+
+  onKey(event: any) {
+    if (PAYS_AVEC_ADRESSE_COMPLETE.includes(event)) {
+      this.adresse.get('libelleRue').setValidators(Validators.required);
+      this.adresse.get('codePostal').setValidators(Validators.required);
+      this.adresse.get('numeroRue').setValidators(Validators.required);
+      this.isAdresseObligatoire = true;
+    } else {
+      this.adresse.get('libelleRue').clearValidators();
+      this.adresse.get('codePostal').clearValidators();
+      this.adresse.get('numeroRue').clearValidators();
+      this.isAdresseObligatoire = false;
+    }
+    this.adresse.get('libelleRue').updateValueAndValidity();
+    this.adresse.get('codePostal').updateValueAndValidity();
+    this.adresse.get('numeroRue').updateValueAndValidity();
   }
 
   /**

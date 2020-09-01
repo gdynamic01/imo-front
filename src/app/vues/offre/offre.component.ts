@@ -1,3 +1,4 @@
+import { PAYS_AVEC_ADRESSE_COMPLETE } from './../../constantes/constantes-datas';
 import { PipeTransformers } from './../../pipes/pipe-transformers';
 import { TypeBienImmobilierEnum, TypeSanitaireEnum } from './../../models/offre/offre';
 import { SharedService } from './../../shared/shared.service';
@@ -36,6 +37,7 @@ export class OffreComponent implements OnInit {
   isPiscine: boolean;
   isServiceMenage: boolean;
   isParking: boolean;
+  isAdresseObligatoire: boolean;
 
   isLocation: boolean;
 
@@ -90,9 +92,9 @@ export class OffreComponent implements OnInit {
         serviceMenage: ['non'],
         eau: ['oui'],
         electricite: ['oui'],
-        zoneGeographique: ['', {validators: Validators.required}],
+        zoneGeographique: [''],
         piscine: ['non'],
-        sanitaire: [''],
+        sanitaire: ['', {validators: Validators.required}],
         nombrePieces: ['', {validators: Validators.required}],
         autreService: ['']
       }),
@@ -141,6 +143,23 @@ export class OffreComponent implements OnInit {
     }
   }
 
+  onKey(event: any) {
+    if (PAYS_AVEC_ADRESSE_COMPLETE.includes(event)) {
+      this.libelleRue.setValidators(Validators.required);
+      this.codePostal.setValidators(Validators.required);
+      this.numeroRue.setValidators(Validators.required);
+      this.isAdresseObligatoire = true;
+    } else {
+      this.libelleRue.clearValidators();
+      this.codePostal.clearValidators();
+      this.numeroRue.clearValidators();
+      this.isAdresseObligatoire = false;
+    }
+    this.libelleRue.updateValueAndValidity();
+    this.codePostal.updateValueAndValidity();
+    this.numeroRue.updateValueAndValidity();
+  }
+
   /**
    * @Description initialisation des champs obligatoires
    */
@@ -155,6 +174,8 @@ export class OffreComponent implements OnInit {
     if (this.isMobilie) {
       this.surface.clearValidators();
       this.surface.updateValueAndValidity();
+      this.immobilier.get('sanitaire').clearValidators();
+      this.immobilier.get('sanitaire').updateValueAndValidity();
     }
   }
 
@@ -241,12 +262,28 @@ export class OffreComponent implements OnInit {
     return this.offreForm.get('immobilier');
   }
 
+  get adresse() {
+    return this.offreForm.get('offre').get('adresse');
+  }
+
   get pays() {
-    return this.offre.get('adresse').get('pays');
+    return this.adresse.get('pays');
+  }
+
+  get codePostal() {
+    return this.adresse.get('codePostal');
   }
 
   get ville() {
-    return this.offre.get('adresse').get('ville');
+    return this.adresse.get('ville');
+  }
+
+  get libelleRue() {
+    return this.adresse.get('libelleRue');
+  }
+
+  get numeroRue() {
+    return this.adresse.get('numeroRue');
   }
 
   get prix() {

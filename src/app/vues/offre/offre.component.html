@@ -8,6 +8,9 @@
                       <mat-form-field>
                         <input matInput formControlName="titre" placeholder="Titre *">
                       </mat-form-field>
+                      <mat-error>
+                        <span *ngIf="titre.hasError('required') && titre.touched">Le titre est obligatoire</span>
+                      </mat-error>
                     </div>
                     <div class="input-field">
                       <mat-form-field>
@@ -25,6 +28,9 @@
                           </mat-option>
                         </mat-select>
                       </mat-form-field>
+                      <mat-error>
+                        <span *ngIf="typeOffre.hasError('required') && typeOffre.touched">Le type offre est obligatoire</span>
+                      </mat-error>
                     </div>
                     <div class="input-field">
                       <mat-form-field>
@@ -36,53 +42,80 @@
                           </mat-option>
                         </mat-select>
                       </mat-form-field>
+                      <mat-error>
+                        <span *ngIf="typeServiceOffre.hasError('required') && typeServiceOffre.touched">Le type de service est obligatoire</span>
+                      </mat-error>
                     </div>
                     <div *ngIf="isLocation" class="input-field">
                       <mat-form-field>
-                        <mat-label>Debut de la location</mat-label>
+                        <mat-label>Debut de la location *</mat-label>
                         <input matInput [matDatepicker]="picker" formControlName="dateDebut" [min]="minDate">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                        </mat-form-field>
+                       <mat-error>
+                         <span *ngIf="dateDebut.hasError('required') && dateDebut.touched">La date de debut est obligatoire</span>
+                       </mat-error>
                     </div>
                     <div *ngIf="isLocation" class="input-field">
                       <mat-form-field>
-                        <mat-label>Fin de la location</mat-label>
+                        <mat-label>Fin de la location *</mat-label>
                         <input matInput [matDatepicker]="picker" formControlName="dateFin" [min]="minDate">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                       </mat-form-field>
+                      <mat-error>
+                        <span *ngIf="dateFin.hasError('required') && dateFin.touched">La date de fin est obligatoire</span>
+                      </mat-error>
                     </div>
                     <div class="input-field">
                       <mat-form-field>
                         <input matInput formControlName="prix" placeholder="Prix *">
                       </mat-form-field>
+                      <mat-error>
+                        <span *ngIf="prix.hasError('required') && prix.touched">Le prix est obligatoire</span>
+                      </mat-error>
                     </div>
                     <div class="adresse" formGroupName="adresse">
                       <div class="input-field">
                         <mat-form-field>
-                          <input matInput formControlName="numeroRue" placeholder="Numero voie">
+                          <input matInput formControlName="numeroRue" placeholder="Numero voie {{isAdresseObligatoire ? '*' : ''}}">
                         </mat-form-field>
+                        <mat-error>
+                          <span *ngIf="numeroRue.hasError('required') && numeroRue.touched">Le numero de rue est obligatoire</span>
+                        </mat-error>
                       </div>
                       <div class="input-field">
                         <mat-form-field>
-                          <input matInput formControlName="libelleRue" placeholder="Nom voie">
+                          <input matInput formControlName="libelleRue" placeholder="Nom voie {{isAdresseObligatoire ? '*' : ''}}">
                         </mat-form-field>
+                        <mat-error>
+                          <span *ngIf="libelleRue.hasError('required') && libelleRue.touched">Le nom de la rue est obligatoire</span>
+                        </mat-error>
                       </div>
                       <div class="input-field">
                         <mat-form-field>
-                          <input matInput formControlName="codePostal" placeholder="Code postal">
+                          <input matInput formControlName="codePostal" placeholder="Code postal {{isAdresseObligatoire ? '*' : ''}}">
                         </mat-form-field>
+                        <mat-error>
+                          <span *ngIf="codePostal.hasError('required') && codePostal.touched">Le code postal est obligatoire</span>
+                        </mat-error>
                       </div>
                       <div class="input-field">
                         <mat-form-field>
                           <input matInput formControlName="ville" placeholder="Ville *">
                         </mat-form-field>
+                        <mat-error>
+                          <span *ngIf="ville.hasError('required') && ville.touched">La ville est obligatoire</span>
+                        </mat-error>
                       </div>
                       <div class="input-field">
                         <mat-form-field>
-                          <input matInput formControlName="pays" placeholder="Pays *">
+                          <input matInput formControlName="pays" placeholder="Pays *" (keyup)="onKey($event.target.value)">
                         </mat-form-field>
+                        <mat-error>
+                          <span *ngIf="pays.hasError('required') && pays.touched">Le pays est obligatoire</span>
+                        </mat-error>
                       </div>
                     </div>
                 </div>
@@ -97,20 +130,29 @@
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="pays.hasError('required') && pays.touched">Le pays est obligatoire</span>
+                    </mat-error>
                   </div>
                   <div class="input-field">
                     <mat-form-field>
                       <input matInput formControlName="surface" placeholder="surface en m² *">
                     </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="surface.hasError('required') && surface.touched">La surface est obligatoire</span>
+                    </mat-error>
                   </div>
                   <div class="input-field">
                     <mat-form-field>
                       <input matInput formControlName="nombrePieces" placeholder="nombre de pieces *">
                     </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="nombrePieces.hasError('required') && nombrePieces.touched">Le nombre de pièce est obligatoire</span>
+                    </mat-error>
                   </div>
                   <div class="input-field">
                     <mat-form-field>
-                      <mat-label>Sanitaire </mat-label>
+                      <mat-label>Sanitaire *</mat-label>
                       <mat-select formControlName="sanitaire">
                         <mat-option *ngFor="let item of typeSanitaireEnum | enumToArray"
                           [value]="item.name | uppercase">
@@ -118,6 +160,9 @@
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
+                    <mat-error>
+                      <span *ngIf="immobilier.get('sanitaire').hasError('required') && immobilier.get('sanitaire').touched">Le sanitaire est obligatoire</span>
+                    </mat-error>
                   </div>
                   <div class="input-field" *ngIf="isTerrain">
                     <mat-form-field>
@@ -126,7 +171,7 @@
                   </div> 
                   <div class="input-field">
                     <mat-form-field>
-                      <mat-label>Zone géographique *</mat-label>
+                      <mat-label>Zone géographique</mat-label>
                       <textarea matInput formControlName="zoneGeographique"></textarea>
                     </mat-form-field>
                   </div>
