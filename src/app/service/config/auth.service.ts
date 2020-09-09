@@ -12,7 +12,6 @@ export class AuthService {
                 public router: Router) {}
 
     /**
-     * @author Mamadou
      * @description verifie la validiter du token
      * @returns boolean
      */

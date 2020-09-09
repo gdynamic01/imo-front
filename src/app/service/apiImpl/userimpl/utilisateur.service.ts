@@ -1,3 +1,4 @@
+import { Role } from './../../../models/users/role';
 import { httpOptions } from './../../../constantes/api-rest';
 import { UserMoral } from './../../../models/users/user';
 import { SharedService } from '../../../shared/shared.service';
@@ -79,5 +80,9 @@ export class UtilisateurService implements IUser<UserMoral, User> {
    */
   getEmail(email: string): Observable<ImoResponse<string>> {
     return this.http.get<ImoResponse<string>>(API.checkEmail + email, httpOptions);
+  }
+
+  getRolesUser(email: string): Observable<ImoResponse<Role>> {
+    return this.http.get<ImoResponse<Role>>(API.getRoles + email, httpOptions);
   }
 }

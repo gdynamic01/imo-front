@@ -1,3 +1,4 @@
+import { SharedModule } from './../../shared/shared.module';
 import { EnumToArrayPipe } from './../../pipes/pipe-transformers-enum';
 import { OffreComponent } from './offre.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -13,10 +14,10 @@ import { OffreRoutingModule } from './offre-routing.module';
   imports: [
     CommonModule,
     OffreRoutingModule,
-    OffreRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   providers: [
     { provide: EnumToArrayPipe }

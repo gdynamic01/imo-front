@@ -1,3 +1,4 @@
+import { AlertComponent } from './vues/alert/alert.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,7 +12,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './vues/home/home.component';
 import { APP_BASE_HREF, registerLocaleData } from '@angular/common';
 import { HeaderComponent } from './vues/header/header.component';
-import { AlerteMessageComponent } from './vues/alerte-message/alerte-message.component';
 import { ConfirmationModule } from './vues/confirmation/confirmation.module';
 import { MaterialModule } from './material.module';
 import { InterceptorService } from './service/config/interceptor.service';
@@ -21,6 +21,7 @@ import { PipeTransformers } from './pipes/pipe-transformers';
 import { AuthentificationModule } from './vues/auth/authentification.module';
 import { OffreModule } from './vues/offre/offre.module';
 import { UserInscriptionModule } from './vues/user/user-inscription.module';
+import { SharedModule } from './shared/shared.module';
 
 registerLocaleData(localeFr, 'fr'); // initialisation format date en français (A changer pour les autres formats)
 
@@ -29,11 +30,11 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    AlerteMessageComponent,
     MenuResponsiveComponent,
-    PipeTransformers
+    PipeTransformers,
+    AlertComponent
   ],
-  entryComponents: [],
+  entryComponents: [AlertComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -46,7 +47,8 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
     AuthentificationModule,
     OffreModule,
     UserInscriptionModule,
-    TranslateModule.forRoot()
+    TranslateModule.forRoot(),
+    SharedModule
   ],
   exports: [PipeTransformers],
   providers: [

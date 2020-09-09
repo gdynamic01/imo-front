@@ -1,3 +1,4 @@
+import { SharedModule } from './../../shared/shared.module';
 import { MaterialModule } from './../../material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserInscriptionComponent } from './user-inscription.component';
@@ -13,7 +14,8 @@ import { UserInscriptionRoutingModule } from './user-inscription-routing.module'
     CommonModule,
     UserInscriptionRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

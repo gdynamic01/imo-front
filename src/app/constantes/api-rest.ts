@@ -13,5 +13,6 @@ export const API = {
     auth: pointEntries + '/authentification/', // api authentification
     offreUri: pointEntries + '/offre', // api creation offre
     getOffres: pointEntries + '/offres',
-    checkEmail: pointEntries + '/email/' // api verification email
+    checkEmail: pointEntries + '/email/', // api verification email
+    getRoles: pointEntries + '/roles/'
 };

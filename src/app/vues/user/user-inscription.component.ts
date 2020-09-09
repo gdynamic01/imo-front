@@ -1,22 +1,23 @@
-import { PAYS_AVEC_ADRESSE_COMPLETE } from './../../constantes/constantes-datas';
+import { PAYS_SANS_ADRESSE_COMPLETE } from './../../constantes/constantes-datas';
 import { Router } from '@angular/router';
 import { SharedCustomValidate } from './../../shared/shared-custom-validate';
 import { UtilisateurService } from '../../service/apiImpl/userimpl/utilisateur.service';
 import { RepresentantLegal } from './../../models/representant-legal';
 import { User, UserMoral } from './../../models/users/user';
 import { ErrorsFormGeneriquesService } from './../../errors/errors-form-generiques.service';
-import { Component, OnInit, Optional } from '@angular/core';
+import { Component, OnInit, Optional, OnDestroy } from '@angular/core';
 import { MatRadioChange } from '@angular/material';
 import { SharedService } from '../../shared/shared.service';
 import { Adresse } from './../../models/adresse';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-inscription',
   templateUrl: './user-inscription.component.html',
   styleUrls: ['./user-inscription.component.scss']
 })
-export class UserInscriptionComponent implements OnInit {
+export class UserInscriptionComponent implements OnInit, OnDestroy {
   utilisateurForm: FormGroup;
   isProfessionnel = false;
   utilisateur: User;
@@ -26,6 +27,8 @@ export class UserInscriptionComponent implements OnInit {
   messageErreur: boolean;
   colors: string;
   isAdresseObligatoire: boolean;
+
+  subscriptions: Subscription[] = [];
 
   constructor(private userService: UtilisateurService, private errorsService: ErrorsFormGeneriquesService,
               private sharedService: SharedService, private router: Router, private fb: FormBuilder,
@@ -47,21 +50,21 @@ export class UserInscriptionComponent implements OnInit {
     this.errorsService.messageResponse.next(null);
     this.initForm();
     this.updateFieldsManadatoryForm('none');
-    this.errorsService.isMessageErreur.subscribe(
+    this.subscriptions.push(this.errorsService.isMessageErreur.subscribe(
       value => {
         this.messageErreur = value;
       }
-    );
-    this.errorsService.colorsErreur.subscribe(
+    ));
+    this.subscriptions.push(this.errorsService.colorsErreur.subscribe(
       value => {
         this.colors = value;
       }
-    );
-    this.errorsService.messageResponse.subscribe(
+    ));
+    this.subscriptions.push(this.errorsService.messageResponse.subscribe(
       value => {
         this.message = value;
       }
-    );
+    ));
   }
 
   initForm() {
@@ -141,7 +144,7 @@ export class UserInscriptionComponent implements OnInit {
   }
 
   onKey(event: any) {
-    if (PAYS_AVEC_ADRESSE_COMPLETE.includes(event)) {
+    if (!PAYS_SANS_ADRESSE_COMPLETE.includes(event)) {
       this.adresse.get('libelleRue').setValidators(Validators.required);
       this.adresse.get('codePostal').setValidators(Validators.required);
       this.adresse.get('numeroRue').setValidators(Validators.required);
@@ -171,21 +174,21 @@ export class UserInscriptionComponent implements OnInit {
     this.initDataUtilisateur(this.utilisateurForm.value);
     if (this.isProfessionnel) {
       this.professionnel.init(this.utilisateur);
-      this.userService.creationProfessionnel(this.professionnel).subscribe(
+      this.subscriptions.push(this.userService.creationProfessionnel(this.professionnel).subscribe(
           data => {
             if (!this.errorsService.traitementErreur(data.statut, data.messageResponse)) {
               this.sharedService.setConfirmationSubject(data.messageResponse);
             }
           }
-        );
+      ));
     } else {
-      this.userService.creationParticulier(this.utilisateur).subscribe(
+      this.subscriptions.push(this.userService.creationParticulier(this.utilisateur).subscribe(
         data => {
           if (!this.errorsService.traitementErreur(data.statut, data.messageResponse)) {
             this.sharedService.setConfirmationSubject(data.messageResponse);
           }
         }
-      );
+      ));
     }
   }
 
@@ -210,5 +213,11 @@ export class UserInscriptionComponent implements OnInit {
     this.utilisateur.password = object.user.passwords.password;
     this.utilisateur.confirmPassword = object.user.passwords.confirmPassword;
     this.utilisateur.typeUtilisateur = object.user.typeUtilisateur;
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(
+      subscription => subscription.unsubscribe()
+    );
   }
 }

@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
   --main-font-family: Roboto, Helvetica, Arial, sans-serif;
+  --main-font-family-cambria: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   --main-font-family-arial: Arial;
   --main-font-weight-600: 600;
   --main-font-weight-500: 500;
@@ -25,6 +26,9 @@
   --main-color-red:red;
   --main-color-blue-a: #106cc8;
   --main-color-lightslategray: lightslategray;
+}
+.mat-snack-bar-container {
+  background: var(--main-color-btn-valid) !important;
 }
 .principal {
   box-shadow: 0 0 8px #ccc;

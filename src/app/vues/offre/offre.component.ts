@@ -1,20 +1,21 @@
-import { PAYS_AVEC_ADRESSE_COMPLETE } from './../../constantes/constantes-datas';
+import { PAYS_SANS_ADRESSE_COMPLETE } from './../../constantes/constantes-datas';
 import { PipeTransformers } from './../../pipes/pipe-transformers';
 import { TypeBienImmobilierEnum, TypeSanitaireEnum } from './../../models/offre/offre';
 import { SharedService } from './../../shared/shared.service';
 import { OffreService } from './../../service/apiImpl/offreimpl/offre.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { OffreGlobal, Offre, Immobilier, Mobile, TypeOffreEnum, TypeServiceEnum, TypeMobileMoteurEnum } from '../../models/offre/offre';
 import { EnumToArrayPipe } from '../../pipes/pipe-transformers-enum';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-offre',
   templateUrl: './offre.component.html',
   styleUrls: ['./offre.component.scss']
 })
-export class OffreComponent implements OnInit {
+export class OffreComponent implements OnInit, OnDestroy {
 
   offreForm: FormGroup;
   offreGlobal: OffreGlobal = new OffreGlobal();
@@ -38,10 +39,11 @@ export class OffreComponent implements OnInit {
   isServiceMenage: boolean;
   isParking: boolean;
   isAdresseObligatoire: boolean;
-
   isLocation: boolean;
-
   minDate = new Date();
+
+  email: string;
+  subscriptions: Subscription[] = [];
 
   constructor(private fb: FormBuilder, private enumToArrays: EnumToArrayPipe,
               private offreService: OffreService, private sharedService: SharedService,
@@ -55,12 +57,18 @@ export class OffreComponent implements OnInit {
                 this.isPiscine = false;
                 this.isServiceMenage = false;
                 this.isParking = false;
+                this.email = null;
    }
 
   ngOnInit() {
     this.isImmobilier = false;
     this.isMobilie = false;
     this.isVelo = false;
+    this.sharedService.emailSubject.subscribe(
+      value => {
+        this.email = value;
+      }
+    );
     this.initForm();
   }
 
@@ -144,7 +152,7 @@ export class OffreComponent implements OnInit {
   }
 
   onKey(event: any) {
-    if (PAYS_AVEC_ADRESSE_COMPLETE.includes(event)) {
+    if (!PAYS_SANS_ADRESSE_COMPLETE.includes(event)) {
       this.libelleRue.setValidators(Validators.required);
       this.codePostal.setValidators(Validators.required);
       this.numeroRue.setValidators(Validators.required);
@@ -181,11 +189,11 @@ export class OffreComponent implements OnInit {
 
   onSubmit() {
     this.initDataOffreGlobal(this.offreForm.value);
-    this.offreService.createOffre(this.offreGlobal).subscribe(
+    this.subscriptions.push(this.offreService.createOffre(this.offreGlobal).subscribe(
       data => {
         this.sharedService.setConfirmationSubject(data.messageResponse);
       }
-    );
+    ));
   }
 
   /**
@@ -203,11 +211,10 @@ export class OffreComponent implements OnInit {
     }
     this.offreGlobal.immobilier = this.immo;
     this.offreGlobal.mobile = this.mobiles;
-    // test
-    this.offreGlobal.email = 'mamoudous2005@yahoo.fr';
+    this.offreGlobal.email = this.email;
   }
 
-  createImmobilier(object) {
+  createImmobilier(object: any) {
     this.immo.titre = object.offre.titre;
     this.immo.surface = object.immobilier.surface;
     this.immo.description = object.offre.description;
@@ -328,5 +335,11 @@ export class OffreComponent implements OnInit {
 
   get dateMiseEnCircualtion() {
     return this.mobile.get('dateMiseEnCircualtion');
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(
+      subscription => subscription.unsubscribe()
+    );
   }
 }

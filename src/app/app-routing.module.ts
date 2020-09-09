@@ -1,6 +1,4 @@
-import { AuthentificationComponent } from './vues/auth/authentification.component';
-import { AuthGuardService as AuthGard } from './service/config/auth.guard.service';
-import { UserInscriptionComponent } from './vues/user/user-inscription.component';
+import { Role } from './models/users/role';
 import { HomeComponent } from './vues/home/home.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -21,7 +19,8 @@ const routes: Routes = [
   },
   {
     path: 'creation-offre',
-    loadChildren: () => import('../app/vues/offre/offre.module').then(mod => mod.OffreModule)
+    loadChildren: () => import('../app/vues/offre/offre.module').then(mod => mod.OffreModule),
+    data: {roles: [Role.part, Role.pro]}
   },
   {
     path: 'connexion',

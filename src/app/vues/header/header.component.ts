@@ -65,6 +65,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.tokenStorage.signOut();
     this.sharedService.setIsActifElement(false);
     this.sharedService.userNameSubject.next(null);
+    this.sharedService.emailSubject.next(null);
     this.userName = null;
     this.router.navigate(['accueil']);
   }

@@ -52,7 +52,7 @@ export class SharedService {
   public setInfosUsers(infoAll: string[]) {
     if (infoAll !== null) {
       this.userNameSubject.next(infoAll[1]);
-      this.emailSubject.next(infoAll[2]);
+      this.emailSubject.next(infoAll[infoAll.length - 1]);
     }
   }
 
