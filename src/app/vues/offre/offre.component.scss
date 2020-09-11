@@ -1,0 +1,21 @@
+.bloc-checkbox {
+  margin-bottom: 10px;
+  label {
+    font-family: var(--main-font-family);
+  }
+}
+.electricite mat-radio-group {
+  margin-left: 13px !important;
+}
+.eau mat-radio-group {
+  margin-left: 54px !important;
+}
+.piscine mat-radio-group {
+  margin-left: 27px !important;
+}
+.parking mat-radio-group {
+  margin-left: 30px !important;
+}
+.menage mat-radio-group {
+  margin-left: 25px !important;
+}

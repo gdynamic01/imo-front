@@ -1,4 +1,4 @@
-import { PAYS_SANS_ADRESSE_COMPLETE } from './../../constantes/constantes-datas';
+import { PAYS_SANS_ADRESSE_COMPLETE, BIEN_IMMOBILIER } from './../../constantes/constantes-datas';
 import { PipeTransformers } from './../../pipes/pipe-transformers';
 import { TypeBienImmobilierEnum, TypeSanitaireEnum } from './../../models/offre/offre';
 import { SharedService } from './../../shared/shared.service';
@@ -128,7 +128,7 @@ export class OffreComponent implements OnInit, OnDestroy {
   }
 
   selectChangeBienImmo(value: string) {
-    this.isTerrain = (this.isVente && value === 'Terrain');
+    this.isTerrain = (this.isVente && BIEN_IMMOBILIER.includes(value));
    }
 
   /**

@@ -175,35 +175,35 @@
                       <textarea matInput formControlName="zoneGeographique"></textarea>
                     </mat-form-field>
                   </div>
-                  <div class="input-field">
+                  <div class="input-field bloc-checkbox">
                     <label class="input-field">Electricité:</label>
                     <mat-radio-group  name="electricite" formControlName="electricite" (change) ="onChange($event)">
                       <mat-radio-button class="input-field" value="oui" >Oui</mat-radio-button>
                       <mat-radio-button class="input-field" value="non"> Non</mat-radio-button>
                     </mat-radio-group>
                   </div>
-                  <div class="input-field">
+                  <div class="input-field bloc-checkbox eau">
                     <label class="input-field">Eau:</label>
                     <mat-radio-group  name="eau" formControlName="eau">
                       <mat-radio-button class="input-field" value="oui">Oui</mat-radio-button>
                       <mat-radio-button class="input-field" value="non">Non</mat-radio-button>
                     </mat-radio-group>
                   </div>
-                  <div class="input-field">
+                  <div class="input-field bloc-checkbox piscine">
                     <label class="input-field">Piscine: </label>
                     <mat-radio-group  name="piscine" formControlName="piscine">
                       <mat-radio-button class="input-field" value="oui">Oui</mat-radio-button>
                       <mat-radio-button class="input-field" value="non">Non</mat-radio-button>
                     </mat-radio-group>
                   </div>
-                  <div class="input-field" *ngIf="isTerrain">
-                    <label class="input-field">Service menage:</label>
+                  <div class="input-field bloc-checkbox menage" *ngIf="isTerrain">
+                    <label class="input-field">Menage:</label>
                     <mat-radio-group  name ="serviceMenage" formControlName="serviceMenage">
                       <mat-radio-button class="input-field" value="oui">Oui</mat-radio-button>
                       <mat-radio-button class="input-field" value="non">Non</mat-radio-button>
                     </mat-radio-group>
                   </div>
-                  <div class="input-field">
+                  <div class="input-field bloc-checkbox parking">
                     <label class="input-field">Parking:</label>
                     <mat-radio-group name="parking" formControlName="parking">
                       <mat-radio-button class="input-field" value="oui">Oui</mat-radio-button>

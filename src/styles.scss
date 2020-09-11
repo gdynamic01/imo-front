@@ -27,6 +27,9 @@
   --main-color-blue-a: #106cc8;
   --main-color-lightslategray: lightslategray;
 }
+mat-radio-group, mat-radio-group mat-radio-button {
+  margin-left: 14px !important; 
+}
 .mat-snack-bar-container {
   background: var(--main-color-btn-valid) !important;
 }
