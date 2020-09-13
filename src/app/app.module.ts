@@ -1,4 +1,3 @@
-import { SearchOffresComponent } from './vues/search/offres/search-offres.component';
 import { AlertComponent } from './vues/alert/alert.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
@@ -23,6 +22,7 @@ import { AuthentificationModule } from './vues/auth/authentification.module';
 import { OffreModule } from './vues/offre/offre.module';
 import { UserInscriptionModule } from './vues/user/user-inscription.module';
 import { SharedModule } from './shared/shared.module';
+import { SearchOffresComponent } from './vues/search/offres/search-offres.component';
 
 registerLocaleData(localeFr, 'fr'); // initialisation format date en français (A changer pour les autres formats)
 
