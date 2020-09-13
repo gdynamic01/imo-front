@@ -46,9 +46,9 @@
                         <span *ngIf="typeServiceOffre.hasError('required') && typeServiceOffre.touched">Le type de service est obligatoire</span>
                       </mat-error>
                     </div>
-                    <div *ngIf="isLocation" class="input-field">
+                    <div class="input-field">
                       <mat-form-field>
-                        <mat-label>Debut de la location *</mat-label>
+                        <mat-label>Debut de la location {{isLocation ? '*' : ''}}</mat-label>
                         <input matInput [matDatepicker]="picker" formControlName="dateDebut" [min]="minDate">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
@@ -57,12 +57,12 @@
                          <span *ngIf="dateDebut.hasError('required') && dateDebut.touched">La date de debut est obligatoire</span>
                        </mat-error>
                     </div>
-                    <div *ngIf="isLocation" class="input-field">
+                    <div class="input-field">
                       <mat-form-field>
-                        <mat-label>Fin de la location *</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="dateFin" [min]="minDate">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-label>Fin de la location {{isLocation ? '*' : ''}}</mat-label>
+                        <input matInput [matDatepicker]="picker2" formControlName="dateFin" [min]="minDate">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
                       </mat-form-field>
                       <mat-error>
                         <span *ngIf="dateFin.hasError('required') && dateFin.touched">La date de fin est obligatoire</span>
@@ -175,7 +175,7 @@
                       <textarea matInput formControlName="zoneGeographique"></textarea>
                     </mat-form-field>
                   </div>
-                  <div class="input-field bloc-checkbox">
+                  <div class="input-field bloc-checkbox electricite">
                     <label class="input-field">Electricité:</label>
                     <mat-radio-group  name="electricite" formControlName="electricite" (change) ="onChange($event)">
                       <mat-radio-button class="input-field" value="oui" >Oui</mat-radio-button>
@@ -215,9 +215,9 @@
                   <div class="input-field">
                     <mat-form-field>
                       <mat-label>Date mise en circulation *</mat-label>
-                      <input matInput [matDatepicker]="picker" formControlName="dateMiseEnCircualtion">
-                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                      <mat-datepicker #picker></mat-datepicker>
+                      <input matInput [matDatepicker]="picker3" formControlName="dateMiseEnCircualtion">
+                      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                      <mat-datepicker #picker3></mat-datepicker>
                     </mat-form-field>
                   </div>
                     <div class="input-field">

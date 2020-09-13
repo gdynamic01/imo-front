@@ -1,0 +1,78 @@
+ .content {
+   margin-top: 19px;
+   .input-field mat-form-field {
+      width: 99% !important;
+   }
+   form {
+     margin-top: 0;
+     padding: 14px 28px 12px 28px;
+     mat-radio-group {
+       margin-left: -6px !important;
+       mat-radio-button:nth-child(2) {
+        margin-left: 12px !important;
+       };
+       mat-radio-button {
+         font-size: 15px !important;
+       }
+     };
+     .mat-chip-list-wrapper .mat-standard-chip, .mat-chip-list-wrapper input.mat-input-element {
+       margin: 2px !important;
+     };
+     mat-chip {
+       font-size: 11px;
+     };
+     mat-chip mat-icon {
+      color: var(--main-color-black-a);
+      font-size: 15px;
+      position: relative;
+      top: 2px;
+      left: -2px;
+      cursor: pointer;
+     };
+     .mat-standard-chip {
+       min-height: 23px !important;
+     };
+     .mat-optgroup-label {
+       background: var(--main-color-lightgray) !important;
+       font-weight: bold !important;
+       color: black !important;
+     }
+     mat-label mat-icon {
+      position: relative;
+      top: 2px;
+      font-size: 20px; 
+     };
+     label {
+      position: relative !important;
+      top: -2px !important;
+      margin-left: 5px;
+      font-weight: bold;
+     };
+     mat-icon, label {
+      color: black;
+     };
+     .fields mat-form-field {
+       width: 49%;
+     };
+     .fields mat-form-field:nth-child(2n+2) {
+       margin-left: 1%;
+     };
+     .content-btn {
+       button {
+        width: 31%;
+        border-radius: 43px;
+        height: 29px;
+        color: var(--main-color-white);
+        border: none;
+         span {
+          position: relative;
+          top: -4px;
+        };
+        margin-left: 33.5%;
+       };
+     }
+    }
+}
+ 
+
+ 

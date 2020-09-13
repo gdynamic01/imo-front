@@ -2,10 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-alerte-message',
-  templateUrl: './alerte-message.component.html',
-  styleUrls: ['./alerte-message.component.scss']
+  templateUrl: './messages-erreurs.component.html',
+  styleUrls: ['./messages-erreurs.component.scss']
 })
-export class AlerteMessageComponent implements OnInit {
+export class MessagesErreursComponent implements OnInit {
 
   @Input() messages: string;
   @Input() colorsMsg: string;

@@ -10,7 +10,7 @@ import { OffreRoutingModule } from './offre-routing.module';
 
 
 @NgModule({
-  declarations: [OffreComponent, EnumToArrayPipe],
+  declarations: [OffreComponent],
   imports: [
     CommonModule,
     OffreRoutingModule,
@@ -19,9 +19,6 @@ import { OffreRoutingModule } from './offre-routing.module';
     FormsModule,
     SharedModule
   ],
-  providers: [
-    { provide: EnumToArrayPipe }
-   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class OffreModule { }

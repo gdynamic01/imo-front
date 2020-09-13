@@ -1,12 +1,23 @@
 .container {
-  .card-recherche {
-    background: var(--main-color-white);
-    h2 {
-      font-family: var(--main-font-family);
+  .principal {
+    .title-search {
+      margin: 0 auto;
+      border: 1px solid var(--main-color-orange-a);
+      background: var(--main-color-orange-a);
+      color: var(--main-color-white);
+      padding: 8px 24px 8px 24px;
+      border-radius: 20px;
       position: relative;
-      top: 14px;
+      top: 19px;
+      font-size: 19px;
+      font-family: var(--main-font-family-cambria);
     };
-  };
+    box-shadow: none !important;
+    .bloc-form {
+      box-shadow: 0 0 8px #ccc;
+    }
+  }
+
 
   .tri-bloc {
     position: relative;

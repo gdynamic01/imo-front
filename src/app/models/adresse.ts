@@ -1,20 +1,20 @@
 export class Adresse {
-
-    /** code postal */
-    public codePostal: number;
-
-    /** complement adresse */
-    public complementAdresse: string;
-
-    /** libelle de la voie */
-    public libelleRue: string;
-
-    /** numero de la rue */
-    public numeroRue: string;
-
-    /** pays */
-    public pays: string;
-
-    /** ville */
-    public ville: string;
+  codePostal: number;
+  complementAdresse: string;
+  libelleRue: string;
+  numeroRue: string;
+  pays: string;
+  ville: string;
 }
+
+export class Pays {
+  nomPays: string;
+  villes: Ville[] = [];
+}
+
+export class Ville {
+  nomVille: string;
+  codePostal: number;
+}
+
+

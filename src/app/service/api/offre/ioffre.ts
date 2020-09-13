@@ -3,5 +3,5 @@ import { ImoResponse } from '../../../models/response/imo-response';
 
 export interface IOffre <T, D> {
     createOffre(object: T): Observable<ImoResponse<T>>;
-    getListOffre(): Observable<ImoResponse<D>>;
+    getListOffre(object: any): Observable<ImoResponse<D>>;
 }

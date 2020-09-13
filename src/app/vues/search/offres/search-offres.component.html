@@ -1,0 +1,70 @@
+<div class="content">
+  <form [formGroup]="searchForm">
+    <div formGroupName="offre">
+      <div class="input-field">  
+        <mat-radio-group formControlName="typeServiceOffre" (change)="onSelect($event)">
+          <mat-radio-button value="LOCATION">Location</mat-radio-button>
+          <mat-radio-button value="VENTE">Vente</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="input-field">
+        <mat-form-field>
+          <mat-label><mat-icon>list</mat-icon><label>Cat&eacute;gories *</label></mat-label>
+          <mat-select formControlName="categories" multiple>
+            <mat-select-trigger>
+              <mat-chip-list>
+                <mat-chip *ngFor="let item of categories.value"
+                  [selectable]="true"
+                  [removable]="true"
+                  (removed)="onCategorieRemoved(item)">
+                    {{item}}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+            </mat-select-trigger>
+            <mat-optgroup *ngFor="let categorie of categoriesList" [label]="categorie.group">
+              <mat-option *ngFor="let item of categorie.values"
+                [value]="item.value | uppercase">
+                  {{item.value}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="fields">
+        <mat-form-field>
+          <mat-label>Date debut {{isLocation ? '*' : ''}}</mat-label>
+          <input matInput [matDatepicker]="picker1" formControlName="dateDebut">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Date de fin {{isLocation ? '*' : ''}}</mat-label>
+          <input matInput [matDatepicker]="picker2" formControlName="dateFin">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="fields">
+        <mat-form-field>
+          <mat-label>Pays *</mat-label>
+          <mat-select formControlName="pays" (selectionChange)="selectPays($event.value)">
+            <mat-option *ngFor="let item of listPays" [value]="item.nomPays">{{item.nomPays}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Villes</mat-label>
+          <mat-select formControlName="ville" [label]="">
+            <mat-option value="">Selectionnez une ville</mat-option>
+            <mat-option *ngFor="let item of listVilles" [value]="item.nomVille">{{item.nomVille}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="content-btn">
+        <button [ngClass]="{'form-valid': searchForm.valid, 'form-invalid': !searchForm.valid}" 
+        type="submit" mat-raised-button [disabled]="!searchForm.valid"
+        (click)="onSubmit()"><span>Rechercher</span></button>
+      </div>
+    </div>
+   </form>
+</div>

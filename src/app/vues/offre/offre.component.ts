@@ -90,8 +90,8 @@ export class OffreComponent implements OnInit, OnDestroy {
           ville: ['', {validators: Validators.required}],
           pays: ['', {validators: Validators.required}]
         }),
-        dateDebut: [this.dateFormat.transform(new Date(), 'yyyy-MM-dd'), Validators.required],
-        dateFin: [this.dateFormat.transform(new Date(), 'yyyy-MM-dd'), Validators.required]
+        dateDebut: [new Date(), Validators.required],
+        dateFin: [new Date(), Validators.required]
       }),
       immobilier: this.fb.group ({
         bien: ['', {validators: Validators.required}],
@@ -107,7 +107,7 @@ export class OffreComponent implements OnInit, OnDestroy {
         autreService: ['']
       }),
       mobile: this.fb.group({
-        dateMiseEnCircualtion: ['', {validators: Validators.required}],
+        dateMiseEnCircualtion: [new Date(), {validators: Validators.required}],
         typeMobileMoteur: ['', {validators: Validators.required}]
       })
     });
@@ -129,7 +129,7 @@ export class OffreComponent implements OnInit, OnDestroy {
 
   selectChangeBienImmo(value: string) {
     this.isTerrain = (this.isVente && BIEN_IMMOBILIER.includes(value));
-   }
+  }
 
   /**
    * @description display the block corresponding to the type of offer
@@ -174,17 +174,30 @@ export class OffreComponent implements OnInit, OnDestroy {
   updateFieldsManadatoryForm() {
     // immobilier
     if (this.isImmobilier) {
+      this.surface.setValidators(Validators.required);
+      this.bien.setValidators(Validators.required);
+      this.nombrePieces.setValidators(Validators.required);
+      this.sanitaire.setValidators(Validators.required);
+
       this.dateMiseEnCircualtion.clearValidators();
       this.typeMobileMoteur.clearValidators();
-      this.typeMobileMoteur.updateValueAndValidity();
-      this.dateMiseEnCircualtion.updateValueAndValidity();
     }
     if (this.isMobilie) {
+      this.typeMobileMoteur.setValidators(Validators.required);
+      this.dateMiseEnCircualtion.setValidators(Validators.required);
+
       this.surface.clearValidators();
-      this.surface.updateValueAndValidity();
-      this.immobilier.get('sanitaire').clearValidators();
-      this.immobilier.get('sanitaire').updateValueAndValidity();
+      this.bien.clearValidators();
+      this.nombrePieces.clearValidators();
+      this.sanitaire.clearValidators();
     }
+    this.sanitaire.updateValueAndValidity();
+    this.surface.updateValueAndValidity();
+    this.bien.updateValueAndValidity();
+    this.nombrePieces.updateValueAndValidity();
+
+    this.typeMobileMoteur.updateValueAndValidity();
+    this.dateMiseEnCircualtion.updateValueAndValidity();
   }
 
   onSubmit() {
@@ -236,8 +249,8 @@ export class OffreComponent implements OnInit, OnDestroy {
     this.immo.nbrePieces = object.immobilier.nombrePieces;
     this.immo.piscine = object.immobilier.piscine === 'oui' ? true : false;
     this.immo.autreService = object.immobilier.autreService;
-    this.immo.dateDebut = object.offre.dateDebut;
-    this.immo.dateFin = object.offre.dateFin;
+    this.immo.dateDebut = this.dateFormat.transform(object.offre.dateDebut, 'yyyy-MM-dd');
+    this.immo.dateFin = this.dateFormat.transform(object.offre.dateFin, 'yyyy-MM-dd');
   }
 
   createMobile(object: any) {
@@ -245,7 +258,7 @@ export class OffreComponent implements OnInit, OnDestroy {
     this.mobiles.description = object.offre.description;
     this.mobiles.adresse = object.offre.adresse;
     this.mobiles.prix = object.offre.prix;
-    this.mobiles.dateMiseEnCircualtion = object.mobile.dateMiseEnCircualtion;
+    this.mobiles.dateMiseEnCircualtion = this.dateFormat.transform(object.mobile.dateMiseEnCircualtion, 'yyyy-MM-dd');
     this.mobiles.model = object.mobile.model;
     this.mobiles.typeMobileMoteur = object.mobile.typeMobileMoteur;
     this.mobiles.typeAnnonce = object.offre.typeAnnonce;
@@ -253,8 +266,8 @@ export class OffreComponent implements OnInit, OnDestroy {
     this.mobiles.typeServiceOffre = object.offre.typeServiceOffre.toUpperCase();
     this.mobiles.adresse.ville = object.offre.adresse.ville;
     this.mobiles.adresse.pays = object.offre.adresse.pays;
-    this.mobiles.dateDebut = object.offre.dateDebut;
-    this.mobiles.dateFin = object.offre.dateFin;
+    this.mobiles.dateDebut = this.dateFormat.transform(object.offre.dateDebut, 'yyyy-MM-dd');
+    this.mobiles.dateFin = this.dateFormat.transform(object.offre.dateFin, 'yyyy-MM-dd');
   }
 
   get offre() {
@@ -267,6 +280,14 @@ export class OffreComponent implements OnInit, OnDestroy {
 
   get immobilier() {
     return this.offreForm.get('immobilier');
+  }
+
+  get sanitaire() {
+    return this.immobilier.get('sanitaire');
+  }
+
+  get bien() {
+    return this.immobilier.get('bien');
   }
 
   get adresse() {

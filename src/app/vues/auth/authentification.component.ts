@@ -78,6 +78,7 @@ export class AuthentificationComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     const values = this.authForm.value;
+    let messageResponse;
     this.subscriptions.push(this.userService.authentification(values.email, values.password).pipe(
       map(
         connexion => {
@@ -87,6 +88,7 @@ export class AuthentificationComponent implements OnInit, OnDestroy {
             this.sharedService.setIsActifElement(true);
             this.sharedService.setInfosUsers(this.authService.getInfoUser());
           }
+          messageResponse = result.messageResponse;
           return result;
         }
       ),
@@ -97,7 +99,7 @@ export class AuthentificationComponent implements OnInit, OnDestroy {
         localStorage.setItem('roles', JSON.stringify(data.result));
         this.router.navigate(['accueil']);
       }, error => {
-        this.errorsService.traitementErreur(error.status, 'L\'email ou le mot de passe est incorrect');
+        this.errorsService.traitementErreur(error.status, messageResponse);
       }
     ));
   }

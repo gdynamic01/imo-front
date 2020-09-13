@@ -1,3 +1,4 @@
+import { SearchOffresComponent } from './vues/search/offres/search-offres.component';
 import { AlertComponent } from './vues/alert/alert.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
@@ -32,7 +33,8 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
     HeaderComponent,
     MenuResponsiveComponent,
     PipeTransformers,
-    AlertComponent
+    AlertComponent,
+    SearchOffresComponent
   ],
   entryComponents: [AlertComponent],
   imports: [
@@ -50,7 +52,7 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
     TranslateModule.forRoot(),
     SharedModule
   ],
-  exports: [PipeTransformers],
+  exports: [PipeTransformers, SearchOffresComponent],
   providers: [
      {provide: APP_BASE_HREF, useValue: ''},
      {

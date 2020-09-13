@@ -60,6 +60,13 @@ export class SharedService {
     this.itemSelectedSubject.next(item);
   }
 
+  removeElement<T>(categories: T[], toRemove: T) {
+    const index = categories.indexOf(toRemove);
+    if (index !== -1) {
+      categories.splice(index, 1);
+    }
+  }
+
   public redirection(uri: string) {
     switch (uri) {
       case 'creation-offre':

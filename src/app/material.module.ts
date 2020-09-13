@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, MatMenuModule, MatIconModule, MatCheckboxModule,
          MatDatepickerModule, MatCardModule, MatTabsModule, MatToolbarModule,
-         MatSelectModule, MatNativeDateModule, MatRadioModule, MatSnackBarModule } from '@angular/material';
+         MatSelectModule, MatNativeDateModule, MatRadioModule, MatSnackBarModule, MatChipsModule } from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
@@ -23,7 +23,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatSelectModule,
     MatNativeDateModule,
     MatRadioModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule
   ]
 })
 export class MaterialModule {}
