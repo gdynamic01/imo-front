@@ -1,3 +1,4 @@
+import { Pays, Ville } from './../models/adresse';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -84,5 +85,24 @@ export class SharedService {
               default:
                 this.router.navigate(['accueil']);
     }
+  }
+
+  public getNomPays(listPays: Pays[]): string[] {
+    const nomPays = new Array<string>();
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < listPays.length; i++) {
+      nomPays.push(listPays[i].nomPays);
+    }
+    return nomPays;
+  }
+
+  public getNomVilles(nomPays: string, listPays: Pays[]) {
+    const nomVilles = new Array<string>();
+    const pays = listPays.filter(value => value.nomPays === nomPays);
+    console.log('____________ pays: ', pays);
+    for (let i = 0; i < pays[0].villes.length; i++) {
+      nomVilles.push(listPays[0].villes[i].nomVille);
+    }
+    return nomVilles;
   }
 }

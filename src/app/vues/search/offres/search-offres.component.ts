@@ -9,7 +9,8 @@ import { MatRadioChange } from '@angular/material';
 import { PipeTransformers } from './../../../pipes/pipe-transformers';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-offres',
@@ -22,7 +23,11 @@ export class SearchOffresComponent implements OnInit, OnDestroy {
   isLocation: boolean;
   categoriesList = CATEGORIES;
   listPays: Array<Pays> = new Array<Pays>();
+  listNomPays: string[];
   listVilles: Array<Ville> = new Array<Ville>();
+  listNomVilles: string[] = [];
+  filtrePays: Observable<string[]>;
+  filtreVilles: Observable<string[]>;
   isSelectPays: boolean;
 
   subscriptions: Subscription[] = [];
@@ -38,15 +43,38 @@ export class SearchOffresComponent implements OnInit, OnDestroy {
     this.initForm();
   }
 
+  private _filter(nomPays: string): string[] {
+    const filterValue = nomPays;
+    return this.listNomPays.filter(value => value.indexOf(filterValue) === 0);
+  }
+
+  private _filterVille(nomVille: string): string[] {
+    const filterValue = nomVille;
+    return this.listNomVilles.filter(value => value.indexOf(filterValue) === 0);
+  }
+
   getPays() {
     this.subscriptions.push(
       this.offreService.getListPays().subscribe(
         data => {
           if (data !== null) {
             this.listPays = data.result;
+            this.listNomPays = this.sharedService.getNomPays(this.listPays);
+            this.filtrePays = this.offre.get('pays').valueChanges.pipe(
+              startWith(''),
+              map(value => this._filter(value))
+            );
           }
         }
       ));
+  }
+
+  getVilles(nomPays: string) {
+    this.listNomVilles = this.sharedService.getNomVilles(nomPays, this.listPays);
+    this.filtreVilles = this.offre.get('ville').valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterVille(value))
+    );
   }
 
   initForm() {

@@ -47,18 +47,39 @@
       </div>
       <div class="fields">
         <mat-form-field>
-          <mat-label>Pays *</mat-label>
-          <mat-select formControlName="pays" (selectionChange)="selectPays($event.value)">
-            <mat-option *ngFor="let item of listPays" [value]="item.nomPays">{{item.nomPays}}</mat-option>
-          </mat-select>
+          <input type="text"
+            placeholder="Pays *"
+            matInput
+            [formControl]="pays"
+            [matAutocomplete]="autoPays">
+          <mat-autocomplete autoActiveFirstOption #autoPays="matAutocomplete" (optionSelected)='getVilles($event.option.value)'>
+            <mat-option *ngFor="let item of filtrePays | async" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
+
         <mat-form-field>
+          <input type="text"
+            placeholder="Ville *"
+            matInput
+            [formControl]="ville"
+            [matAutocomplete]="autoVille">
+          <mat-autocomplete autoActiveFirstOption #autoVille="matAutocomplete">
+            <mat-option *ngFor="let item of filtreVilles | async" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+
+        <!-- <mat-form-field>
           <mat-label>Villes</mat-label>
           <mat-select formControlName="ville" [label]="">
             <mat-option value="">Selectionnez une ville</mat-option>
             <mat-option *ngFor="let item of listVilles" [value]="item.nomVille">{{item.nomVille}}</mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
       </div>
       <div class="content-btn">
         <button [ngClass]="{'form-valid': searchForm.valid, 'form-invalid': !searchForm.valid}" 
