@@ -70,7 +70,7 @@ export class SearchOffresComponent implements OnInit, OnDestroy {
   }
 
   getVilles(nomPays: string) {
-    this.listNomVilles = this.sharedService.getNomVilles(nomPays, this.listPays);
+    this.listNomVilles = this.sharedService.getNomVillesByPays(nomPays, this.listPays);
     this.filtreVilles = this.offre.get('ville').valueChanges.pipe(
       startWith(''),
       map(value => this._filterVille(value))

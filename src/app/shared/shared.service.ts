@@ -89,20 +89,31 @@ export class SharedService {
 
   public getNomPays(listPays: Pays[]): string[] {
     const nomPays = new Array<string>();
-    // tslint:disable-next-line: prefer-for-of
-    for (let i = 0; i < listPays.length; i++) {
-      nomPays.push(listPays[i].nomPays);
+    for (const pays of listPays) {
+      nomPays.push(pays.nomPays);
     }
     return nomPays;
   }
 
-  public getNomVilles(nomPays: string, listPays: Pays[]) {
+  public getNomVillesByPays(nomPays: string, listPays: Pays[]): string[] {
     const nomVilles = new Array<string>();
     const pays = listPays.filter(value => value.nomPays === nomPays);
-    console.log('____________ pays: ', pays);
     for (let i = 0; i < pays[0].villes.length; i++) {
       nomVilles.push(listPays[0].villes[i].nomVille);
     }
     return nomVilles;
+  }
+
+  public getNomPaysByVille(nomVille: string, listPays: Pays[]): string[] {
+    const nomPays = new Array<string>();
+    for (const pays of listPays) {
+      for (const ville of pays.villes) {
+        if (ville.nomVille === nomVille) {
+          nomPays.push(pays.nomPays);
+          break;
+        }
+      }
+    }
+    return nomPays;
   }
 }

@@ -102,17 +102,37 @@
                         </mat-error>
                       </div>
                       <div class="input-field">
-                        <mat-form-field>
+                        <!-- <mat-form-field>
                           <input matInput formControlName="ville" placeholder="Ville *">
-                        </mat-form-field>
+                        </mat-form-field> -->
+                        <input type="text"
+                          placeholder="Ville *"
+                          matInput
+                          [formControl]="ville"
+                          [matAutocomplete]="autoVille">
+                        <mat-autocomplete autoActiveFirstOption #autoVille="matAutocomplete">
+                          <mat-option *ngFor="let item of filtreVilles | async" [value]="item">
+                            {{item}}
+                          </mat-option>
+                        </mat-autocomplete>
                         <mat-error>
                           <span *ngIf="ville.hasError('required') && ville.touched">La ville est obligatoire</span>
                         </mat-error>
                       </div>
                       <div class="input-field">
-                        <mat-form-field>
+                        <!-- <mat-form-field>
                           <input matInput formControlName="pays" placeholder="Pays *" (keyup)="onKey($event.target.value)">
-                        </mat-form-field>
+                        </mat-form-field> -->
+                        <input type="text"
+                          placeholder="Pays *"
+                          matInput
+                          [formControl]="pays"
+                          [matAutocomplete]="autoPays">
+                        <mat-autocomplete autoActiveFirstOption #autoPays="matAutocomplete" (optionSelected)='getVilles($event.option.value)'>
+                          <mat-option *ngFor="let item of filtrePays | async" [value]="item">
+                            {{item}}
+                          </mat-option>
+                        </mat-autocomplete>
                         <mat-error>
                           <span *ngIf="pays.hasError('required') && pays.touched">Le pays est obligatoire</span>
                         </mat-error>

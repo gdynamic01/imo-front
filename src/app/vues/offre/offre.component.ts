@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { OffreGlobal, Offre, Immobilier, Mobile, TypeOffreEnum, TypeServiceEnum, TypeMobileMoteurEnum } from '../../models/offre/offre';
 import { EnumToArrayPipe } from '../../pipes/pipe-transformers-enum';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-offre',
@@ -41,9 +41,10 @@ export class OffreComponent implements OnInit, OnDestroy {
   isAdresseObligatoire: boolean;
   isLocation: boolean;
   minDate = new Date();
-
   email: string;
   subscriptions: Subscription[] = [];
+  filtrePays: Observable<string[]>;
+  filtreVilles: Observable<string[]>;
 
   constructor(private fb: FormBuilder, private enumToArrays: EnumToArrayPipe,
               private offreService: OffreService, private sharedService: SharedService,
