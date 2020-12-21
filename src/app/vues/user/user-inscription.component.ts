@@ -176,7 +176,7 @@ export class UserInscriptionComponent implements OnInit, OnDestroy {
       this.professionnel.init(this.utilisateur);
       this.subscriptions.push(this.userService.creationProfessionnel(this.professionnel).subscribe(
           data => {
-            if (!this.errorsService.traitementErreur(data.statut, data.messageResponse)) {
+            if (!this.errorsService.traitementErreur(data.status, data.messageResponse)) {
               this.sharedService.setConfirmationSubject(data.messageResponse);
             }
           }
@@ -184,7 +184,7 @@ export class UserInscriptionComponent implements OnInit, OnDestroy {
     } else {
       this.subscriptions.push(this.userService.creationParticulier(this.utilisateur).subscribe(
         data => {
-          if (!this.errorsService.traitementErreur(data.statut, data.messageResponse)) {
+          if (!this.errorsService.traitementErreur(data.status, data.messageResponse)) {
             this.sharedService.setConfirmationSubject(data.messageResponse);
           }
         }

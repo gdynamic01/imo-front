@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { Adresse } from '../adresse';
 
 export class Offre {
@@ -85,5 +86,45 @@ export enum TypeServiceEnum {
 export enum TypeSanitaireEnum {
   Exterieur,
   Interieur
+}
+
+export class OffreSearch {
+  id: number;
+  createAt: Date;
+  updateAt: Date;
+  typeDebienImmobilier: TypeBienImmobilierEnum;
+  adresse: Adresse = new Adresse();
+  surface: number;
+  nbrePieces: number;
+  piscine: boolean;
+  sanitaire: TypeSanitaireEnum;
+  autreService: string;
+  serviceMenage: boolean;
+  parking: boolean;
+  electricite: boolean;
+  eau: boolean;
+  motoriser: boolean;
+  kilometrage: number;
+  nbRoue: number;
+  model: string;
+  nbPorte: number;
+  dateMiseEnCircualtion: Date;
+  typeMobileMoteur: TypeMobileMoteurEnum;
+  batterie: string;
+  dureeBaterie: Time;
+  typeBienMobile: TypeBienMobileEnum;
+  siret: string;
+  codeOffre: string;
+  titre: string;
+  description: string;
+  prix: number;
+  typeOffre: TypeOffreEnum;
+  typeAnnonce: string;
+  typeServiceOffre: TypeServiceEnum;
+  photosOffres: Array<string>;
+  symboleMonetaire: string;
+  dateDebut: Date;
+  dateFin: Date;
+  nombreDeJour: number;
 }
 

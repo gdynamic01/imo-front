@@ -1,10 +1,10 @@
 import { PipeTransformers } from './../../../pipes/pipe-transformers';
 import { Pays } from './../../../models/adresse';
-import { catchError, shareReplay } from 'rxjs/operators';
+import { catchError, shareReplay, map } from 'rxjs/operators';
 import { API, httpOptions } from './../../../constantes/api-rest';
 import { ImoResponse } from './../../../models/response/imo-response';
 import { Observable, of } from 'rxjs';
-import { OffreGlobal, Offre, Immobilier } from './../../../models/offre/offre';
+import { OffreGlobal, Offre, Immobilier, OffreSearch } from './../../../models/offre/offre';
 import { IOffre } from './../../api/offre/ioffre';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { SharedService } from './../../../shared/shared.service';
@@ -29,7 +29,7 @@ export class OffreService implements IOffre<OffreGlobal, Offre> {
       ));
   }
 
-  getListOffre(search: any): Observable<ImoResponse<Offre>> {
+  getListOffre(search: any): Observable<ImoResponse<OffreSearch>> {
     let parameters = new HttpParams();
     if (search !== null) {
       const categories = search.offre.categories as string[];
@@ -53,8 +53,8 @@ export class OffreService implements IOffre<OffreGlobal, Offre> {
       ),
       params: parameters,
       withCredentials: true
-  };
-    return this.http.get<ImoResponse<Offre>>(API.getOffres, httOptions);
+    };
+    return this.http.get<ImoResponse<OffreSearch>>(API.getOffres, httOptions);
   }
 
   getListPays(): Observable<ImoResponse<Pays>> {

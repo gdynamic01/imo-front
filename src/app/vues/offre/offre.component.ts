@@ -1,6 +1,6 @@
+import { TypeSanitaireEnum, TypeBienImmobilierEnum } from './../../models/offre/offre';
 import { PAYS_SANS_ADRESSE_COMPLETE, BIEN_IMMOBILIER } from './../../constantes/constantes-datas';
 import { PipeTransformers } from './../../pipes/pipe-transformers';
-import { TypeBienImmobilierEnum, TypeSanitaireEnum } from './../../models/offre/offre';
 import { SharedService } from './../../shared/shared.service';
 import { OffreService } from './../../service/apiImpl/offreimpl/offre.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';

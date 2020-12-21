@@ -57,7 +57,7 @@ export class SharedCustomValidate {
       return this.utilisaterService.getEmail(c.value).pipe(
         map(
           res => {
-            return (res !== null && res.statut === 200) ? { exist: true } : null;
+            return (res !== null && res.status === 200) ? { exist: true } : null;
           }
         ));
     };

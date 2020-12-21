@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     ));
     this.typesDemandes = TYPE_SERVICE;
-    // this.getOffres();
+    this.getOffres();
   }
 
   /**
@@ -62,7 +62,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   getOffres() {
     this.subscriptions.push(this.offreService.getListOffre(null).subscribe(
       data => {
-        if (!this.errorsService.traitementErreur(data.statut, data.messageResponse)) {
+        if (!this.errorsService.traitementErreur(data.status, data.messageResponse)) {
           this.imoResponse = data;
         }
       }

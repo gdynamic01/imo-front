@@ -9,7 +9,7 @@ export class ImoResponse <T> {
     public result: Array<T>;
 
     /** code http */
-    public statut: number;
+    public status: number;
 
     /** nb element dans list */
     public nbOffre: number;
