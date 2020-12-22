@@ -6,7 +6,7 @@ export class ImoResponse <T> {
     public messageResponse: string;
 
     /** resultat de la reponse */
-    public result: Array<T>;
+    public result: Array<T> = new Array;
 
     /** code http */
     public status: number;

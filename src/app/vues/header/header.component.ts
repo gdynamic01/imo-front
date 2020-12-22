@@ -1,11 +1,8 @@
-import { SharedPopinGeneriques } from './../../shared/shared-popin-generiques';
 import { Router } from '@angular/router';
 import { AuthService } from './../../service/config/auth.service';
 import { TokenStorageService } from './../../service/config/token-storage.service';
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SharedService } from '../../shared/shared.service';
-import { AuthentificationComponent } from '../auth/authentification.component';
 import { Subscription } from 'rxjs';
 
 declare var $: any;
