@@ -46,6 +46,8 @@ export class OffreComponent implements OnInit, OnDestroy {
   filtrePays: Observable<string[]>;
   filtreVilles: Observable<string[]>;
 
+  
+
   constructor(private fb: FormBuilder, private enumToArrays: EnumToArrayPipe,
               private offreService: OffreService, private sharedService: SharedService,
               private dateFormat: PipeTransformers) {

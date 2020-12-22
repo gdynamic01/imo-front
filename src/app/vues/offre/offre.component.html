@@ -102,10 +102,10 @@
                         </mat-error>
                       </div>
                       <div class="input-field">
-                        <!-- <mat-form-field>
+                        <mat-form-field>
                           <input matInput formControlName="ville" placeholder="Ville *">
-                        </mat-form-field> -->
-                        <input type="text"
+                        </mat-form-field>
+                        <!-- <input type="text"
                           placeholder="Ville *"
                           matInput
                           [formControl]="ville"
@@ -114,16 +114,16 @@
                           <mat-option *ngFor="let item of filtreVilles | async" [value]="item">
                             {{item}}
                           </mat-option>
-                        </mat-autocomplete>
+                        </mat-autocomplete> -->
                         <mat-error>
                           <span *ngIf="ville.hasError('required') && ville.touched">La ville est obligatoire</span>
                         </mat-error>
                       </div>
                       <div class="input-field">
-                        <!-- <mat-form-field>
+                        <mat-form-field>
                           <input matInput formControlName="pays" placeholder="Pays *" (keyup)="onKey($event.target.value)">
-                        </mat-form-field> -->
-                        <input type="text"
+                        </mat-form-field>
+                        <!-- <input type="text"
                           placeholder="Pays *"
                           matInput
                           [formControl]="pays"
@@ -132,7 +132,7 @@
                           <mat-option *ngFor="let item of filtrePays | async" [value]="item">
                             {{item}}
                           </mat-option>
-                        </mat-autocomplete>
+                        </mat-autocomplete> -->
                         <mat-error>
                           <span *ngIf="pays.hasError('required') && pays.touched">Le pays est obligatoire</span>
                         </mat-error>

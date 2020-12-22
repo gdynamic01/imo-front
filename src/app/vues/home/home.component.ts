@@ -1,26 +1,25 @@
+import { OffreSearch } from './../../models/offre/offre';
 import { MatSnackBar } from '@angular/material';
 import { ErrorsFormGeneriquesService } from './../../errors/errors-form-generiques.service';
 import { OffreService } from './../../service/apiImpl/offreimpl/offre.service';
 import { SharedService } from './../../shared/shared.service';
 import { ImoResponse } from './../../models/response/imo-response';
 import { PipeTransformers } from '../../pipes/pipe-transformers';
-import { Offre, TypeOffreEnum, TypeServiceEnum } from '../../models/offre/offre';
 import { TYPE_SERVICE } from '../../constantes/constantes-datas';
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-
-declare var $: any;
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
   public typesDemandes: string[];
   messageError: string;
-  imoResponse: ImoResponse<Offre> = new ImoResponse<Offre>();
+  imoResponse: ImoResponse<OffreSearch> = new ImoResponse();
+  totalOffre: number = 0;
 
   subscriptions: Subscription[] = [];
 
@@ -30,6 +29,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getOffres();
     this.sharedService.itemSelectedSubject.next('accueil');
     this.errorsService.messageResponse.next(null);
     this.subscriptions.push(this.errorsService.messageResponse.subscribe(
@@ -37,8 +37,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.messageError = value;
       }
     ));
-    this.typesDemandes = TYPE_SERVICE;
-    this.getOffres();
+    // this.typesDemandes = TYPE_SERVICE;
   }
 
   /**
@@ -60,13 +59,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getOffres() {
-    this.subscriptions.push(this.offreService.getListOffre(null).subscribe(
+    this.offreService.getListOffre(null).subscribe(
       data => {
         if (!this.errorsService.traitementErreur(data.status, data.messageResponse)) {
+          this.totalOffre = data.result.length > 0 ? data.result.length : 0;
           this.imoResponse = data;
         }
       }
-    ));
+    )
   }
 
   ngOnDestroy() {
