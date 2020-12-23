@@ -1,4 +1,6 @@
+import { environment } from './../../environments/environment.prod';
 import { HttpHeaders } from '@angular/common/http';
+
 
 export const pointEntries = 'http://localhost:8686/loumos';  // url
 export const httpOptions = {
@@ -15,5 +17,9 @@ export const API = {
     getOffres: pointEntries + '/offres',
     checkEmail: pointEntries + '/email/', // api verification email
     getRoles: pointEntries + '/roles/',
-    getPays: pointEntries + '/pays'
+    getPays: pointEntries + '/pays',
+    environment: pointEntries+ 'http://localhost:8686/loumos' //url
+    
 };
+
+
