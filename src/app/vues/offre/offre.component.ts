@@ -271,8 +271,8 @@ export class OffreComponent implements OnInit, OnDestroy {
     this.mobiles.typeServiceOffre = object.offre.typeServiceOffre.toUpperCase();
     this.mobiles.adresse.ville = object.offre.adresse.ville;
     this.mobiles.adresse.pays = object.offre.adresse.pays;
-    this.mobiles.dateDebut = this.dateFormat.transform(object.offre.dateDebut, 'yyyy-MM-dd');
-    this.mobiles.dateFin = this.dateFormat.transform(object.offre.dateFin, 'yyyy-MM-dd');
+    this.mobiles.dateDebut = this.dateFormat.transform(object.offre.dateDebut, this.pattern);
+    this.mobiles.dateFin = this.dateFormat.transform(object.offre.dateFin, this.pattern);
   }
 
   get offre() {
