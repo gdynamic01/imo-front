@@ -17,6 +17,8 @@ import { Subscription, Observable } from 'rxjs';
 })
 export class OffreComponent implements OnInit, OnDestroy {
 
+  pattern = 'yyyy-MM-dd HH:mm';
+
   offreForm: FormGroup;
   offreGlobal: OffreGlobal = new OffreGlobal();
   immo: Immobilier = new Immobilier();
@@ -45,6 +47,8 @@ export class OffreComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   filtrePays: Observable<string[]>;
   filtreVilles: Observable<string[]>;
+
+  
 
   constructor(private fb: FormBuilder, private enumToArrays: EnumToArrayPipe,
               private offreService: OffreService, private sharedService: SharedService,
@@ -250,8 +254,8 @@ export class OffreComponent implements OnInit, OnDestroy {
     this.immo.nbrePieces = object.immobilier.nombrePieces;
     this.immo.piscine = object.immobilier.piscine === 'oui' ? true : false;
     this.immo.autreService = object.immobilier.autreService;
-    this.immo.dateDebut = this.dateFormat.transform(object.offre.dateDebut, 'yyyy-MM-dd');
-    this.immo.dateFin = this.dateFormat.transform(object.offre.dateFin, 'yyyy-MM-dd');
+    this.immo.dateDebut = this.dateFormat.transform(object.offre.dateDebut, this.pattern );
+    this.immo.dateFin = this.dateFormat.transform(object.offre.dateFin, this.pattern);
   }
 
   createMobile(object: any) {

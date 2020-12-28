@@ -116,4 +116,15 @@ export class SharedService {
     }
     return nomPays;
   }
+
+  /**
+   * @author Mamadou
+   * @description retourne le nombre de jour entre 2 dates [Attention: si date == dateDuJour alors on retournera 1]
+   * @param date
+   * @returns nombre de jour
+   */
+  public convertDate(date: Date) {
+    const dateDuJour = new Date().getTime() / 86400000;
+    return Number(dateDuJour - date.getTime() / 86400000).toFixed(0);
+  }
 }
