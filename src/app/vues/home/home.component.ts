@@ -37,7 +37,6 @@ export class HomeComponent implements OnInit {
         this.messageError = value;
       }
     ));
-    // this.typesDemandes = TYPE_SERVICE;
   }
 
   /**

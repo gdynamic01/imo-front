@@ -134,7 +134,7 @@ export class OffreComponent implements OnInit, OnDestroy {
 
   selectChangeBienImmo(value: string) {
     this.isTerrain = (this.isVente && BIEN_IMMOBILIER.includes(value));
-   }
+  }
 
   /**
    * @description display the block corresponding to the type of offer
