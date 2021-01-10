@@ -1,4 +1,5 @@
 import { AlertComponent } from './vues/alert/alert.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -50,7 +51,9 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
     OffreModule,
     UserInscriptionModule,
     TranslateModule.forRoot(),
-    SharedModule
+    SharedModule,
+    FlexLayoutModule
+    
   ],
   exports: [PipeTransformers, SearchOffresComponent],
   providers: [

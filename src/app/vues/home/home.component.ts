@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { OffreSearch } from './../../models/offre/offre';
 import { MatSnackBar } from '@angular/material';
 import { ErrorsFormGeneriquesService } from './../../errors/errors-form-generiques.service';
@@ -25,7 +26,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private sharedService: SharedService, private datePipe: PipeTransformers,
               private offreService: OffreService, private errorsService: ErrorsFormGeneriquesService,
-              private matSnackBar: MatSnackBar) {
+              private matSnackBar: MatSnackBar, private router: Router) {
   }
 
   ngOnInit() {
@@ -66,6 +67,10 @@ export class HomeComponent implements OnInit {
         }
       }
     )
+  }
+
+  detailsOffre(code: string) {
+    this.router.navigate(['offre/', code, 'details-offre']);
   }
 
   ngOnDestroy() {

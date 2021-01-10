@@ -5,7 +5,9 @@
       <app-search-offres></app-search-offres>
     </div>
     <div *ngIf="totalOffre > 0" class="offres">
-      <div class="card-offre the-last-child" *ngFor="let offreSearch of imoResponse.result">
+      <div class="card-offre the-last-child" *ngFor="let offreSearch of imoResponse.result"
+        (click)="detailsOffre(offreSearch.codeOffre)"
+        title="voir le detail de l'offre">
           <div class="bloc-left">
             <img [src]="png">
           </div>

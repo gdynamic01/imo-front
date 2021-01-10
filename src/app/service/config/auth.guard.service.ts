@@ -26,7 +26,7 @@ export class AuthGuardService implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         if (!this.authService.isAuthenticated()) {
           switch (state.url) {
-            case '/creation-offre':
+            case '/offre/creation':
               this.router.navigate(['connexion']);
               break;
               default:
@@ -42,7 +42,7 @@ export class AuthGuardService implements CanActivate {
     private redirectToUri(uri: string, rolesUsers: Data) {
       const roles = JSON.parse(localStorage.getItem('roles'));
       switch (uri) {
-        case ('/creation-offre'):
+        case ('/offre/creation'):
           for (const role of roles) {
             if (!rolesUsers.roles.includes(role)) {
               // erreur 401 (unAuthorized)

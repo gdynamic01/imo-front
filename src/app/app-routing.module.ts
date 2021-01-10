@@ -18,7 +18,7 @@ const routes: Routes = [
     loadChildren: () => import('../app/vues/confirmation/confirmation.module').then(mod => mod.ConfirmationModule)
   },
   {
-    path: 'creation-offre',
+    path: 'offre',
     loadChildren: () => import('../app/vues/offre/offre.module').then(mod => mod.OffreModule),
     data: {roles: [Role.part, Role.pro]}
   },

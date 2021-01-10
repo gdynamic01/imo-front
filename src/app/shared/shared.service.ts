@@ -69,9 +69,10 @@ export class SharedService {
   }
 
   public redirection(uri: string) {
+    console.log('uri: ',uri);
     switch (uri) {
-      case 'creation-offre':
-        this.router.navigate(['creation-offre']);
+      case 'offre/creation':
+        this.router.navigate(['offre/creation']);
         break;
         case 'accueil':
           this.router.navigate(['accueil']);
