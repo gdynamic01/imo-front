@@ -1,5 +1,5 @@
 <div *ngIf="userName !== null && userName !== undefined" class="right menu-list">
-  <a [ngClass]="{'item-color': itemSelected === 'creation-offre'}" class="depot-offre" (click)="redirection('creation-offre')"><i class="material-icons">add_circle</i><span>D&eacute;poser une annonce</span></a>
+  <a [ngClass]="{'item-color': itemSelected === 'creation-offre'}" class="depot-offre" (click)="redirection('offre')"><i class="material-icons">add_circle</i><span>D&eacute;poser une annonce</span></a>
   <a [ngClass]="{'item-color': itemSelected === 'accueil'}" (click)="redirection('accueil')"><i class="material-icons">home</i><span>Accueil</span></a>
   <button mat-button [matMenuTriggerFor]="beforeMenu">
     <i class="material-icons">account_circle</i>
@@ -11,7 +11,7 @@
   </mat-menu>
 </div>
 <div *ngIf="!isActifButton" class="menu-list">
-  <a class="depot-offre" [ngClass]="{'item-color': itemSelected === 'creation-offre'}" (click)="redirection('creation-offre')"><i class="material-icons">add_circle</i><span>D&eacute;poser une annonce</span></a>
+  <a class="depot-offre" [ngClass]="{'item-color': itemSelected === 'creation-offre'}" (click)="redirection('offre')"><i class="material-icons">add_circle</i><span>D&eacute;poser une annonce</span></a>
   <a [ngClass]="{'item-color': itemSelected === 'accueil'}" (click)="redirection('accueil')"><i class="material-icons">home</i><span>Accueil</span></a>
   <a [ngClass]="{'item-color': itemSelected === 'inscription'}" (click)="redirection('inscription')"><i class="material-icons">person_add</i><span>Inscription</span></a>
   <a [ngClass]="{'item-color': itemSelected === 'connexion'}" (click)="redirection('connexion')"><i class="material-icons">perm_identity</i><span>Connexion</span></a>

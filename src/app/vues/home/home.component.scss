@@ -18,6 +18,7 @@
     };
     .offres {
       .card-offre {
+        cursor: pointer;
         display: flex;
         padding: 3px;
         background: var(--main-color-white);

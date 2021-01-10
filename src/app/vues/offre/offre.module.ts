@@ -7,10 +7,11 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { OffreRoutingModule } from './offre-routing.module';
+import { DetailOffreComponent } from './details-offre/detail-offre.component';
 
 
 @NgModule({
-  declarations: [OffreComponent],
+  declarations: [OffreComponent, DetailOffreComponent],
   imports: [
     CommonModule,
     OffreRoutingModule,

@@ -1,0 +1,63 @@
+.container {
+  .principal {
+    padding: 20px;
+    background: var(--main-color-white);
+    box-shadow: none;
+    h3 {
+      margin: 0 auto;
+      margin-bottom: 20px;
+      font-family: var(--main-font-family);
+      font-weight: var(--main-font-weight-600) !important;
+      font-size: 20px;
+    };
+    .infos {
+      box-shadow: 0 1px 3px var(--main-color-gray);
+      padding: 15px;
+      .email-btn {
+        margin-top: 9px;
+        button {
+          background: var(--main-color-blue-a);
+          width: 100%;
+          color: var(--main-color-white);
+          .material-icons {
+            color: var(--main-color-white);
+            top: 0;
+          }
+        }
+      };
+      .telephone {
+        button {
+          border: 1px solid var(--main-color-blue-a);
+          width: 100%;
+          color: var(--main-color-blue-a);
+          box-shadow: none !important;
+          .material-icons {
+            color: var(--main-color-blue-a);
+            top: 0;
+          }
+        }
+      };
+    };
+    .presentation-bien .date-publication, .info-description .description {
+       padding-bottom: 20px;
+       border-bottom: 1px solid #80808026;
+    };
+    .info-description .description, .info-adresse .adresse {
+      margin-top: -15px;
+    };
+    h5 {
+      font-size: 18px;
+      font-family: var(--main-font-family);
+      margin-top: 22px;
+    };
+    .datas {
+      font-family: var(--main-font-family);
+      font-size: 16px;
+      .material-icons {
+        position: var(--main-material-icons-position);
+        top: var(--main-material-icons-top);
+        left: var(--main-material-icons-left);
+      }
+    }
+  }
+}
