@@ -4,7 +4,6 @@ import { SharedService } from './../../shared/shared.service';
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, Data } from '@angular/router';
 
-import { SharedPopinGeneriques } from './../../shared/shared-popin-generiques';
 import { AuthService } from './auth.service';
 import { MatSnackBar } from '@angular/material';
 
@@ -14,24 +13,29 @@ import { MatSnackBar } from '@angular/material';
 export class AuthGuardService implements CanActivate {
 
     constructor(private authService: AuthService, private router: Router,
-                private sharedPopinGeneriques: SharedPopinGeneriques, private sharedService: SharedService,
+                private sharedService: SharedService,
                 private matSnackBar: MatSnackBar) {}
 
     /**
-     * @author Mamadou
      * @description gère les accès sur les differents routes (pages)
      * @param route
      * @param state
      */
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         if (!this.authService.isAuthenticated()) {
-          switch (state.url) {
-            case '/offre/creation':
+          const uri = state.url;
+          switch (uri) {
+            case '/offre':
               this.router.navigate(['connexion']);
               break;
-              default:
+            default:
+              // Traitement du cas de details-offre
+              if (uri !== 'accueil') {
+                this.router.navigate(['connexion']);
+              } else {
                 this.router.navigate(['accueil']);
-                break;
+              }
+              break;
           }
           return false;
         }
@@ -39,10 +43,15 @@ export class AuthGuardService implements CanActivate {
         return true;
     }
 
+    /**
+     * @description dispatch les redirections
+     * @param uri url de redirection
+     * @param rolesUsers role utilisateur
+     */
     private redirectToUri(uri: string, rolesUsers: Data) {
       const roles = JSON.parse(localStorage.getItem('roles'));
       switch (uri) {
-        case ('/offre/creation'):
+        case ('/offre'):
           for (const role of roles) {
             if (!rolesUsers.roles.includes(role)) {
               // erreur 401 (unAuthorized)

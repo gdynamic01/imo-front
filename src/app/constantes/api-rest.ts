@@ -15,5 +15,6 @@ export const API = {
     getOffres: pointEntries + '/offres',
     checkEmail: pointEntries + '/email/', // api verification email
     getRoles: pointEntries + '/roles/',
-    getPays: pointEntries + '/pays'
+    getPays: pointEntries + '/pays',
+    isOffre: pointEntries
 };

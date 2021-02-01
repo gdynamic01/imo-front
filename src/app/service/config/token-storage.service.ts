@@ -1,7 +1,7 @@
+import { ObjectStorageService } from './object-storage.service';
 import { Injectable } from '@angular/core';
 
 const TOKEN_KEY = 'AuthToken';
-const INFO_USER = 'infoUser';
 
 @Injectable({
   providedIn: 'root'
@@ -11,16 +11,15 @@ export class TokenStorageService {
   constructor() { }
 
   /**
-   * @author Mamadou
    * @description deconnexion et suppression des infos users
    */
   signOut() {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.clear();
+    localStorage.clear();
   }
 
   /**
-   * @author Mamadou
    * @description enregistrement du token et des info-user
    * @param token
    * @param infoUser
@@ -31,7 +30,6 @@ export class TokenStorageService {
   }
 
   /**
-   * @author Mamadou
    * @description retourne le token
    * @returns token
    */

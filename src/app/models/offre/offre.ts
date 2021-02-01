@@ -126,5 +126,10 @@ export class OffreSearch {
   dateDebut: Date;
   dateFin: Date;
   nombreDeJour: number;
+  raisonSocial: string;
+	telephone: string;
+	nom: string;
+  prenom: string;
+  typeUser: string
 }
 

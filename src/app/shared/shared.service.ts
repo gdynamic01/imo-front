@@ -57,10 +57,19 @@ export class SharedService {
     }
   }
 
+  /**
+   * @description set Item
+   * @param item 
+   */
   public setItemSelectedSubject(item: string) {
     this.itemSelectedSubject.next(item);
   }
 
+  /**
+   * @description 
+   * @param categories 
+   * @param toRemove 
+   */
   removeElement<T>(categories: T[], toRemove: T) {
     const index = categories.indexOf(toRemove);
     if (index !== -1) {
@@ -69,22 +78,21 @@ export class SharedService {
   }
 
   public redirection(uri: string) {
-    console.log('uri: ',uri);
     switch (uri) {
-      case 'offre/creation':
-        this.router.navigate(['offre/creation']);
+      case 'offre':
+        this.router.navigate(['offre']);
         break;
-        case 'accueil':
-          this.router.navigate(['accueil']);
-          break;
-          case 'inscription':
-            this.router.navigate(['inscription']);
-            break;
-            case 'connexion':
-              this.router.navigate(['connexion']);
-              break;
-              default:
-                this.router.navigate(['accueil']);
+      case 'accueil':
+        this.router.navigate(['accueil']);
+        break;
+      case 'inscription':
+        this.router.navigate(['inscription']);
+        break;
+      case 'connexion':
+        this.router.navigate(['connexion']);
+        break;
+      default:
+        this.router.navigate(['accueil']);
     }
   }
 

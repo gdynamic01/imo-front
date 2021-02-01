@@ -1,3 +1,4 @@
+import { DetailsOffreComponent } from '../app/vues/offre/details-offre/details-offre.component';
 import { AlertComponent } from './vues/alert/alert.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslateModule } from '@ngx-translate/core';
@@ -35,7 +36,8 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
     MenuResponsiveComponent,
     PipeTransformers,
     AlertComponent,
-    SearchOffresComponent
+    SearchOffresComponent,
+    DetailsOffreComponent
   ],
   entryComponents: [AlertComponent],
   imports: [
@@ -53,7 +55,6 @@ registerLocaleData(localeFr, 'fr'); // initialisation format date en français (
     TranslateModule.forRoot(),
     SharedModule,
     FlexLayoutModule
-    
   ],
   exports: [PipeTransformers, SearchOffresComponent],
   providers: [

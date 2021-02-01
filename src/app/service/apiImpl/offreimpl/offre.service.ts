@@ -60,4 +60,8 @@ export class OffreService implements IOffre<OffreGlobal, Offre> {
   getListPays(): Observable<ImoResponse<Pays>> {
     return this.http.get<ImoResponse<Pays>>(API.getPays, httpOptions).pipe(shareReplay(1));
   }
+
+  getOffreByCode(code: string): Observable<ImoResponse<OffreSearch>> {
+    return this.http.get<ImoResponse<OffreSearch>>(API.isOffre+'/'+code+'/offre', httpOptions);
+  }
 }

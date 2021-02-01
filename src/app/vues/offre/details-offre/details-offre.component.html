@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="principal" fxFlex="60" fxFlex.md="70" fxFlex.sm="80" fxFlex.xs="98" fxLayout="column">
+  <div *ngIf="isDetail" class="principal" fxFlex="60" fxFlex.md="70" fxFlex.sm="80" fxFlex.xs="98" fxLayout="column">
     <h3>DETAILS OFFRE</h3>
     <div flex fxLayout="row" class="infos">
       <div fxFlex="30">
@@ -7,13 +7,16 @@
       </div>
       <div fxFlex="70">
         <div class="datas info-client">
-          <label>Nom: Entreprise/particulier</label>
+          <label>{{offre.raisonSocial}}</label>
         </div>
-        <div class="datas">
-          <label>N° SIREN : 2340090</label>
+        <div class="datas siren">
+          <label>N° Siret: {{offre.siret}}</label>
         </div>
         <div class="datas telephone">
-          <button type="button" mat-raised-button><i class="material-icons">call</i><span>Numero de téléphone</span></button>
+          <button type="button" mat-raised-button (click)="afficheTelephone()"><i class="material-icons">call</i>
+            <span *ngIf="!isAfficheTelephone">téléphone</span>
+            <span *ngIf="isAfficheTelephone">{{offre.telephone}}</span>
+          </button>
         </div>
         <div class="datas email-btn">
           <button type="button" mat-raised-button><i class="material-icons">email</i><span>Ecrire un message</span></button>
@@ -24,19 +27,30 @@
     <div flex fxLayout="row" class="presentation-bien">
       <div fxFlex="100">
         <div class="type-b-i datas">
-          <h5>[Maison, Appartement...] [Nbre de pièce] [surface]</h5>
+          <h5>{{offre.typeDebienImmobilier}} {{offre.nbrePieces}} {{offre.surface}}</h5>
         </div>
         <div class="prix datas">
-          <label>2222 euros</label>
+          <label>{{offre.prix}} euros</label>
         </div>
         <div class="date-publication datas">
-          <span>22-01-2020 à 13:00</span>
+          <span>{{offre.createAt}} à 13:00</span>
         </div>
       </div>
     </div>
     <!-- Critère du bien -->
-    <div>
-
+    <div flex fxLayout="row" class="criteres">
+      <div fxFlex="100">
+        <h5>Critères</h5>
+        <div class="datas affichage-criteres">
+          <table>
+            <tr>
+              <td>[Type de bien]</td>
+              <td>[Nbre de piece]</td>
+              <td>[Sanitaire]</td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
     <!-- Description du bien -->
     <div flex fxLayout="row" class="info-description">
@@ -58,5 +72,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="!isDetail" class="page-error" fxFlex="60" fxFlex.md="70" fxFlex.sm="80" fxFlex.xs="98" fxLayout="column">
+    <h4>L'offre n'existe (PAGE HTML A DEFINIR DANS LES PROCHAINS SPRINT)</h4>
   </div>
 </div> 

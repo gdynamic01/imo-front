@@ -37,12 +37,17 @@
           }
         }
       };
+      .info-client, .siren, .telephone {
+        margin-bottom: 12px;
+      }
     };
-    .presentation-bien .date-publication, .info-description .description {
+    .presentation-bien .date-publication, .info-description .description,
+    .criteres .affichage-criteres {
        padding-bottom: 20px;
        border-bottom: 1px solid #80808026;
     };
-    .info-description .description, .info-adresse .adresse {
+    .info-description .description, .info-adresse .adresse,
+    .criteres .affichage-criteres {
       margin-top: -15px;
     };
     h5 {
@@ -58,6 +63,12 @@
         top: var(--main-material-icons-top);
         left: var(--main-material-icons-left);
       }
+    }
+  };
+  .page-error {
+    h4 {
+      margin: 0 auto;
+      color: red;
     }
   }
 }

@@ -1,3 +1,4 @@
+import { ObjectStorageService } from './../../service/config/object-storage.service';
 import { Router } from '@angular/router';
 import { OffreSearch } from './../../models/offre/offre';
 import { MatSnackBar } from '@angular/material';
@@ -26,7 +27,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private sharedService: SharedService, private datePipe: PipeTransformers,
               private offreService: OffreService, private errorsService: ErrorsFormGeneriquesService,
-              private matSnackBar: MatSnackBar, private router: Router) {
+              private matSnackBar: MatSnackBar, private router: Router, private objectStorageService: ObjectStorageService) {
   }
 
   ngOnInit() {
@@ -58,19 +59,30 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  /**
+   * @description recuperation de toutes les offres
+   */
   getOffres() {
-    this.offreService.getListOffre(null).subscribe(
-      data => {
-        if (!this.errorsService.traitementErreur(data.status, data.messageResponse)) {
-          this.totalOffre = data.result.length > 0 ? data.result.length : 0;
-          this.imoResponse = data;
+    this.subscriptions.push(
+      this.offreService.getListOffre(null).subscribe(
+        data => {
+          if (!this.errorsService.traitementErreur(data.status, data.messageResponse)) {
+            this.totalOffre = data.result.length > 0 ? data.result.length : 0;
+            this.imoResponse = data;
+            if(this.imoResponse !== null && this.objectStorageService.getValue('offreList') === null) {
+              this.objectStorageService.saveLocalStorage(JSON.stringify(this.imoResponse.result), 'offreList');
+            }
+          }
         }
-      }
-    )
+    ))
   }
 
+  /**
+   * @description redirection sur la page details offres
+   * @param code code offre
+   */
   detailsOffre(code: string) {
-    this.router.navigate(['offre/', code, 'details-offre']);
+    this.router.navigate([code]);
   }
 
   ngOnDestroy() {

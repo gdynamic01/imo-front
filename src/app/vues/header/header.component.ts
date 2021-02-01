@@ -45,13 +45,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * @description redirection 
+   * @param uri url de redirection
+   */
   redirection(uri: string) {
-    if (this.userName === null && uri === 'offre') {
-      uri = 'connexion';
-      this.sharedService.itemSelectedSubject.next('connexion');
-    } else if (this.userName !== null && uri === 'offre') {
-      this.sharedService.itemSelectedSubject.next('creation-offre');
-    }
     this.sharedService.redirection(uri);
   }
 
