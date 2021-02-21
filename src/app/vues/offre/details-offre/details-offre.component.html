@@ -44,9 +44,20 @@
         <div class="datas affichage-criteres">
           <table>
             <tr>
-              <td>[Type de bien]</td>
-              <td>[Nbre de piece]</td>
-              <td>[Sanitaire]</td>
+              <td>
+                <div class="type-bien"><label>Type de bien</label></div>
+                <span>{{offre.typeDebienImmobilier}}</span>
+              </td>
+              <td>
+                <div class="pieces"><label>Nombre de pièces</label></div>
+                <span>{{offre.nbrePieces}}</span>
+              </td>
+              <ng-container *ngIf="offre.typeServiceOffre === 'Location'">
+                <td>
+                  <div class="charge"><label>Charge comprise</label></div>
+                  <span>[A rajouter, OUI/NON]</span>
+                </td>
+              </ng-container>
             </tr>
           </table>
         </div>
@@ -57,7 +68,7 @@
       <div fxFlex="100">
         <h5>Description</h5>
         <div class="datas description">
-          <label>Ceci est la description de l'offre</label>
+          <label>{{offre.description}}</label>
         </div>
       </div>
     </div>
@@ -65,10 +76,13 @@
       <div fxFlex="100">
         <h5>Adresse</h5>
         <div class="datas adresse">
-          11 rue gallieni
-        </div>
-        <div class="datas">
-          93270 Sevran
+          <div>
+            <label>{{offre.adresse.numeroRue+' '+offre.adresse.libelleRue}}</label>
+          </div>
+          <div>
+            <label>{{offre.adresse.codePostal}}</label>
+            <label class="ville">{{offre.adresse.ville}}</label>
+          </div>
         </div>
       </div>
     </div>
